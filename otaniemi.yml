@@ -1,0 +1,25 @@
+buildings:
+  - id: cs
+    name: Tietotekniikka
+    name_fi: Computer Science
+    aliases: ['T', 'Subway Building']
+    osm: 91227662
+    children:
+      - name: Paniikki
+        type: room
+  - id: paa
+    osm: 4252946
+  - id: f
+    osm: 98855202
+  - id: tuas
+    osm: 29012757
+  - id: oih
+    osm: 148683540
+  - id: meri
+    osm: 4259025
+  - id: micronova
+    osm: 7585092
+  - id: vesilaboratorio
+    osm: 4259026
+  - id: nanotalo
+    osm: 27930945
