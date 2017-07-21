@@ -1,25 +1,181 @@
 buildings:
-  - id: cs
+  - id: paa
+    osm: 4252946
+    alias: [R001, Main Building]
+  - id: r002
+    osm: 7579330
+    alias:
+  - id: physics
+    osm: 98855202
+    alias: [R003, Health House]
+  - id: r004
+    osm: 97545829
+    alias: [R004]
+  - id: r005
+    osm: 97664102
+    alias: [R005]
+  - id: r006
+    osm: 156903284
+    name:
+    name_fi:
+    name_en:
+    name_sv:
+    alias: [R006]
+  - id: r007
+    osm: 156903282
+    name:
+    name_fi:
+    name_en:
+    name_sv:
+    alias: [R007]
+  - id: r008
+    osm: 156903276
+    name:
+    name_fi:
+    name_en:
+    name_sv:
+    alias: [R008]
+  - id: r009
+    osm: 27930945
+    name:
+    name_fi:
+    name_en:
+    name_sv:
+    alias: [R009]
+  - id: r010
+    osm: 4424188
+    name:
+    name_fi:
+    name_en:
+    name_sv:
+    alias: [R010]
+  - id: r011
+    osm: 7588058
+    name:
+    name_fi:
+    name_en:
+    name_sv:
+    alias: [R011]
+  - id: r012
+    osm: 7588374
+    name:
+    name_fi:
+    name_en:
+    name_sv:
+    alias: [R0]
+  - id: r013
+    osm: 7588593
+    name:
+    name_fi:
+    name_en:
+    name_sv:
+    alias: [R013]
+  - id: r014
+    osm: 7588741
+    name:
+    name_fi:
+    name_en:
+    name_sv:
+    alias: [R014]
+  - id: r015
+    osm: 4252948
+    name:
+    name_fi:
+    name_en:
+    name_sv:
+    alias: [R015, Library, Learning Center, Harald Herlin Learning Centre]
+    children:
+      - name: "Robert's Coffee"
+        type: cafe
+  - id: r016
+    osm: 4259025
+  - id: r017
+    osm: 97662460
+    name:
+    name_fi:
+    name_en:
+    name_sv:
+    alias: [R017]
+  - id: r018
+    osm: 7244238
+    alias: [R018]
+  - id: r019
+    osm: 4252954
+    name: Dipoli
+    alias: [R019]
+  - id: r020
+    osm: 7589963
+    alias: [R020, Shopping centre]
+  # No building 21
+  - id: r022
+    osm: 26608151
+    alias: [R022, Administration]
+  - id: r023
+    osm: 26608177
+    alias: [R023]
+  - id: r024
+    osm: 27468640
+    alias: [R024]
+  - id: r025
+    osm: 26608273
+    alias: [R025]
+  - id: r026
+    osm: 26608317
+    alias: [R026]
+  - id: r027
+    osm: 7588940
+    alias: [R027]
+  - id: r028
+    osm: 4259272
+    alias: [R0]
+    children:
+      - name: Unisport
+  - id: r029  # relation
+    osm: 146382153
+    alias: [R029, Aalto Studios]
+    address: Otakaari 7
+  - id: r030
+    osm: 
     name: Tietotekniikka
     name_fi: Computer Science
-    aliases: ['T', 'Subway Building']
+    aliases: [R030, 'T', 'Subway Building']
     osm: 91227662
     children:
       - name: Paniikki
         type: room
-  - id: paa
-    osm: 4252946
-  - id: f
-    osm: 98855202
-  - id: tuas
-    osm: 29012757
+  # No R031
   - id: oih
     osm: 148683540
-  - id: meri
-    osm: 4259025
-  - id: micronova
-    osm: 7585092
+    alias: [R032]
   - id: vesilaboratorio
     osm: 4259026
-  - id: nanotalo
-    osm: 27930945
+  - id: r035
+    osm: 51725020
+    alias: [R035]
+    children:
+      - name: IT Services
+  - id: micronova
+    osm: 7585092
+    alias: [R036, ]
+    children:
+      - name: Nanofab
+  - id: tuas
+    osm: 29012757
+    alias: [R037]
+    children:
+      - name: Aalto Vertures Program
+      - name: TUAS
+        type: restaurant
+  - id: r038
+    osm: 7589907
+    alias: [R038]
+    name: Aalto Student Union AYY
+  - id: r039
+    osm: 27464085
+    alias: [R039]
+  - id: r040
+    osm: 4252953
+    alias: [R040]
+    children:
+      - name: Täffä
+        type: restaurant

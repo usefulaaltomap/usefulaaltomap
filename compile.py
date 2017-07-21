@@ -1,4 +1,5 @@
 import json
+import os
 import sys
 
 import requests
@@ -20,7 +21,7 @@ for building in data.get('buildings', []):
     if 'osm' in building:
         osm_ways.append(building['osm'])
 
-if use_cache:
+if use_cache and os.path.exists('osm_raw_data.json'):
     r = json.loads(open('osm_raw_data.json').read())
 else:
     r = requests.get('http://overpass-api.de/api/interpreter',
@@ -40,9 +41,11 @@ for elem in r['elements']:
 
 def process_building(building):
     # Find initial data based on OSM
-    print('building id=%s'%building['id'])
+    building.setdefault('type', 'building')
+    print('%s id=%s'%(building['type'], building['id']))
+
     from_osm = {'tags': { } }
-    if 'osm' in building:
+    if 'osm' in building and building['osm'] in osm_data:
         building_osm = osm_data[building['osm']]
         print('  osm id=%s'%building['osm'])
         #print(building_osm)
@@ -61,7 +64,7 @@ def process_building(building):
             if 'name:en' in building_osm['tags']:  from_osm['name_en'] = building_osm['tags']['name:en']
             if 'name:sv' in building_osm['tags']:  from_osm['name_sv'] = building_osm['tags']['name:sv']
             if 'addr:street' in building_osm['tags']:
-                from_osm['tags']['address'] = " ".join((building_osm['tags']['addr:street'], building_osm['tags']['addr:street']))
+                from_osm['tags']['address'] = " ".join((building_osm['tags']['addr:street'], building_osm['tags']['addr:housenumber']))
 
 
     # Now update based on yaml data
@@ -92,7 +95,7 @@ for building in data.get('buildings', []):
     # If this building has children, add them
     if children:
         for child in children:
-            child['parent'] = building
+            child['parent'] = building['id']
             newdata.append(child)
 
 
