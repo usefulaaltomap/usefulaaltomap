@@ -1,34 +1,86 @@
 <!DOCTYPE HTML>
 <html style="height:100%">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css">
-<title>Useful Aalto Map</title>
-</head>
-<body style="height:100%; margin:0" ng-app="usefulAaltoMap" ng-controller="main">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
-  <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-simple-logger/0.1.7/angular-simple-logger.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ui-leaflet/2.0.0/ui-leaflet.js"></script>
-  
+  <style>
+    .leaflet-pane {
+      z-index:100;
+    }
 
-  <leaflet height="80%" center="map.center" markers="map.markers" paths="map.paths" watch-options="map.watchOptions"></leaflet>
-  <input placeholder="Search (NYI)" ng-model="searchText" ng-change="search()" ng-model-options="{debounce:250}">
-  
+    .searchBarSuggestions li {
+      border-bottom: 1px solid #ccc;
+      height: auto;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      white-space: normal;
+    }
+
+    .searchBarSuggestions li:last-child {
+      border-bottom-width: 0;
+    }
+    .searchBarSuggestions .item-aliases {
+      font-size:12px;
+      color:rgba(1, 1, 1, 0.54);
+    }
+    .searchBarSuggestions .item-title,
+    .searchBarSuggestions .item-aliases {
+      display: block;
+      line-height: 2;
+    }
+  </style>
+<title>Useful Aalto Map</title>
+  <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ui-leaflet/2.0.0/ui-leaflet.js"></script>
+</head>
+<body ng-cloak style="height:100%; margin:0" ng-app="usefulAaltoMap" ng-controller="main">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-simple-logger/0.1.7/angular-simple-logger.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
+
+    <md-autocomplete
+      placeholder="Search"
+      style="position:fixed; top:10px; max-width:300px; width:80%; left:0; margin:0 auto; right:0; z-index: 1000"
+      md-selected-item="selectedItem"
+      md-selected-item-change="zoomOnObject(selectedItem)"
+      md-search-text="searchText"
+      md-items="item in getItems(searchText)"
+      md-item-text="getItemText(item)"
+      md-min-length="1"
+      md-menu-class="searchBarSuggestions"
+      md-match-case-insensitive="true"
+      md-delay="250">
+        <md-item-template>
+          <span md-highlight-text="searchText" class="item-title">{{item.name || item.name_en || item.name_sv || item.id}}</span>
+          <span class="item-aliases">
+            <span md-highlight-text="searchText" ng-repeat="alias in item.aliases">{{alias}}{{$last ? '' : ', '}}</span>
+          </span>
+        </md-item-template>
+    </md-autocomplete>  
+
+    <leaflet height="100%" center="map.center" markers="map.markers" paths="map.paths" watch-options="map.watchOptions"></leaflet>
 
   <script>
 
     var mapData;
-    angular.module('usefulAaltoMap', ['ui-leaflet'])
-    .controller('main', function($http, $scope, $compile) {
+    angular.module('usefulAaltoMap', ['ui-leaflet', 'ngMaterial'])
+    .controller('main', function($http, $scope, $compile, leafletData, $timeout) {
 
 
-      if (navigator.geolocation) {
+      /*if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(args) {
           $scope.map.center.lat = args.coords.latitude;
           $scope.map.center.lng = args.coords.longitude;
         })
-      }
+      }*/
 
       function addBuilding(d) {
         $scope.map.paths[d.id] = {
@@ -61,9 +113,40 @@
         }
       }
 
-      $scope.searchText = "";
-      $scope.search = function() {
-        // TODO
+      $scope.zoomOnObject = function(obj) {
+        // TODO: add more types
+        switch (obj.type) {
+          case 'building':
+            $scope.leafletMap.fitBounds(obj.outline);
+            break;
+          default:
+            // nothing
+        }
+      }
+
+      $scope.getItemText = function(selectedItem) {
+        return selectedItem.name || selectedItem.name_sv || selectedItem.name_en || selectedItem.id;
+      }
+
+      $scope.getItems = function(searchText) {
+        return mapData.filter(function(d) {
+
+          function match(str) {
+            if (!str) return false;
+            return str.toLowerCase().indexOf(searchText.toLowerCase()) > -1
+          }
+
+          function matchAliases() {
+            var matched = false;
+            angular.forEach(d.aliases, function(a) {
+              if (match(a)) { matched = true };
+            })
+            return matched;
+          }
+
+          var match = match(d.name) || match(d.name_sv) || match(d.name_en) || match(d.id) || matchAliases();
+          return match;
+        })
       }
 
       $scope.$on('leafletDirectivePath.click', function(event, args) {
@@ -89,6 +172,14 @@
             default:
               // do nothing
           }
+        })
+      })
+
+      leafletData.getMap().then(function(map) {
+        $scope.leafletMap = map;
+        $timeout(function() {
+          // refresh map to update after loading
+          map.invalidateSize();
         })
       })
     })
