@@ -1,27 +1,98 @@
 <!DOCTYPE HTML>
+<html style="height:100%">
 <head>
+  <meta charset="UTF-8">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css">
-  <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
 <title>Useful Aalto Map</title>
 </head>
-<body>
-<div id="map"></div>
-<script>
-  // initialize the map on the "map" div with a given center and zoom
-  var map = L.map('map', {
-  center: [51.505, -0.09],
-  zoom: 13
-  });
+<body style="height:100%; margin:0" ng-app="usefulAaltoMap" ng-controller="main">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-simple-logger/0.1.7/angular-simple-logger.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ui-leaflet/2.0.0/ui-leaflet.js"></script>
+  
 
-  var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-  var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-  var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 12, attribution: osmAttrib});
+  <leaflet height="80%" center="map.center" markers="map.markers" paths="map.paths" watch-options="map.watchOptions"></leaflet>
+  <input placeholder="Search (NYI)" ng-model="searchText" ng-change="search()" ng-model-options="{debounce:250}">
+  
 
-  // start the map in South-East England
-  //map.setView(new L.LatLng(51.3, 0.7),9);
-  map.addLayer(osm);
+  <script>
 
-  initmap();
+    var mapData;
+    angular.module('usefulAaltoMap', ['ui-leaflet'])
+    .controller('main', function($http, $scope, $compile) {
 
-</script>
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(args) {
+          $scope.map.center.lat = args.coords.latitude;
+          $scope.map.center.lng = args.coords.longitude;
+        })
+      }
+
+      function addBuilding(d) {
+        $scope.map.paths[d.id] = {
+          clickable: true,
+          weight: 2,
+          fill: true,
+          fillColor: 'red',
+          latlngs: d.outline.map(function(coords) {
+            return {
+              lat: coords[0],
+              lng: coords[1]
+            }
+          }),
+          data: d,
+          message: d.name
+        }
+      }
+
+      $scope.map = {
+        enable: ['click'],
+        center: {
+          lat: 60.1871,
+          lng: 24.8261,
+          zoom: 17
+        },
+        paths: {},
+        watchOptions: {
+          individual: { type: 'watch' },
+          type: 'watchCollection'
+        }
+      }
+
+      $scope.searchText = "";
+      $scope.search = function() {
+        // TODO
+      }
+
+      $scope.$on('leafletDirectivePath.click', function(event, args) {
+        // On building click, center map on it (just testing)
+
+        var path = $scope.map.paths[args.modelName]
+        var data = $scope.map.paths[args.modelName].data;
+        var latlon = data.latlon;
+        
+        $scope.map.center.lat = latlon[0];
+        $scope.map.center.lng = latlon[1];
+      })
+
+
+      $http.get('data.json')
+      .then(function(res) {
+        mapData = res.data;
+        angular.forEach(mapData, function(d) {
+          switch (d.type) {
+            case 'building':
+              addBuilding(d)
+              break;
+            default:
+              // do nothing
+          }
+        })
+      })
+    })
+
+  </script>
 </body>
+</html>

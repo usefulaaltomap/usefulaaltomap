@@ -1,0 +1,4 @@
+- Separate code into different files
+- Text search --> highlight + zoom on matches
+- Text search --> show text info about matches (see stackoverflow tag search?)
+- Mobile UI? Search bar on top, info popup from the side on building tap etc?
