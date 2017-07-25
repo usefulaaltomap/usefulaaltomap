@@ -146,6 +146,6 @@ newdata = dict(
     )
 
 if len(sys.argv) > 1:
-    open(sys.argv[1], 'w').write(json.dumps(newdata))
+    open(sys.argv[1], 'w').write(json.dumps(newdata, separators=(',', ':')))
 else:
     print(json.dumps(newdata, indent=4))
