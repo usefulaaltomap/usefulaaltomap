@@ -31,23 +31,41 @@ class Location():
         if 'osm' in self.data:
             data['latlon'] = self.latlon
             data['outline'] = self.outline
+        if 'aliases' in self.data:
+            aliases = self.data['aliases']
+            if not isinstance(aliases, (list, tuple)):
+                aliases = [aliases]
+            data['aliases'] = aliases
         data.update(self.names)
         return data
 
     # Getter methods
     def osm_elements(self):
         """Used when downloading OSM data"""
-        if 'osm' in self.data:
-            return ('way', self.data['osm'])
+        if 'osm' not in self.data: return None
+        if not isinstance(self.data['osm'], dict):
+            return [('way', self.data['osm'])]
+        data = [ ]
+        data.append(('way', self.data['osm']['outline']))
+        data.append((self.data['osm']['metadata'].split('=')))
+        return data
     @property
     def osm_data_location(self):
         """OSM element that has the location data (path, latlon)"""
         if 'osm' not in self.data: return None
+        if isinstance(self.data['osm'], dict):
+            if isinstance(self.data['osm']['outline'], str):
+                return osm_data[int(self.data['osm']['outline'].split('=')[1])]
+            return osm_data[self.data['osm']['outline']]
         return osm_data[self.data['osm']]
     @property
     def osm_metadata(self):
         """OSM element that has the metadata (names, address, etc)"""
         if 'osm' not in self.data: return None
+        if isinstance(self.data['osm'], dict):
+            if isinstance(self.data['osm']['metadata'], str):
+                return osm_data[int(self.data['osm']['metadata'].split('=')[1])]
+            return osm_data[self.data['osm']['metadata']]
         return osm_data[self.data['osm']]
     @property
     def latlon(self):
@@ -71,7 +89,10 @@ class Location():
             if 'name:sv' in osm['tags']:  names['name_sv'] = osm['tags']['name:sv']
             if 'addr:street' in osm['tags']:
                 names['address'] = " ".join((osm['tags']['addr:street'], osm['tags']['addr:housenumber']))
-        if 'name' not in names: names['name'] = building['id']
+        if 'name' in self.data: names['name'] = self.data['name']
+        if 'name_fi' in self.data: names['name_fi'] = self.data['name_fi']
+        if 'name_en' in self.data: names['name_en'] = self.data['name_en']
+        if 'name_sv' in self.data: names['name_sv'] = self.data['name_sv']
         return names
 
 
@@ -88,68 +109,28 @@ osm_ways = []
 for L in locations:
     osm_data = L.osm_elements()
     if osm_data is not None:
-        osm_ways.append(osm_data)
+        osm_ways.extend(osm_data)
 # Download and cache it
 if use_cache and os.path.exists('osm_raw_data.json'):
     r = json.loads(open('osm_raw_data.json').read())
 else:
-    rcommand = "[out:json];(%s);out;"%";".join('%s(%d);>'%x for x in osm_ways)
+    rcommand = "[out:json];(%s);out;"%";".join('%s(%s);>'%tuple(x) for x in osm_ways)
     r = requests.get('http://overpass-api.de/api/interpreter',
                 params=dict(data=rcommand))
-    print(r.status)
+    if r.status_code != 200:
+        raise RuntimeError("HTTP failure: %s %s"%(r.status_code, r.reason))
     open('osm_raw_data.json', 'w').write(r.text)
     try:
         r = r.json()
     except:
         print(r.text)
+        exit(1)
 # Assemble actual data
 osm_data = { }
 for elem in r['elements']:
     osm_data[elem['id']] = elem
 
 
-def process_building(building):
-    # Find initial data based on OSM
-    building.setdefault('type', 'building')
-    print('%s id=%s'%(building['type'], building['id']))
-
-    from_osm = {'tags': { } }
-    if 'osm' in building and building['osm'] in osm_data:
-        building_osm = osm_data[building['osm']]
-        print('  osm id=%s'%building['osm'])
-        #print(building_osm)
-        # find OSM outline
-        # TODO: assumes it's a way
-        latlon_path = [ (osm_data[n]['lat'], osm_data[n]['lon']) for n in building_osm['nodes'] ]
-        building['outline'] = latlon_path
-        # Find average location (TODO: make correct)
-        building['latlon'] = (sum(x[0] for x in latlon_path)/len(latlon_path),
-                              sum(x[1] for x in latlon_path)/len(latlon_path))
-
-        # Other metadata
-        if 'tags' in building_osm:
-            if 'name' in building_osm['tags']:     from_osm['name']    = building_osm['tags']['name']
-            if 'int_name' in building_osm['tags']: from_osm['name_en'] = building_osm['tags']['int_name']
-            if 'name:en' in building_osm['tags']:  from_osm['name_en'] = building_osm['tags']['name:en']
-            if 'name:sv' in building_osm['tags']:  from_osm['name_sv'] = building_osm['tags']['name:sv']
-            if 'addr:street' in building_osm['tags']:
-                from_osm['tags']['address'] = " ".join((building_osm['tags']['addr:street'], building_osm['tags']['addr:housenumber']))
-
-
-    # Now update based on yaml data
-    if 'name' not in building: building['name'] = building['id']
-
-    # Create final object.  We want to return yaml data, if it exists,
-    # and otherwise update from OSM data.  Eventually convert this to
-    # a proper dict-merge algorithm.
-    new_tags = { }
-    new_building = { }
-    new_building.update(from_osm)
-    new_building.update(building)
-    new_tags.update(from_osm.get('tags', {}))
-    new_tags.update(building.get('tags', {}))
-    new_building['tags'] = new_tags
-    return new_building
 
 
 

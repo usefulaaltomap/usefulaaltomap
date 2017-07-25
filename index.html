@@ -64,7 +64,7 @@
             <span md-highlight-text="searchText" ng-repeat="alias in item.aliases">{{alias}}{{$last ? '' : ', '}}</span>
           </span>
         </md-item-template>
-    </md-autocomplete>  
+    </md-autocomplete>
 
     <leaflet height="100%" center="map.center" markers="map.markers" paths="map.paths" watch-options="map.watchOptions"></leaflet>
 
@@ -83,20 +83,27 @@
       }*/
 
       function addBuilding(d) {
-        $scope.map.paths[d.id] = {
-          clickable: true,
-          weight: 2,
-          fill: true,
-          fillColor: 'red',
-          latlngs: d.outline.map(function(coords) {
-            return {
-              lat: coords[0],
-              lng: coords[1]
-            }
-          }),
-          data: d,
-          message: d.name
-        }
+        if (d.outline) {
+	  message = d.name
+	  if (d.name_fi) message += "\n<br> FI: " + d.name_en;
+	  if (d.name_en) message += "\n<br> EN: " + d.name_en;
+	  if (d.name_sv) message += "\n<br> SV: " + d.name_en;
+          if (d.aliases) message += "\n<br> AKA: " + d.aliases.join(", ");
+          $scope.map.paths[d.id] = {
+            clickable: true,
+            weight: 2,
+            fill: true,
+            fillColor: 'red',
+            latlngs: d.outline.map(function(coords) {
+              return {
+                lat: coords[0],
+                lng: coords[1]
+              }
+            }),
+            data: d,
+            message: message
+          }
+	}
       }
 
       $scope.map = {
@@ -155,7 +162,7 @@
         var path = $scope.map.paths[args.modelName]
         var data = $scope.map.paths[args.modelName].data;
         var latlon = data.latlon;
-        
+
         $scope.map.center.lat = latlon[0];
         $scope.map.center.lng = latlon[1];
       })
@@ -163,7 +170,7 @@
 
       $http.get('data.json')
       .then(function(res) {
-        mapData = res.data;
+        mapData = res.data.locations;
         angular.forEach(mapData, function(d) {
           switch (d.type) {
             case 'building':

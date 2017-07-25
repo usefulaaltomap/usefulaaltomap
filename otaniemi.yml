@@ -1,89 +1,95 @@
+# The R-numbers come from the Aalto map.
 buildings:
+  # Main
   - id: paa
-    osm: 4252946
-    alias: [R001, Main Building]
+    osm:
+      outline: 4252946
+      metadata: rel=4148
+    alaises: [R001, Main Building]
   - id: r002
     osm: 7579330
-    alias:
-  - id: physics
+    alaises:
+  # NBE
+  - id: r003
     osm: 98855202
-    alias: [R003, Health House]
+    alaises: [R003, Health House]
+  # ELEC building
   - id: r004
     osm: 97545829
-    alias: [R004]
+    alaises: [R004]
   - id: r005
     osm: 97664102
-    alias: [R005]
+    alaises: [R005]
   - id: r006
     osm: 156903284
     name:
     name_fi:
     name_en:
     name_sv:
-    alias: [R006]
+    alaises: [R006]
   - id: r007
     osm: 156903282
     name:
     name_fi:
     name_en:
     name_sv:
-    alias: [R007]
+    alaises: [R007]
   - id: r008
     osm: 156903276
     name:
     name_fi:
     name_en:
     name_sv:
-    alias: [R008]
+    alaises: [R008]
   - id: r009
     osm: 27930945
     name:
     name_fi:
     name_en:
     name_sv:
-    alias: [R009]
+    alaises: [R009]
   - id: r010
     osm: 4424188
     name:
     name_fi:
     name_en:
     name_sv:
-    alias: [R010]
+    alaises: [R010]
   - id: r011
     osm: 7588058
     name:
     name_fi:
     name_en:
     name_sv:
-    alias: [R011]
+    alaises: [R011]
   - id: r012
     osm: 7588374
     name:
     name_fi:
     name_en:
     name_sv:
-    alias: [R0]
+    alaises: [R0]
   - id: r013
     osm: 7588593
     name:
     name_fi:
     name_en:
     name_sv:
-    alias: [R013]
+    alaises: [R013]
   - id: r014
     osm: 7588741
     name:
     name_fi:
     name_en:
     name_sv:
-    alias: [R014]
+    alaises: [R014]
   - id: r015
     osm: 4252948
     name:
     name_fi:
     name_en:
     name_sv:
-    alias: [R015, Library, Learning Center, Harald Herlin Learning Centre]
+    alaises: [R015, Library, Learning Center, Harald Herlin Learning Centre]
     children:
       - name: "Robert's Coffee"
         type: cafe
@@ -95,47 +101,49 @@ buildings:
     name_fi:
     name_en:
     name_sv:
-    alias: [R017]
+    alaises: [R017]
   - id: r018
     osm: 7244238
-    alias: [R018]
+    alaises: [R018]
   - id: r019
     osm: 4252954
     name: Dipoli
-    alias: [R019]
+    alaises: [R019]
+  # Old shopping center
   - id: r020
     osm: 7589963
-    alias: [R020, Shopping centre]
+    alaises: [R020, Shopping centre]
+    name: Otaniemi shopping center
   # No building 21
   - id: r022
     osm: 26608151
-    alias: [R022, Administration]
+    alaises: [R022, Administration]
   - id: r023
     osm: 26608177
-    alias: [R023]
+    alaises: [R023]
   - id: r024
     osm: 27468640
-    alias: [R024]
+    alaises: [R024]
   - id: r025
     osm: 26608273
-    alias: [R025]
+    alaises: [R025]
   - id: r026
     osm: 26608317
-    alias: [R026]
+    alaises: [R026]
   - id: r027
     osm: 7588940
-    alias: [R027]
+    alaises: [R027]
   - id: r028
     osm: 4259272
-    alias: [R0]
+    alaises: [R0]
     children:
       - name: Unisport
   - id: r029  # relation
     osm: 146382153
-    alias: [R029, Aalto Studios]
+    alaises: [R029, Aalto Studios]
     address: Otakaari 7
+  # CS
   - id: r030
-    osm: 
     name: Tietotekniikka
     name_fi: Computer Science
     aliases: [R030, 'T', 'Subway Building']
@@ -146,36 +154,37 @@ buildings:
   # No R031
   - id: oih
     osm: 148683540
-    alias: [R032]
+    alaises: [R032]
   - id: vesilaboratorio
     osm: 4259026
   - id: r035
     osm: 51725020
-    alias: [R035]
+    alaises: [R035]
     children:
       - name: IT Services
   - id: micronova
     osm: 7585092
-    alias: [R036, ]
+    alaises: [R036, ]
     children:
       - name: Nanofab
   - id: tuas
     osm: 29012757
-    alias: [R037]
+    alaises: [R037]
     children:
       - name: Aalto Vertures Program
       - name: TUAS
         type: restaurant
+  # Student union
   - id: r038
     osm: 7589907
-    alias: [R038]
+    alaises: [R038]
     name: Aalto Student Union AYY
   - id: r039
     osm: 27464085
-    alias: [R039]
+    alaises: [R039]
   - id: r040
     osm: 4252953
-    alias: [R040]
+    alaises: [R040]
     children:
       - name: Täffä
         type: restaurant
