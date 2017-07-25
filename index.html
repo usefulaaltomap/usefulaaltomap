@@ -85,9 +85,9 @@
       function addBuilding(d) {
         if (d.outline) {
 	  message = d.name
-	  if (d.name_fi) message += "\n<br> FI: " + d.name_en;
+	  if (d.name_fi) message += "\n<br> FI: " + d.name_fi;
 	  if (d.name_en) message += "\n<br> EN: " + d.name_en;
-	  if (d.name_sv) message += "\n<br> SV: " + d.name_en;
+	  if (d.name_sv) message += "\n<br> SV: " + d.name_sv;
           if (d.aliases) message += "\n<br> AKA: " + d.aliases.join(", ");
           $scope.map.paths[d.id] = {
             clickable: true,
@@ -122,7 +122,7 @@
 
       $scope.zoomOnObject = function(obj) {
         // TODO: add more types
-        switch (obj.type) {
+        switch (obj.type || 'location') {
           case 'building':
             $scope.leafletMap.fitBounds(obj.outline);
             break;

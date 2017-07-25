@@ -5,171 +5,175 @@ buildings:
     osm:
       outline: 4252946
       metadata: rel=4148
-    alaises: [R001, Main Building]
+    aliases: [R001, Main Building]
   - id: r002
     osm: 7579330
-    alaises:
-  # NBE
+    aliases:
+  # NBE / (physics)
   - id: r003
-    osm: 98855202
-    alaises: [R003, Health House]
+    osm:
+      outline: 98855202
+      metadata: rel=1402504
+    aliases: [R003, Health House]
   # ELEC building
   - id: r004
-    osm: 97545829
-    alaises: [R004]
+    osm: 24342454
+    aliases: [R004, ELEC]
   - id: r005
     osm: 97664102
-    alaises: [R005]
+    aliases: [R005]
   - id: r006
     osm: 156903284
     name:
     name_fi:
     name_en:
     name_sv:
-    alaises: [R006]
+    aliases: [R006]
   - id: r007
     osm: 156903282
     name:
     name_fi:
     name_en:
     name_sv:
-    alaises: [R007]
+    aliases: [R007]
   - id: r008
     osm: 156903276
     name:
     name_fi:
     name_en:
     name_sv:
-    alaises: [R008]
+    aliases: [R008]
+  # Nanotalo
   - id: r009
     osm: 27930945
     name:
     name_fi:
     name_en:
     name_sv:
-    alaises: [R009]
+    aliases: [R009]
   - id: r010
     osm: 4424188
     name:
     name_fi:
     name_en:
     name_sv:
-    alaises: [R010]
+    aliases: [R010]
   - id: r011
     osm: 7588058
     name:
     name_fi:
     name_en:
     name_sv:
-    alaises: [R011]
+    aliases: [R011]
   - id: r012
     osm: 7588374
     name:
     name_fi:
     name_en:
     name_sv:
-    alaises: [R0]
+    aliases: [R0]
   - id: r013
     osm: 7588593
     name:
     name_fi:
     name_en:
     name_sv:
-    alaises: [R013]
+    aliases: [R013]
   - id: r014
     osm: 7588741
     name:
     name_fi:
     name_en:
     name_sv:
-    alaises: [R014]
+    aliases: [R014]
   - id: r015
     osm: 4252948
     name:
     name_fi:
     name_en:
     name_sv:
-    alaises: [R015, Library, Learning Center, Harald Herlin Learning Centre]
+    aliases: [R015, Library, Learning Center, Harald Herlin Learning Centre]
     children:
       - name: "Robert's Coffee"
         type: cafe
   - id: r016
     osm: 4259025
+  # Maari
   - id: r017
-    osm: 97662460
+    osm: 97662456
     name:
     name_fi:
     name_en:
     name_sv:
-    alaises: [R017]
+    aliases: [R017]
   - id: r018
     osm: 7244238
-    alaises: [R018]
+    aliases: [R018]
   - id: r019
     osm: 4252954
     name: Dipoli
-    alaises: [R019]
+    aliases: [R019]
   # Old shopping center
   - id: r020
     osm: 7589963
-    alaises: [R020, Shopping centre]
+    aliases: [R020, Shopping centre]
     name: Otaniemi shopping center
   # No building 21
   - id: r022
     osm: 26608151
-    alaises: [R022, Administration]
+    aliases: [R022, Administration]
   - id: r023
     osm: 26608177
-    alaises: [R023]
+    aliases: [R023]
   - id: r024
     osm: 27468640
-    alaises: [R024]
+    aliases: [R024]
   - id: r025
     osm: 26608273
-    alaises: [R025]
+    aliases: [R025]
   - id: r026
     osm: 26608317
-    alaises: [R026]
+    aliases: [R026]
   - id: r027
     osm: 7588940
-    alaises: [R027]
+    aliases: [R027]
   - id: r028
     osm: 4259272
-    alaises: [R0]
+    aliases: [R0]
     children:
       - name: Unisport
-  - id: r029  # relation
-    osm: 146382153
-    alaises: [R029, Aalto Studios]
+  # Aalto Studios
+  - id: r029
+    osm: 24342456
+    aliases: [R029, Aalto Studios]
     address: Otakaari 7
   # CS
   - id: r030
-    name: Tietotekniikka
-    name_fi: Computer Science
-    aliases: [R030, 'T', 'Subway Building']
+    aliases: [R030, 'T', 'Subway Building', 'CS']
     osm: 91227662
     children:
       - name: Paniikki
         type: room
   # No R031
+  # Open Innovation House
   - id: oih
     osm: 148683540
-    alaises: [R032]
+    aliases: [R032, OIH, ]
   - id: vesilaboratorio
     osm: 4259026
   - id: r035
     osm: 51725020
-    alaises: [R035]
+    aliases: [R035]
     children:
       - name: IT Services
   - id: micronova
     osm: 7585092
-    alaises: [R036, ]
+    aliases: [R036, ]
     children:
       - name: Nanofab
   - id: tuas
     osm: 29012757
-    alaises: [R037]
+    aliases: [R037]
     children:
       - name: Aalto Vertures Program
       - name: TUAS
@@ -177,14 +181,15 @@ buildings:
   # Student union
   - id: r038
     osm: 7589907
-    alaises: [R038]
+    aliases: [R038]
     name: Aalto Student Union AYY
   - id: r039
     osm: 27464085
-    alaises: [R039]
+    aliases: [R039]
+  # TF
   - id: r040
     osm: 4252953
-    alaises: [R040]
+    aliases: [R040]
     children:
       - name: Täffä
         type: restaurant

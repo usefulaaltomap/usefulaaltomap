@@ -76,7 +76,7 @@ class Location():
     @property
     def outline(self):
         if 'osm' not in self.data: return None
-        return [ (osm_data[n]['lat'], osm_data[n]['lon'])
+        return [ (round(osm_data[n]['lat'], 5), round(osm_data[n]['lon'], 5))
                  for n in self.osm_data_location['nodes'] ]
     @property
     def names(self):
@@ -89,10 +89,10 @@ class Location():
             if 'name:sv' in osm['tags']:  names['name_sv'] = osm['tags']['name:sv']
             if 'addr:street' in osm['tags']:
                 names['address'] = " ".join((osm['tags']['addr:street'], osm['tags']['addr:housenumber']))
-        if 'name' in self.data: names['name'] = self.data['name']
-        if 'name_fi' in self.data: names['name_fi'] = self.data['name_fi']
-        if 'name_en' in self.data: names['name_en'] = self.data['name_en']
-        if 'name_sv' in self.data: names['name_sv'] = self.data['name_sv']
+        if self.data.get('name')   : names['name'] = self.data['name']
+        if self.data.get('name_fi'): names['name_fi'] = self.data['name_fi']
+        if self.data.get('name_en'): names['name_en'] = self.data['name_en']
+        if self.data.get('name_sv'): names['name_sv'] = self.data['name_sv']
         return names
 
 
