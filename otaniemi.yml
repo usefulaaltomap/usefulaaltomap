@@ -176,7 +176,7 @@ buildings:
     osm: 29012757
     aliases: [R037, TU, AS]
     children:
-      - name: Aalto Vertures Program
+      - name: Aalto Ventures Program
       - name: TUAS
         type: restaurant
   # Student union
