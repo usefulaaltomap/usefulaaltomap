@@ -135,13 +135,38 @@
         return selectedItem.name || selectedItem.name_sv || selectedItem.name_en || selectedItem.id;
       }
 
-      $scope.getItems = function(searchText) {
-        return mapData.filter(function(d) {
+      $scope.getItems = function(searchQuery) {
+        searchQuery = searchQuery.toLowerCase();  // What user enters
 
-          function match(str) {
+	var match;
+        // Searching for just a digit
+        if (searchQuery.match('/^[0-9]{1,2}$/')) {
+	  match = function (str) {
             if (!str) return false;
-            return str.toLowerCase().indexOf(searchText.toLowerCase()) > -1
-          }
+            return str.endsWith(searchQuery)
+          };
+        // Searching for a single letter - building letters
+        } else if (searchQuery.length == 1) {
+	  match = function (str) {
+            if (!str) return false;
+            return str.toLowerCase() == searchQuery
+          };
+        // Searching for only two letters - match at start of each word only
+        } else if (searchQuery.length == 2) {
+	  match = function (str) {
+            if (!str) return false;
+            return RegExp("\\b"+searchQuery, 'i').test(str)
+          };
+        // Generic search
+        } else {
+          match = function (str) {
+            if (!str) return false;
+            return str.toLowerCase().indexOf(searchQuery) > -1
+          };
+        }
+
+	return mapData.filter(function(d) {
+
 
           function matchAliases() {
             var matched = false;
@@ -151,8 +176,8 @@
             return matched;
           }
 
-          var match = match(d.name) || match(d.name_sv) || match(d.name_en) || match(d.id) || matchAliases();
-          return match;
+          var isMatch = match(d.name) || match(d.name_sv) || match(d.name_en) || match(d.id) || matchAliases();
+          return isMatch;
         })
       }
 
