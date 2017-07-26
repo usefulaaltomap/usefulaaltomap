@@ -5,7 +5,7 @@ buildings:
     osm:
       outline: 4252946
       metadata: rel=4148
-    aliases: [R001, Main Building]
+    aliases: [R001, A, H, M, U, Y, Main Building]
   - id: r002
     osm: 7579330
     aliases:
@@ -14,7 +14,7 @@ buildings:
     osm:
       outline: 98855202
       metadata: rel=1402504
-    aliases: [R003, Health House]
+    aliases: [R003, F, Health House]
   # ELEC building
   - id: r004
     osm: 24342454
@@ -58,13 +58,14 @@ buildings:
     name_en:
     name_sv:
     aliases: [R010]
+  # Chemistry
   - id: r011
     osm: 7588058
     name:
     name_fi:
     name_en:
     name_sv:
-    aliases: [R011]
+    aliases: [R011, CHEM]
   - id: r012
     osm: 7588374
     name:
@@ -173,7 +174,7 @@ buildings:
       - name: Nanofab
   - id: tuas
     osm: 29012757
-    aliases: [R037]
+    aliases: [R037, TU, AS]
     children:
       - name: Aalto Vertures Program
       - name: TUAS
