@@ -1,7 +1,7 @@
 # The R-numbers come from the Aalto map.
 buildings:
   # Main
-  - id: paa
+  - id: main
     osm: 4252946
     osm_meta: rel=4148
     aliases: [R001, A, H, M, U, Y, Main Building]
@@ -184,16 +184,19 @@ buildings:
   - id: oih
     osm: 148683540
     aliases: [R032, OIH, ]
-  - id: vesilaboratorio
+  # Water laboratory
+  - id: r034
     osm: 4259026
+    aliases: [R034]
   - id: r035
     osm: 51725020
     aliases: [R035]
     children:
       - name: IT Services
-  - id: micronova
+  # Micronova
+  - id: r036
     osm: 7585092
-    aliases: [R036, ]
+    aliases: [R036]
     children:
       - name: Nanofab
   - id: tuas
@@ -258,3 +261,31 @@ other:
     name: X-burger
     type: restaurant
     osm: node=82638832
+  - id: dept:cs
+    name: Computer Science
+    parents: [r030, tuas]
+    type: department
+  #- id: ARTS
+  #  - parents: [main, r067]
+  #- id: BIZ
+  #  - parents: [main, r067]
+  - id: CHEM
+    name: School of Chemical Technology
+    type: school
+    parents: [r011, r012, r013]
+  - id: ELEC
+    name: School of Electrical Engineering
+    type: school
+    parents: [r004, oih, tuas, r036, ]
+  - id: ENG
+    name: School of Engineering
+    type: school
+    parents: [r008, r034,       # Built Env
+              r002,             # Civil
+              r008, r006, r007, r005, r016, r025, # Mechanical
+              ]
+  - id: SCI
+    name: School of Science
+    type: school
+    parents: [main, r003, r008, r009, r030, oih, r036, tuas]
+
