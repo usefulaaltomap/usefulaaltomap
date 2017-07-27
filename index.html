@@ -89,6 +89,7 @@
           <span ng-show="object.name_en"><b>EN:</b> {{object.name_en}}<br></span>
           <span ng-show="object.name_sv"><b>SV:</b> {{object.name_sv}}<br></span>
           <span ng-show="object.address"><b>Address:</b> {{object.address}}<br></span>
+          <span ng-show="object.opening_hours"><b>Open:</b> {{object.opening_hours}}<br></span>
           </div>
           <div ng-show="object.aliases && object.aliases.length">
             <b>Aliases:</b> <span ng-repeat="a in object.aliases">{{a}}{{$last ? '' : ', '}}</span>
@@ -105,8 +106,8 @@
           <div ng-show="object.lore">
             <b>Lore:</b> <span>{{object.lore}}</span>
           </div>
-          <div ng-show="object.osm_id">
-            <b>OSM ID:</b> <span>{{object.osm_id}}</span>
+          <div ng-show="object.osm_elements" style="font-size: 75%;">
+            <b>OSM objects:</b> <span ng-repeat="c in object.osm_elements"><a href="https://www.openstreetmap.org/{{c[0]}}/{{c[1]}}">{{c[1]}}</a></span>
           </div>
         </md-content>
       </div>

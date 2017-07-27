@@ -1,13 +1,14 @@
 import json
 import os
+import re
 import sys
 
 import requests
 import yaml
 
 data = yaml.load(open('otaniemi.yml'))
-
 use_cache = True
+re_nametoid = re.compile('[^a-zA-Z0-9_]+')
 
 # Getting ways by ID:
 # wget -o /dev/null -O- 'http://overpass-api.de/api/interpreter?data=[out:json];(way(91227662);way(555));out;'
@@ -24,7 +25,7 @@ class Location():
     @property
     def id(self):
         if 'id'   in self.data: return self.data['id']
-        if 'name' in self.data: return self.data['name']
+        if 'name' in self.data: return re_nametoid.sub('', self.data['name'].lower())
         return str(id(self))
     def json(self):
         data= dict(
@@ -38,6 +39,8 @@ class Location():
         data['aliases'] = [ ]
         if self.osm_metadata and 'loc_name' in self.osm_metadata['tags']:
             data['aliases'].append(self.osm_metadata['tags']['loc_name'])
+        if self.osm_metadata and 'opening_hours' in self.osm_metadata['tags']:
+            data['opening_hours'] = self.osm_metadata['tags']['opening_hours']
         if 'aliases' in self.data:
             aliases = self.data['aliases']
             if not isinstance(aliases, (list, tuple)):
@@ -51,6 +54,9 @@ class Location():
         data['osm_id'] = [ ]
         if 'osm' in self.data:  data['osm_id'].append(self.data['osm'])
         if 'osm_meta' in self.data:  data['osm_id'].append(self.data['osm_meta'])
+        if self.osm_elements():
+            data['osm_elements'] = [(t.replace('rel', 'relation'), v)
+                                    for t,v in self.osm_elements()]
         return data
     @property
     def children(self):

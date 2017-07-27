@@ -28,8 +28,13 @@ buildings:
     osm: 98855202
     osm_meta: rel=1402504
     aliases: [R003, F, Health Technology House]
-    lore: Originally the Applied Physics building.  Physics has moved long-ago,
-          but people still call it the F-building.
+    note: >-
+      To get to NBE, you must enter through the C door on Rakentajanaukio.  To get to
+      lecture rooms and restaurants, use the A door on Otakaari.  Internal connection only
+      for staff.
+    lore: Originally the Applied Physics (Fysiikka) building.  Physics has moved long-ago,
+          and apparently in 2015 was renamed "Health Technology House" without any of the
+          occupants knowing, but people still call it the F-building.
     children:
       - name: Kvarkki
         osm: node=577022359
@@ -76,8 +81,10 @@ buildings:
     children:
       - name: "Robert's Coffee"
         type: cafe
+  # Marine technology
   - id: r016
     osm: 4259025
+    aliases: [R016]
   # Maari
   - id: r017
     osm: 97662456
