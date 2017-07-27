@@ -5,6 +5,11 @@ buildings:
     osm: 4252946
     osm_meta: rel=4148
     aliases: [R001, A, H, M, U, Y, Main Building]
+    note: >
+      This buliding is large and confusing, but has reasonable directions inside.  Make sure
+      you know the wing (letter) of the place you are going.  It could also be useful to know
+      what entrance (letter) you should use, but this is different from the wing letters.
+      Also, not everything connected on the upper levels!
     children:
       - id: alvari
         osm: node=301814516
@@ -17,12 +22,14 @@ buildings:
         type: cafe
   - id: r002
     osm: 7579330
-    aliases:
+    aliases: [R002]
   # NBE / (physics)
   - id: r003
     osm: 98855202
     osm_meta: rel=1402504
-    aliases: [R003, F, Health House]
+    aliases: [R003, F, Health Technology House]
+    lore: Originally the Applied Physics building.  Physics has moved long-ago,
+          but people still call it the F-building.
     children:
       - name: Kvarkki
         osm: node=577022359
@@ -36,75 +43,35 @@ buildings:
     aliases: [R005]
   - id: r006
     osm: 156903284
-    name:
-    name_fi:
-    name_en:
-    name_sv:
     aliases: [R006]
   - id: r007
     osm: 156903282
-    name:
-    name_fi:
-    name_en:
-    name_sv:
     aliases: [R007]
   - id: r008
     osm: 156903276
-    name:
-    name_fi:
-    name_en:
-    name_sv:
     aliases: [R008]
   # Nanotalo
   - id: r009
     osm: 27930945
-    name:
-    name_fi:
-    name_en:
-    name_sv:
     aliases: [R009]
   - id: r010
     osm: 4424188
-    name:
-    name_fi:
-    name_en:
-    name_sv:
     aliases: [R010]
   # Chemistry
   - id: r011
     osm: 7588058
-    name:
-    name_fi:
-    name_en:
-    name_sv:
     aliases: [R011, CHEM]
   - id: r012
     osm: 7588374
-    name:
-    name_fi:
-    name_en:
-    name_sv:
     aliases: [R0]
   - id: r013
     osm: 7588593
-    name:
-    name_fi:
-    name_en:
-    name_sv:
     aliases: [R013]
   - id: r014
     osm: 7588741
-    name:
-    name_fi:
-    name_en:
-    name_sv:
     aliases: [R014]
   - id: r015
     osm: 4252948
-    name:
-    name_fi:
-    name_en:
-    name_sv:
     aliases: [R015, Library, Learning Center, Harald Herlin Learning Centre]
     children:
       - name: "Robert's Coffee"
@@ -114,10 +81,6 @@ buildings:
   # Maari
   - id: r017
     osm: 97662456
-    name:
-    name_fi:
-    name_en:
-    name_sv:
     aliases: [R017]
   - id: r018
     osm: 7244238
@@ -154,9 +117,10 @@ buildings:
   - id: r027
     osm: 7588940
     aliases: [R027]
+  # Otahalli
   - id: r028
     osm: 4259272
-    aliases: [R0]
+    aliases: [R028]
     children:
       - name: Unisport
   # Aalto Studios
@@ -168,6 +132,10 @@ buildings:
   - id: r030
     aliases: [R030, 'T', 'Subway Building', 'CS']
     osm: 91227662
+    lore: >
+       In 2015 a Subway restaurant opened here.  They added a huge sign
+       saying "Subway", ignoring the fact that it was bigger than any mention
+       that this was the CS building!  We're still upset about this.
     children:
       - name: Paniikki
         type: room
@@ -288,4 +256,5 @@ other:
     name: School of Science
     type: school
     parents: [main, r003, r008, r009, r030, oih, r036, tuas]
+
 

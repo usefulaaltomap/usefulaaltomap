@@ -44,10 +44,13 @@ class Location():
                 aliases = [aliases]
             data['aliases'].extend(aliases)
         data.update(self.names)
-        if self.data.get('parents'):
-            data['parents'] = self.data['parents']
-        if self.data.get('children'):
-            data['children'] = self.data['children']
+        if self.data.get('parents'):      data['parents'] = self.data['parents']
+        if self.data.get('children'):     data['children'] = self.data['children']
+        if self.data.get('lore'):         data['lore'] = self.data['lore']
+        if self.data.get('note'):         data['note'] = self.data['note']
+        data['osm_id'] = [ ]
+        if 'osm' in self.data:  data['osm_id'].append(self.data['osm'])
+        if 'osm_meta' in self.data:  data['osm_id'].append(self.data['osm_meta'])
         return data
     @property
     def children(self):
@@ -219,5 +222,6 @@ newdata = dict(
 
 if len(sys.argv) > 1:
     open(sys.argv[1], 'w').write(json.dumps(newdata, separators=(',', ':')))
+    open(sys.argv[1]+'-readable', 'w').write(json.dumps(newdata, indent=2))
 else:
     print(json.dumps(newdata, indent=4))

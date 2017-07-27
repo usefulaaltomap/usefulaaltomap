@@ -84,18 +84,26 @@
           <h1 class="md-toolbar-tools">{{object.name}}</h1>
         </md-toolbar>
         <md-content layout-padding>
-          <div ng-show="object.name_fi">EN: {{object.name_fi}}</div>
-          <div ng-show="object.name_en">EN: {{object.name_en}}</div>
-          <div ng-show="object.name_sv">EN: {{object.name_sv}}</div>
+          <div ng-show="object.name_fi"><b>FI:</b> {{object.name_fi}}</div>
+          <div ng-show="object.name_en"><b>EN:</b> {{object.name_en}}</div>
+          <div ng-show="object.name_sv"><b>EN:</b> {{object.name_sv}}</div>
           <div ng-show="object.aliases && object.aliases.length">
-            Aliases: <span ng-repeat="a in object.aliases">{{a}}{{$last ? '' : ', '}}</span>
+            <b>Aliases:</b> <span ng-repeat="a in object.aliases">{{a}}{{$last ? '' : ', '}}</span>
+          </div>
+          <div ng-show="object.note">
+            <b>Note:</b> <span>{{object.note}}</span>
           </div>
           <div ng-show="object.children">
-            Contains
+            <b>Contains</b>
             <div ng-repeat="c in object.children">
               <a href="javascript:;" ng-click="zoomOnObjectById(c)">- {{objects[c].name}}</a>
-              
             </div>
+          </div>
+          <div ng-show="object.lore">
+            <b>Lore:</b> <span>{{object.lore}}</span>
+          </div>
+          <div ng-show="object.osm_id">
+            <b>OSM ID:</b> <span>{{object.osm_id}}</span>
           </div>
         </md-content>
       </div>
@@ -133,10 +141,11 @@
           if (d.name_fi) message += "\n<br> FI: " + d.name_fi;
           if (d.name_en) message += "\n<br> EN: " + d.name_en;
           if (d.name_sv) message += "\n<br> SV: " + d.name_sv;
-          if (d.aliases) message += "\n<br> (" + d.aliases.join(", ") + ")";
-          if (d.children) {
-             message += "\n<br> Contains: " + d.children.map(function (x) { return mapService.data[x]['name']}).join(", ");
-          }
+          if (d.aliases && d.aliases.length > 0)
+             message += "\n<br> (" + d.aliases.join(", ") + ")";
+          //if (d.children) {
+          //   message += "\n<br> Contains: " + d.children.map(function (x) { return mapService.data[x]['name']}).join(", ");
+          //}
           $scope.map.paths[d.id] = {
             clickable: true,
             weight: BUILDING_DEFAULT_OUTLINE_WEIGHT,
