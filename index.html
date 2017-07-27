@@ -39,6 +39,8 @@
 </head>
 <body ng-cloak style="height:100%; margin:0" ng-app="usefulAaltoMap" ng-controller="main">
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+
   <!-- Angular Material dependencies -->  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-simple-logger/0.1.7/angular-simple-logger.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-animate.min.js"></script>
@@ -72,31 +74,48 @@
 
     <leaflet height="100%" center="map.center" markers="map.markers" paths="map.paths" watch-options="map.watchOptions"></leaflet>
 
+    <md-sidenav
+      class="md-sidenav-right"
+      style="z-index:100"
+      md-component-id="right"
+      md-whiteframe="4">
+      <div ng-controller="sidenavController">
+        <md-toolbar>
+          <h1 class="md-toolbar-tools">{{object.name}}</h1>
+        </md-toolbar>
+        <md-content layout-padding>
+          <div ng-show="object.name_fi">EN: {{object.name_fi}}</div>
+          <div ng-show="object.name_en">EN: {{object.name_en}}</div>
+          <div ng-show="object.name_sv">EN: {{object.name_sv}}</div>
+          <div ng-show="object.aliases && object.aliases.length">
+            Aliases: <span ng-repeat="a in object.aliases">{{a}}{{$last ? '' : ', '}}</span>
+          </div>
+          <div ng-show="object.children">
+            Contains
+            <div ng-repeat="c in object.children">
+              <a href="javascript:;" ng-click="zoomOnObjectById(c)">- {{objects[c].name}}</a>
+              
+            </div>
+          </div>
+        </md-content>
+      </div>
+    </md-sidenav>
+
   <script>
 
-    var mapData;
+    /* Config constants TODO: NON-GLOBAL?*/
+    var BUILDING_DEFAULT_OUTLINE_WEIGHT = 1;
+    var BUILDING_DEFAULT_FILL_OPACITY = 0.1;
+    var BUILDING_HIGHLIGHT_OUTLINE_WEIGHT = 2;
+    var BUILDING_HIGHLIGHT_FILL_OPACITY = 0.2;
+
     angular.module('usefulAaltoMap', ['ui-leaflet', 'ngMaterial'])
-    .controller('main', function($http, $scope, $compile, leafletData, $timeout) {
+    .controller('main', function($http, $scope, $compile, leafletData, $mdSidenav, mapService) {
+
+    $scope.zoomOnObject = mapService.zoomOnObject;
+
 
     /* Utility methods */
-
-    function coordUnion(objs) {
-      // Return array of union of all coordinates of objects
-      var newcoords = [ ];
-      for (var i=0 ; i<objs.length ; i++) {
-        var obj = mapData2[objs[i]];
-        if (obj.outline) {
-          for (var j=0 ; j<obj.outline.length ; j++) {
-            newcoords.push(obj.outline[j]);
-          }
-        } else if (obj.latlon) {
-          newcoords.push(obj.latlon);
-        }
-      }
-      if (newcoords.length > 0)
-        return newcoords;
-    }
-
     /* Core visualization methods */
 
       /*if (navigator.geolocation) {
@@ -106,23 +125,24 @@
         })
       }*/
 
+      $scope.map = mapService.map;
+
       function addBuilding(d) {
         if (d.outline) {
-      	  message = d.name
-      	  if (d.name_fi) message += "\n<br> FI: " + d.name_fi;
-      	  if (d.name_en) message += "\n<br> EN: " + d.name_en;
-      	  if (d.name_sv) message += "\n<br> SV: " + d.name_sv;
+          message = d.name
+          if (d.name_fi) message += "\n<br> FI: " + d.name_fi;
+          if (d.name_en) message += "\n<br> EN: " + d.name_en;
+          if (d.name_sv) message += "\n<br> SV: " + d.name_sv;
           if (d.aliases) message += "\n<br> (" + d.aliases.join(", ") + ")";
           if (d.children) {
-             console.log(d.children);
-             message += "\n<br> Contains: " + d.children.map(function (x) { return mapData2[x]['name']}).join(", ");
+             message += "\n<br> Contains: " + d.children.map(function (x) { return mapService.data[x]['name']}).join(", ");
           }
           $scope.map.paths[d.id] = {
             clickable: true,
-            weight: 1,
+            weight: BUILDING_DEFAULT_OUTLINE_WEIGHT,
             fill: true,
             fillColor: 'red',
-            fillOpacity: 0.1,
+            fillOpacity: BUILDING_DEFAULT_FILL_OPACITY,
             latlngs: d.outline.map(function(coords) {
               return {
                 lat: coords[0],
@@ -135,58 +155,11 @@
         }
       }
 
-      $scope.map = {
-        enable: ['click'],
-        center: {
-          lat: 60.1871,
-          lng: 24.8261,
-          zoom: 17
-        },
-        paths: {},
-        watchOptions: {
-          individual: { type: 'watch' },
-          type: 'watchCollection'
-        }
-      }
-
-      function highlightObject(obj) {
-        // Visually mark this object as selected.  Recurses to parent
-        // objects, too.
-        // TODO: highlight this object
-        // ...
-        console.log(obj);
-        console.log("Should highlight:", obj.id)
-        if (obj.parents && obj.parents.length >= 1) {
-          obj.parents.forEach(function (parent) {
-            highlightObject(mapData2[parent]);
-          })
-        }
-      }
-
       // When an object is selected.
 
-      //
-      $scope.zoomOnObject = function(obj) {
-        if (obj == null) return;
-        // When an object is selected from search.
-        // TODO: add more types
-        if (obj.outline != null) {
-          $scope.leafletMap.fitBounds(obj.outline);
-          highlightObject(obj);
-        } else if (obj.latlon != null) {
-          //$scope.leafletMap.fitBounds([[obj.latlon[0]-.0007, obj.latlon[1]-.0007],[obj.latlon[0]+.0007, obj.latlon[1]+.0007]]);
-          $scope.leafletMap.flyTo(obj.latlon, 18);
-          //$scope.leafletMap.panTo(obj.latlon);
-          highlightObject(obj);
-        } else if (obj.parents && obj.parents.length >= 1) {
-          var outline = coordUnion(obj.parents);
-          if (outline != null) {
-            $scope.leafletMap.fitBounds(outline);
-          }
-          highlightObject(obj);
-        }
+      $scope.zoomOnObjectById = function(id) {
+        $scope.zoomOnObject(mapService.data[id]);
       }
-
 
       $scope.getItemText = function(selectedItem) {
         return selectedItem.name || selectedItem.name_sv || selectedItem.name_en || selectedItem.id;
@@ -195,6 +168,7 @@
       $scope.getItems = function(searchQuery) {
         searchQuery = searchQuery.toLowerCase();  // What user enters
 
+        // Helper function for filtering search results
         function match(str) {
           if (!str) return false;
           // Searching for just a digit
@@ -215,45 +189,58 @@
           }
         }
 
-	return mapData.filter(function(d) {
+        // Check if the query matches an alias
+        function matchAliases(d) {
+          var matched = false;
+          angular.forEach(d.aliases, function(a) {
+            if (match(a)) { matched = true };
+          })
+          return matched;
+        }
 
-
-          function matchAliases() {
-            var matched = false;
-            angular.forEach(d.aliases, function(a) {
-              if (match(a)) { matched = true };
-            })
-            return matched;
-          }
-
-          var isMatch = match(d.name) || match(d.name_sv) || match(d.name_en) || match(d.id) || matchAliases();
-          return isMatch;
+        return _.filter(mapService.data, function(d) {
+          return match(d.name) || match(d.name_sv) || match(d.name_en) || match(d.id) || matchAliases(d);
         })
       }
 
+      function openSidenav(obj) {
+        $scope.$broadcast('objectSelected', obj);
+        $mdSidenav('right').open()
+        /*.then(function() {
+          return;
+        })*/
+      }
+
       $scope.$on('leafletDirectivePath.click', function(event, args) {
-        // On building click, center map on it (just testing)
-        
-        var path = $scope.map.paths[args.modelName]
-        var data = $scope.map.paths[args.modelName].data;
-        var latlon = data.latlon;
-
-        path.weight = 2;
-        path.fillOpacity = 0.2;
-
-        $scope.map.center.lat = latlon[0];
-        $scope.map.center.lng = latlon[1];
+        event.preventDefault();
+        openSidenav(mapService.data[args.modelName])
       })
 
-      var mapData2 = { };
+      $scope.$on('leafletDirectivePath.mouseover', function(event, args) {
+        var data = mapService.data[args.modelName]
+        mapService.highlightObject(mapService.data[args.modelName]);
+        var pxBounds = args.leafletObject._pxBounds;
+        var popup = L.popup({autoPan: false, offset: {x: 0, y: -(pxBounds.max.y - pxBounds.min.y) / 2}})
+          .setLatLng(data.latlon)
+          .setContent(args.leafletObject.options.message)
+          .openOn(mapService.leafletMap)
+      })
+
+      $scope.$on('leafletDirectivePath.mouseout', function(event, args) {
+        var path = $scope.map.paths[args.modelName];
+
+        path.weight = BUILDING_DEFAULT_OUTLINE_WEIGHT;
+        path.fillOpacity = BUILDING_DEFAULT_FILL_OPACITY;
+      })
+
+      mapService.data = { };
       $http.get('data.json')
       .then(function(res) {
-        mapData = res.data.locations;
-        angular.forEach(mapData, function(d) {
-          mapData2[d.id] = d;
+        angular.forEach(res.data.locations, function(d) {
+          mapService.data[d.id] = d;
         })
         // Add objects to map
-        angular.forEach(mapData, function(d) {
+        angular.forEach(mapService.data, function(d) {
           switch (d.type) {
             case 'building':
               addBuilding(d)
@@ -263,14 +250,116 @@
           }
         })
       })
+    })
+
+    angular.module('usefulAaltoMap')
+    .service('mapService', function(leafletData, utils, $timeout) {
+      var mapS = {};
+
+      mapS.map = {
+        enable: ['click'],
+        center: {
+          lat: 60.1871,
+          lng: 24.8261,
+          zoom: 17
+        },
+        paths: {},
+        watchOptions: {
+          individual: { type: 'watch' },
+          type: 'watchCollection'
+        }
+      }
 
       leafletData.getMap().then(function(map) {
-        $scope.leafletMap = map;
+        mapS.leafletMap = map;
         $timeout(function() {
           // refresh map to update after loading
           map.invalidateSize();
         })
       })
+      
+      mapS.zoomOnObject = function(obj) {
+        if (obj == null) return;
+        // When an object is selected from search.
+        // TODO: add more types
+        if (obj.outline != null) {
+          mapS.leafletMap.fitBounds(obj.outline);
+          mapS.highlightObject(obj);
+        } else if (obj.latlon != null) {
+          //$scope.leafletMap.fitBounds([[obj.latlon[0]-.0007, obj.latlon[1]-.0007],[obj.latlon[0]+.0007, obj.latlon[1]+.0007]]);
+          mapS.leafletMap.flyTo(obj.latlon, 18);
+          //$scope.leafletMap.panTo(obj.latlon);
+          mapS.highlightObject(obj);
+        } else if (obj.parents && obj.parents.length >= 1) {
+          var outline = utils.coordUnion(_.map(obj.parents, function(id) {
+            return mapS.data[id];
+          }));
+          if (outline != null) {
+            mapS.leafletMap.fitBounds(outline);
+          }
+          mapS.highlightObject(obj);
+        }
+      }
+
+      mapS.highlightObject = function(obj) {
+        // Visually mark this object as selected.  Recurses to parent
+        // objects, too.
+        // TODO: highlight this object
+        // ...
+        switch (obj.type) {
+          case 'building':
+            var path = mapS.map.paths[obj.id];
+            path.fillOpacity = BUILDING_HIGHLIGHT_FILL_OPACITY;
+            path.weight = BUILDING_HIGHLIGHT_OUTLINE_WEIGHT;
+            break;
+        }
+        if (obj.parents && obj.parents.length >= 1) {
+          obj.parents.forEach(function (parent) {
+            mapS.highlightObject(mapS.data[parent]);
+          })
+        }
+      }
+
+      return mapS;
+    })
+
+    angular.module('usefulAaltoMap')
+    .service('utils', function() {
+      var utils = {};
+
+      utils.coordUnion = function(objs) {
+        // Return array of union of all coordinates of objects
+        var newcoords = [ ];
+        for (var i=0 ; i<objs.length ; i++) {
+          var obj = objs[i];
+          if (obj.outline) {
+            for (var j=0 ; j<obj.outline.length ; j++) {
+              newcoords.push(obj.outline[j]);
+            }
+          } else if (obj.latlon) {
+            newcoords.push(obj.latlon);
+          }
+        }
+        if (newcoords.length > 0)
+          return newcoords;
+      }
+
+      return utils;
+    })
+
+    angular.module('usefulAaltoMap')
+    .controller('sidenavController', function($scope, mapService) {
+
+      $scope.objects = mapService.data;
+
+      $scope.$on('objectSelected', function(event, object) {
+        $scope.object = object;
+      })
+
+      $scope.selectChild = function(id) {
+
+      }
+
     })
 
   </script>
