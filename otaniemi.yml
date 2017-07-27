@@ -2,19 +2,24 @@
 buildings:
   # Main
   - id: paa
-    osm:
-      outline: 4252946
-      metadata: rel=4148
+    osm: 4252946
+    osm_meta: rel=4148
     aliases: [R001, A, H, M, U, Y, Main Building]
+    children:
+      - id: alvari
+        osm: node=301814516
   - id: r002
     osm: 7579330
     aliases:
   # NBE / (physics)
   - id: r003
-    osm:
-      outline: 98855202
-      metadata: rel=1402504
+    osm: 98855202
+    osm_meta: rel=1402504
     aliases: [R003, F, Health House]
+    children:
+      - name: Kvarkki
+        osm: node=577022359
+        type: restaurant
   # ELEC building
   - id: r004
     osm: 24342454
@@ -155,6 +160,9 @@ buildings:
     children:
       - name: Paniikki
         type: room
+      - name: Sodexo
+        type: restaurant
+        id: sodexo-cs
   # No R031
   # Open Innovation House
   - id: oih

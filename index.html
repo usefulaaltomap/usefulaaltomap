@@ -74,6 +74,26 @@
     angular.module('usefulAaltoMap', ['ui-leaflet', 'ngMaterial'])
     .controller('main', function($http, $scope, $compile, leafletData, $timeout) {
 
+    /* Utility methods */
+
+    function coordUnion(objs) {
+      // Return array of union of all coordinates of objects
+      var newcoords = [ ];
+      for (var i=0 ; i<objs.length ; i++) {
+        var obj = mapData2[objs[i]];
+        if (obj.outline) {
+          for (var j=0 ; j<obj.outline.length ; j++) {
+            newcoords.push(obj.outline[j]);
+          }
+        } else if (obj.latlon) {
+          newcoords.push(obj.latlon);
+        }
+      }
+      if (newcoords.length > 0)
+        return newcoords;
+    }
+
+    /* Core visualization methods */
 
       /*if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(args) {
@@ -120,16 +140,42 @@
         }
       }
 
-      $scope.zoomOnObject = function(obj) {
-        // TODO: add more types
-        switch (obj.type || 'location') {
-          case 'building':
-            $scope.leafletMap.fitBounds(obj.outline);
-            break;
-          default:
-            // nothing
+      function highlightObject(obj) {
+        // Visually mark this object as selected.  Recurses to parent
+        // objects, too.
+        // TODO: highlight this object
+        // ...
+        console.log("Should highlight:", obj.id)
+        if (obj.parents && obj.parents.length >= 1) {
+	    obj.parents.forEach(function (parent) {
+              highlightObject(mapData2[parent]);
+            })
         }
       }
+
+      // When an object is selected.
+
+      //
+      $scope.zoomOnObject = function(obj) {
+        if (obj == null) return;
+        // When an object is selected from search.
+        // TODO: add more types
+        if (obj.outline != null) {
+          $scope.leafletMap.fitBounds(obj.outline);
+          highlightObject(obj);
+        } else if (obj.latlon != null) {
+          //$scope.leafletMap.fitBounds([[obj.latlon[0]-.0007, obj.latlon[1]-.0007],[obj.latlon[0]+.0007, obj.latlon[1]+.0007]]);
+	  $scope.leafletMap.flyTo(obj.latlon, 18);
+	  //$scope.leafletMap.panTo(obj.latlon);
+          highlightObject(obj);
+        } else if (obj.parents && obj.parents.length >= 1) {
+          var outline = coordUnion(obj.parents);
+	  if (outline != null)
+            $scope.leafletMap.fitBounds(outline);
+          highlightObject(obj);
+        }
+      }
+
 
       $scope.getItemText = function(selectedItem) {
         return selectedItem.name || selectedItem.name_sv || selectedItem.name_en || selectedItem.id;
@@ -192,11 +238,12 @@
         $scope.map.center.lng = latlon[1];
       })
 
-
+      var mapData2 = { };
       $http.get('data.json')
       .then(function(res) {
         mapData = res.data.locations;
         angular.forEach(mapData, function(d) {
+          mapData2[d.id] = d
           switch (d.type) {
             case 'building':
               addBuilding(d)
