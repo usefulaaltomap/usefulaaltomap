@@ -84,9 +84,12 @@
           <h1 class="md-toolbar-tools">{{object.name}}</h1>
         </md-toolbar>
         <md-content layout-padding>
-          <div ng-show="object.name_fi"><b>FI:</b> {{object.name_fi}}</div>
-          <div ng-show="object.name_en"><b>EN:</b> {{object.name_en}}</div>
-          <div ng-show="object.name_sv"><b>EN:</b> {{object.name_sv}}</div>
+          <div>
+          <span ng-show="object.name_fi"><b>FI:</b> {{object.name_fi}}<br></span>
+          <span ng-show="object.name_en"><b>EN:</b> {{object.name_en}}<br></span>
+          <span ng-show="object.name_sv"><b>SV:</b> {{object.name_sv}}<br></span>
+          <span ng-show="object.address"><b>Address:</b> {{object.address}}<br></span>
+          </div>
           <div ng-show="object.aliases && object.aliases.length">
             <b>Aliases:</b> <span ng-repeat="a in object.aliases">{{a}}{{$last ? '' : ', '}}</span>
           </div>
@@ -178,8 +181,9 @@
         searchQuery = searchQuery.toLowerCase();  // What user enters
 
         // Helper function for filtering search results
-        function match(str) {
+        function match(str, minmatch) {
           if (!str) return false;
+          if (minmatch && searchQuery.length < minmatch) return false;
           // Searching for just a digit
           if (searchQuery.match('/^[0-9]{1,2}$/')) {
             return str.endsWith(searchQuery)
@@ -208,7 +212,7 @@
         }
 
         return _.filter(mapService.data, function(d) {
-          return match(d.name) || match(d.name_sv) || match(d.name_en) || match(d.id) || matchAliases(d);
+          return match(d.name) || match(d.name_sv) || match(d.name_en) || match(d.id) || matchAliases(d) || match(d.address, 7);
         })
       }
 
