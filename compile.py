@@ -154,6 +154,13 @@ for building in data.get('buildings', []):
     for child in building.get('children', []):
         locations.append(Location(child, parent=L.id))
         print(locations[-1].id, locations[-1].data)
+for building in data.get('other', []):
+    L = Location(building)
+    print(L.id, L.data)
+    locations.append(L)
+    for child in building.get('children', []):
+        locations.append(Location(child, parent=L.id))
+        print(locations[-1].id, locations[-1].data)
 # Crosslink children
 locations_lookup = { }
 for L in locations:
