@@ -8,6 +8,13 @@ buildings:
     children:
       - id: alvari
         osm: node=301814516
+        type: restaurant
+      - name: Silenteri
+        type: restaurant
+      - name: Aino cafe
+        type: cafe
+      - name: Elissa cafe
+        type: cafe
   - id: r002
     osm: 7579330
     aliases:
@@ -128,6 +135,10 @@ buildings:
   - id: r022
     osm: 26608151
     aliases: [R022, Administration]
+    children:
+      - name: Calori
+        type: restaurant
+        osm: node=2071854934
   - id: r023
     osm: 26608177
     aliases: [R023]
@@ -160,9 +171,14 @@ buildings:
     children:
       - name: Paniikki
         type: room
+        osm: 91227653
       - name: Sodexo
         type: restaurant
         id: sodexo-cs
+        osm: node=580704688
+      - name: Subway
+        type: restaurant
+        osm: node=3575222399
   # No R031
   # Open Innovation House
   - id: oih
@@ -185,8 +201,9 @@ buildings:
     aliases: [R037, TU, AS]
     children:
       - name: Aalto Ventures Program
-      - name: TUAS
+      - name: Amica TUAS
         type: restaurant
+        osm: node=580706218
   # Student union
   - id: r038
     osm: 7589907
@@ -202,3 +219,42 @@ buildings:
     children:
       - name: Täffä
         type: restaurant
+        osm: node=580707759
+  # Aalto Inn
+  - id: r041
+    name: Aalto Inn   #TODO: update OSM
+    osm: 181643549
+    aliases: [R041]
+  # Student health
+  - id: r042
+    osm: 4266890
+    aliases: [R042]
+  # Chappel
+  - id: chappel
+    osm: 4266572
+    aliases: [R043]
+  # Servin Mökki
+  - id: servinmokki
+    osm: 4259265
+    aliases: [R044]
+  # Radisson blu
+  - id: radisonblu
+    osm: 4259289
+    aliases: [R056, Radisson Blue]
+  # Väre
+  - id: r067
+    osm: 402618642
+    aliases: [R067, School of Arts, Design and Architecture, School of Business]
+  - id: r069
+    osm: 402618641
+    aliases: [R069, Metro Centre]
+  - id: metro2
+    osm: 408595707
+    name: Metro entrance 2
+    #aliases: [Metro entrance 2]
+
+other:
+  - id: xburger
+    name: X-burger
+    type: restaurant
+    osm: node=82638832

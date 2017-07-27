@@ -112,7 +112,11 @@
       	  if (d.name_fi) message += "\n<br> FI: " + d.name_fi;
       	  if (d.name_en) message += "\n<br> EN: " + d.name_en;
       	  if (d.name_sv) message += "\n<br> SV: " + d.name_sv;
-          if (d.aliases) message += "\n<br> AKA: " + d.aliases.join(", ");
+          if (d.aliases) message += "\n<br> (" + d.aliases.join(", ") + ")";
+          if (d.children) {
+             console.log(d.children);
+             message += "\n<br> Contains: " + d.children.map(function (x) { return mapData2[x]['name']}).join(", ");
+          }
           $scope.map.paths[d.id] = {
             clickable: true,
             weight: 1,
@@ -246,7 +250,10 @@
       .then(function(res) {
         mapData = res.data.locations;
         angular.forEach(mapData, function(d) {
-          mapData2[d.id] = d
+          mapData2[d.id] = d;
+        })
+        // Add objects to map
+        angular.forEach(mapData, function(d) {
           switch (d.type) {
             case 'building':
               addBuilding(d)
