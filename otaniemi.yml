@@ -262,14 +262,25 @@ buildings:
     #aliases: [Metro entrance 2]
 
 # Töölö
+  # Töölö main building
+  - id: chydenia
+    aliases: [Töölö Päärakennus, Töölö main building]
+    osm: 124297669
+    osm_meta: rel=1697955
+    address: Runeberginkatu 14-16, Helsinki.
   # Chydenia, Runeberginkatu 22–24
   - id: chydenia
     osm: 23192754
-    osm_meta: 338322347
+    osm_meta: node=338322347
     name: Aalto Chydenia Building
   # Economicum, Arkadiankatu 7
   - id: economicum
     osm: 165194634
+  # Arkadia, Lapuankatu 2
+  - id: arkadia
+    name: Aalto Arkadia
+    osm: 124476546
+    osm_meta: node=298645132
   # Töölö Towers
   - id: toolotowers
     name: Töölö Towers
@@ -279,11 +290,6 @@ buildings:
     name: Domus Gaudium
     osm: 96286289
     osm_meta: node=1116096931
-  # Arkadia, Lapuankatu 2
-  - id: arkadia
-    name: Aalto Arkadia
-    osm: 129126184
-    osm_meta: node=298645132
 
 # Arabia
   - id: arabia
@@ -381,7 +387,7 @@ other:
     name_sv: Institutionen för arkitektur
     note: Department located on Arabia campus, Helsinki.
     type: department
-    parents: [r024]
+    parents: [r024, ARTS]
     url: http://architecture.aalto.fi/
     url_en: http://architecture.aalto.fi/en/
   - id: dept:art
@@ -390,7 +396,7 @@ other:
     name_sv: Institutionen för konst
     note: Department located on Arabia campus, Helsinki.
     type: department
-    parents: [arabia]
+    parents: [arabia, ARTS]
     url_en: http://taide.aalto.fi/en/
     url_fi: http://taide.aalto.fi/fi/
   - id: dept:design
@@ -399,7 +405,7 @@ other:
     name_sv: Institutionen för design
     note: Department located on Arabia campus, Helsinki.
     type: department
-    parents: [arabia]
+    parents: [arabia, ARTS]
     url: http://design.aalto.fi/
     url_en: http://design.aalto.fi/en/
   - id: dept:media
@@ -408,7 +414,7 @@ other:
     name_sv: Institutionen för medier
     note: Department located on Arabia campus, Helsinki.
     type: department
-    parents: [arabia]
+    parents: [arabia, ARTS]
     url: http://media.aalto.fi/
     url_en: http://media.aalto.fi/en/
   - id: dept:film
@@ -417,7 +423,7 @@ other:
     name_sv: Institutionen för filmkonst och scenografi
     note: Department located on Arabia campus, Helsinki.
     type: department
-    parents: [arabia]
+    parents: [arabia, ARTS]
     url: http://elo.aalto.fi/
     url_en: http://elo.aalto.fi/en/
   - id: dept:lume
@@ -444,7 +450,7 @@ other:
     note: >
       Located in Töölö, Helsinki: Chydenia building, 3rd floor Runeberginkatu 22-24
     type: department
-    parents: [chydenia]
+    parents: [chydenia, BIZ]
     url_en: http://accounting.aalto.fi/en/
     url_fi: accounting.aalto.fi/fi/
   - id: dept:economics
@@ -454,7 +460,7 @@ other:
       Located in Töölö, Helsinki: Arkadiankatu 7
     note: Department located on Arabia campus, Helsinki.
     type: department
-    parents: [economicum]
+    parents: [economicum, BIZ]
     url_en: http://economics.aalto.fi/en/
     url_fi: http://economics.aalto.fi/fi/
   - id: dept:finance
@@ -463,7 +469,7 @@ other:
     note: >
       Located in Töölö, Helsinki: Chydenia building, 2rd floor Runeberginkatu 22-24
     type: department
-    parents: [chydenia]
+    parents: [chydenia, BIZ]
     url_en: http://finance.aalto.fi/en/
     url_fi: http://finance.aalto.fi/fi/
   - id: dept:infosrv
@@ -472,7 +478,7 @@ other:
     note: >
       Located in Töölö, Helsinki: Chydenia building, 4th-5th floors Runeberginkatu 22-24
     type: department
-    parents: [chydenia]
+    parents: [chydenia, BIZ]
     url_en: http://information.aalto.fi/en/
     url_fi: http://information.aalto.fi/fi/
   - id: dept:management
@@ -481,7 +487,7 @@ other:
     type: department
     note: >
       Located in Töölö, Helsinki.
-    parents: []
+    parents: [BIZ]
     url_en: http://management.aalto.fi/en/
     url_fi: http://management.aalto.fi/fi
   - id: dept:marketing
@@ -490,19 +496,19 @@ other:
     type: department
     note: >
       Located in Töölö, Helsinki.
-    parents: []
+    parents: [BIZ]
     url_en:
     url_fi:
   - id: unit:aaltoee
     name_en: Aalto University Executive Education
     type: unit
     aliases: [Aalto EE]
-    parents: [domusgadium]
+    parents: [domusgadium, BIZ]
     url: http://www.aaltoee.com/
   - id: unit:cemat
     name_en: Center for Markets in Transition (CEMAT)
     name_fi: Kansainvälisten markkinoiden tutkimuskeskus
-    aliases: [CEMAT]
+    aliases: [CEMAT, BIZ]
     address: "Lapuankatu 2, Helsinki"
     note: "Located in Töölö, Helsinki."
     type: unit
@@ -512,17 +518,17 @@ other:
   - id: unit:cikr
     name_en: Center for Knowledge and Innovation Research
     name_fi: Tiedon ja innovaatioiden tutkimuskeskus
-    aliases: [CKIR]
+    aliases: [CKIR, BIZ]
     address: "Runeberginkatu 22-24, Helsinki"
     type: unit
-    parents: []
+    parents: [BIZ]
     url_en: http://ckir.aalto.fi/en/
     url_fi: http://ckir.aalto.fi/fi/
   - id: unit:mikkeli
     name_en: Mikkeli Campus
     name_fi: Mikkelin yksikkö
     type: unit
-    parents: []
+    parents: [BIZ]
     url_en: http://biz.aalto.fi/en/studies/mikkeli/
     url_fi: http://biz.aalto.fi/fi/studies/mikkeli/
   # CHEM
@@ -531,7 +537,7 @@ other:
     name_fi: Kemian tekniikan ja metallurgian laitos
     name_sv:
     type: department
-    parents: [r011]
+    parents: [r011, CHEM]
     url_en: http://cmet.aalto.fi/en/
     url_fi: http://cmet.aalto.fi/fi/
   - id: dept:cmat
@@ -539,7 +545,7 @@ other:
     name_fi: Kemian ja materiaalitieteen laitos
     name_sv: Institutionen för materialteknik
     type: department
-    parents: [r011]
+    parents: [r011, CHEM]
     url_en: http://cmat.aalto.fi/en/
     url_fi: http://cmat.aalto.fi/fi/
   - id: dept:bio
@@ -547,14 +553,14 @@ other:
     name_fi: Biotuotteiden ja biotekniikan laitos
     name_sv: Institutionen för bio- och kemiteknik
     type: department
-    parents: []   # TODO
+    parents: [CHEM]   # TODO
   # ELEC
   - id: dept:eea
     name_en: Department of Electrical Engineering and Automation
     name_fi: Sähkötekniikan ja automaation laitos
     name_sv: Instititutionen för elektroteknik och automation
     type: department
-    parents: [r030, tuas, r036]
+    parents: [r030, tuas, r036, ELEC]
     url_en: http://eea.aalto.fi/en/
     url_fi: http://eea.aalto.fi/fi/
   - id: dept:ele
@@ -562,7 +568,7 @@ other:
     name_fi: Elektroniikan ja nanotekniikan laitos
     name_sv: Institutionen för elektronik och nanoteknik
     type: department
-    parents: [r036, tuas]
+    parents: [r036, tuas, ELEC]
     url_en: http://ele.aalto.fi/en/
     url_fi: http://ele.aalto.fi/fi/
   - id: dept:spa
@@ -570,7 +576,7 @@ other:
     name_fi: Signaalinkäsittelyn ja akustiikan laitos
     name_sv: Institutionen för signalbehandling och akustik
     type: department
-    parents: [r030, r004, tuas, r003]
+    parents: [r030, r004, tuas, r003, ELEC]
     url_en: http://spa.aalto.fi/en/
     url_fi: http://spa.aalto.fi/fi/
   - id: dept:comnet
@@ -578,21 +584,21 @@ other:
     name_fi: Tietoliikenne- ja tietoverkkotekniikan laitos
     name_sv: Institutionen för kommunikations- och nätverkteknik
     type: department
-    parents: [r030, tuas]
+    parents: [r030, tuas, ELEC]
     url_en: http://comnet.aalto.fi/en/
     url_fi: http://comnet.aalto.fi/fi/
   - id: unit:nanofab
     name: Aalto Nanofab
     type: unit
     aliases: [Micronova]
-    parents: [r036]
+    parents: [r036, ELEC]
     url: http://www.micronova.fi/
   - id: unit:metsahovi
     name_en: Metsähovi Radio Observatory
     name_fi: Metsähovin radiotutkimusasema
     name_sv: Skoggård radioforskningsinstitut
     type: unit
-    parents: [metsahovi]
+    parents: [metsahovi, ELEC]
     url_en: http://metsahovi.aalto.fi/en/
     url_fi: http://metsahovi.aalto.fi/fi/
   # ENG
@@ -600,21 +606,21 @@ other:
     name_en: Department of Mechanical Engineering
     name_fi: Konetekniikan laitos
     type: department
-    parents: [r008, r007, r006, r005, r025, r016]
+    parents: [r008, r007, r006, r005, r025, r016, ENG]
     url_en: http://mecheng.aalto.fi/en/
     url_fi: http://mecheng.aalto.fi/fi/
   - id: dept:civileng
     name_en: Department of Civil Engineering
     name_fi: Rakennustekniikan laitos
     type: department
-    parents: [r002]
+    parents: [r002, ENG]
     url_en: http://civileng.aalto.fi/en/
     url_fi: http://civileng.aalto.fi/fi/
   - id: dept:builtenv
     name_en: Department of Built Environment
     name_fi: Rakennetun ympäristön laitos
     type: department
-    parents: [r008, r034]
+    parents: [r008, r034, ENG]
     url_en: http://builtenv.aalto.fi/en/
     url_fi: http://builtenv.aalto.fi/fi/
   # SCI
@@ -623,7 +629,7 @@ other:
     name_fi: Teknillisen fysiikan laitos
     name_sv: Institutionen för teknisk fysik
     type: department
-    parents: [main, r036, r009]
+    parents: [main, r036, r009, SCI]
     url_en: http://physics.aalto.fi/en/
     url_fi: http://physics.aalto.fi/
   - id: dept:cs
@@ -632,7 +638,7 @@ other:
     name_sv: Institutionen för datateknik
     type: department
     aliases: [CS]
-    parents: [r030, tuas]
+    parents: [r030, tuas, SCI]
     url_en: http://cs.aalto.fi/en/
     url_fi: http://cs.aalto.fi/fi/
   - id: dept:tuta
@@ -640,7 +646,7 @@ other:
     name_fi: Tuotantotalouden laitos
     name_sv: Institutionen för produktionsekonomi
     type: department
-    parents: [tuas]
+    parents: [tuas, SCI]
     url_en: http://tuta.aalto.fi/en/
     url_fi: http://tuta.aalto.fi/fi/
   - id: dept:math
@@ -648,7 +654,7 @@ other:
     name_fi: Matematiikan ja systeemianalyysin laitos
     name_sv: Institutionen för matematik och systemanlys
     type: department
-    parents: [main]
+    parents: [main, SCI]
     note: M wing (Y entrance closest), 2nd-3rd floors
     url_en: http://math.aalto.fi/en/
     url_fi: http://math.aalto.fi/fi/
@@ -657,7 +663,7 @@ other:
     name_fi: Neurotieteen ja lääketieteellisen tekniikan laitos
     name_sv: Institutionen för neurovetenskap och biomedicinsk teknik
     type: department
-    parents: [r003]
+    parents: [r003, SCI]
     note: "Rakentajanaukio 2 C entrance only, 2nd-3rd floors"
     url_en: http://nbe.aalto.fi/en/
     url_fi: http://nbe.aalto.fi/fi/
@@ -667,11 +673,11 @@ other:
     name_sv: Forskningsinstitutet för informationsteknologi
     aliases: [HIIT]
     type: unit
-    parents: [r030]
+    parents: [r030, "dept:cs"]
     url_en: http://www.hiit.fi/
   - id: unit:eit
     name: EIT Digital
     type: unit
-    aliases: [EIT ICT Labs]
+    aliases: [EIT ICT Labs, SCI]
     parents: []
     url: "http://sci.aalto.fi/en/departments/#eit"
