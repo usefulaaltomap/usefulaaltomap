@@ -138,8 +138,15 @@ class Location():
         if locdat['type'] != 'way':
             return None
         if 'nodes' in locdat:
-            return [ (round(osm_data[n]['lat'], 5), round(osm_data[n]['lon'], 5))
+            nodes = [ (round(osm_data[n]['lat'], 5), round(osm_data[n]['lon'], 5))
                      for n in locdat['nodes'] ]
+            return nodes
+            # Convex halls reduce data size a bit (currently to 70% but looks much worse)
+            #print(len(nodes))
+            #from scipy.spatial import ConvexHull
+            #cv = ConvexHull(nodes)
+            #print(len(cv.vertices))
+            #return [nodes[i] for i in cv.vertices ]
     @property
     def names(self):
         osm = self.osm_metadata
