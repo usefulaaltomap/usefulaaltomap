@@ -135,6 +135,8 @@
     .controller('main', function($http, $scope, $compile, leafletData, $mdSidenav, mapService) {
 
     $scope.zoomOnObject = mapService.zoomOnObject;
+    $scope.openSideNav = mapService.openSideNav;
+    $scope.searchQuerySelected = mapService.searchQuerySelected;
 
 
     /* Utility methods */
@@ -198,7 +200,10 @@
       // When an object is selected.
 
       $scope.zoomOnObjectById = function(id) {
+        //if (! ('outline' in mapService.data[id] || 'latlon' in mapService.data[id]))
+        //  openSidenav(mapService.data[id]);
         $scope.zoomOnObject(mapService.data[id]);
+        openSidenav(mapService.data[id]);
       }
 
       $scope.getItemText = function(selectedItem) {
@@ -323,6 +328,7 @@
         if (obj == null) return;
         // When an object is selected from search.
         // TODO: add more types
+        //mapS.openSidenav(obj);
         if (obj.outline != null) {
           mapS.leafletMap.fitBounds(obj.outline);
           mapS.highlightObject(obj);
@@ -341,7 +347,7 @@
           mapS.highlightObject(obj);
         } else {
           // Has no geographic information, but display info.
-          //openSidenav(obj);   TODO: doesn't work...
+          //openSidenav(obj);   //TODO: doesn't work...
         }
       }
 
@@ -362,6 +368,13 @@
             mapS.highlightObject(mapS.data[parent]);
           })
         }
+      }
+
+      mapS.searchQuerySelected = function(obj) {
+        if (obj == null) return;
+        console.log("xxx");
+        if ('outline' in obj) mapS.zoomOnObject(obj);
+        else                  openSidenav(obj);
       }
 
       return mapS;
