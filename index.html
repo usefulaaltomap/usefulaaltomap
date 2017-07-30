@@ -41,7 +41,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
 
-  <!-- Angular Material dependencies -->  
+  <!-- Angular Material dependencies -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-simple-logger/0.1.7/angular-simple-logger.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-animate.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-aria.min.js"></script>
@@ -65,7 +65,7 @@
       md-match-case-insensitive="true"
       md-delay="250">
         <md-item-template>
-          <span md-highlight-text="searchText" class="item-title">{{item.name || item.name_en || item.name_sv || item.id}}</span>
+          <span md-highlight-text="searchText" class="item-title">{{get_lang(item, 'name') || item.id}} ({{ item['type'].toLowerCase() }})</span>
           <span class="item-aliases">
             <span md-highlight-text="searchText" ng-repeat="alias in item.aliases">{{alias}}{{$last ? '' : ', '}}</span>
           </span>
@@ -81,7 +81,7 @@
       md-whiteframe="4">
       <div ng-controller="sidenavController">
         <md-toolbar>
-          <h1 class="md-toolbar-tools">{{object.name}}</h1>
+          <h1 class="md-toolbar-tools">{{get_lang(object, 'name')}}</h1>
         </md-toolbar>
         <md-content layout-padding>
           <div>
@@ -90,25 +90,33 @@
           <span ng-show="object.name_sv"><b>SV:</b> {{object.name_sv}}<br></span>
           <span ng-show="object.address"><b>Address:</b> {{object.address}}<br></span>
           <span ng-show="object.opening_hours"><b>Open:</b> {{object.opening_hours}}<br></span>
+          <span ng-show="object.url || url_en || url_fi"><a href={{get_lang(object, 'url')}}>URL</a><br></span> <!-- TODO: this may not work -->
           </div>
           <div ng-show="object.aliases && object.aliases.length">
             <b>Aliases:</b> <span ng-repeat="a in object.aliases">{{a}}{{$last ? '' : ', '}}</span>
           </div>
-          <div ng-show="object.note">
-            <b>Note:</b> <span>{{object.note}}</span>
+          <div style="font-size: 75%"  ng-show="object.note">
+            <b>Note:</b> <span>{{get_lang(object, 'note')}}</span>
           </div>
-          <div ng-show="object.children">
+          <div style="font-size: 75%"  ng-show="object.children">
             <b>Contains</b>
             <div ng-repeat="c in object.children">
-              <a href="javascript:;" ng-click="zoomOnObjectById(c)">- {{objects[c].name}}</a>
+              <a href="javascript:;" ng-click="zoomOnObjectById(c)">- {{get_lang(objects[c], 'name')}}</a>
             </div>
           </div>
-          <div ng-show="object.lore">
-            <b>Lore:</b> <span>{{object.lore}}</span>
+          <div style="font-size: 75%" ng-show="object.parents">
+            <b>Contained in</b>
+            <div ng-repeat="p in object.parents">
+              <a href="javascript:;" ng-click="zoomOnObjectById(p)">- {{get_lang(objects[p], 'name')}}</a>
+            </div>
           </div>
-          <div ng-show="object.osm_elements" style="font-size: 75%;">
-            <b>OSM objects:</b> <span ng-repeat="c in object.osm_elements"><a href="https://www.openstreetmap.org/{{c[0]}}/{{c[1]}}">{{c[1]}}</a></span>
+          <div style="font-size: 75%" ng-show="object.lore">
+            <b>Lore:</b> <span>{{get_lang(object, 'lore')}}</span>
           </div>
+          <div style="font-size: 50%; vertical-align: bottom;" ng-show="object.osm_elements">
+            <b>OSM objects:</b> <span ng-repeat="c in object.osm_elements"><a href="https://www.openstreetmap.org/{{c[0]}}/{{c[1]}}">{{c[1]}}</a> </span>
+          </div>
+          <div style="font-size: 50%; vertical-align: bottom;">Language: <a href="javascript:set_lang('en')">EN</a> <a href="javascript:set_lang('fi')">FI</a> <a href="javascript:set_lang('sv')">SV</a></div>
         </md-content>
       </div>
     </md-sidenav>
@@ -120,6 +128,8 @@
     var BUILDING_DEFAULT_FILL_OPACITY = 0.1;
     var BUILDING_HIGHLIGHT_OUTLINE_WEIGHT = 2;
     var BUILDING_HIGHLIGHT_FILL_OPACITY = 0.2;
+    var LANG = "fi";
+
 
     angular.module('usefulAaltoMap', ['ui-leaflet', 'ngMaterial'])
     .controller('main', function($http, $scope, $compile, leafletData, $mdSidenav, mapService) {
@@ -128,6 +138,23 @@
 
 
     /* Utility methods */
+    function get_lang(obj, name) {
+      // Search (for example) obj.name_en, obj.name, obj.name_fi, etc for best
+      // translation of an object.
+      if (obj == null) return;
+      if (name+"_"+LANG in obj)  return obj[name+"_"+LANG];
+      if (name          in obj)  return obj[name];
+      if (name+"_en"    in obj)  return obj[name+"_en"];
+      if (name+"_fi"    in obj)  return obj[name+"_fi"];
+      if (name+"_sv"    in obj)  return obj[name+"_sv"];
+    }
+    $scope.get_lang = get_lang;
+    function set_lang(lang) {
+      // Set language.  This doesnt' work right now.
+      LANG = lang;
+    }
+    $scope.set_lang = set_lang;
+
     /* Core visualization methods */
 
       /*if (navigator.geolocation) {
@@ -141,10 +168,10 @@
 
       function addBuilding(d) {
         if (d.outline) {
-          message = d.name
-          if (d.name_fi) message += "\n<br> FI: " + d.name_fi;
-          if (d.name_en) message += "\n<br> EN: " + d.name_en;
-          if (d.name_sv) message += "\n<br> SV: " + d.name_sv;
+          message = get_lang(d, "name")
+          //if (d.name_fi) message += "\n<br> FI: " + d.name_fi;
+          //if (d.name_en) message += "\n<br> EN: " + d.name_en;
+          //if (d.name_sv) message += "\n<br> SV: " + d.name_sv;
           if (d.aliases && d.aliases.length > 0)
              message += "\n<br> (" + d.aliases.join(", ") + ")";
           //if (d.children) {
@@ -175,7 +202,7 @@
       }
 
       $scope.getItemText = function(selectedItem) {
-        return selectedItem.name || selectedItem.name_sv || selectedItem.name_en || selectedItem.id;
+        return get_lang(selectedItem, 'name') || selectedItem.id;
       }
 
       $scope.getItems = function(searchQuery) {
@@ -213,7 +240,7 @@
         }
 
         return _.filter(mapService.data, function(d) {
-          return match(d.name) || match(d.name_sv) || match(d.name_en) || match(d.id) || matchAliases(d) || match(d.address, 7);
+          return match(d.name) || match(d.name_fi) || match(d.name_en) || match(d.name_sv) || match(d.id) || matchAliases(d) || match(d.address, 7);
         })
       }
 
@@ -291,7 +318,7 @@
           map.invalidateSize();
         })
       })
-      
+
       mapS.zoomOnObject = function(obj) {
         if (obj == null) return;
         // When an object is selected from search.
@@ -312,6 +339,9 @@
             mapS.leafletMap.fitBounds(outline);
           }
           mapS.highlightObject(obj);
+        } else {
+          // Has no geographic information, but display info.
+          //openSidenav(obj);   TODO: doesn't work...
         }
       }
 
