@@ -99,25 +99,25 @@
             <b>Note:</b> <span>{{get_lang(object, 'note')}}</span>
           </div>
           <div style="font-size: 75%"  ng-show="object.children">
-            <b>Contains</b>
+            <b>Contains:</b>
             <div ng-repeat="c in object.children" ng-if="objects[c].parents == null || objects[c].parents.length <= 1">
               - <a href="javascript:;" ng-click="zoomOnObjectById(c)">{{get_lang(objects[c], 'name')}}</a> ({{objects[c].type}})
             </div>
           </div>
           <div style="font-size: 75%"  ng-show="object.children">
-            <b>Contains part of</b>
+            <b>Contains part of:</b>
             <div ng-repeat="c in object.children" ng-if="objects[c].parents.length > 1">
               - <a href="javascript:;" ng-click="zoomOnObjectById(c)">{{get_lang(objects[c], 'name')}}</a> ({{objects[c].type}})
             </div>
           </div>
           <div style="font-size: 75%" ng-show="object.parents">
-            <b>Contained in</b>
+            <b>Contained in:</b>
             <div ng-repeat="p in object.parents" ng-if="objects[p].type == 'building'">
               - <a href="javascript:;" ng-click="zoomOnObjectById(p)">{{get_lang(objects[p], 'name')}}</a> ({{objects[p].type}})
             </div>
           </div>
           <div style="font-size: 75%" ng-show="object.parents">
-            <b>Part of</b>
+            <b>Part of:</b>
             <div ng-repeat="p in object.parents" ng-if="objects[p].type != 'building'">
               - <a href="javascript:;" ng-click="zoomOnObjectById(p)">{{get_lang(objects[p], 'name')}}</a> ({{objects[p].type}})
             </div>
@@ -125,10 +125,16 @@
           <div style="font-size: 75%" ng-show="object.lore">
             <b>Lore:</b> <span>{{get_lang(object, 'lore')}}</span>
           </div>
-          <div style="font-size: 50%; vertical-align: bottom;" ng-show="object.osm_elements">
+          <!-- Bottom -->
+          <div style="font-size: 50%; vertical-align: bottom;">
+          <div>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfnzjS_3o4NeU1tzmpZ6CBn-pDRH9L1gyVB3cWA9WHEMim3Vg/viewform?usp=pp_url&entry.680957649={{object.id}}&entry.1500670776={{get_lang(object, 'name')}}">Submit new data or correction</a>
+          </div>
+          <div ng-show="object.osm_elements">
             <b>OSM objects:</b> <span ng-repeat="c in object.osm_elements"><a href="https://www.openstreetmap.org/{{c[0]}}/{{c[1]}}">{{c[1]}}</a> </span>
           </div>
-          <div style="font-size: 50%; vertical-align: bottom;">Language: <a href="javascript:set_lang('en')">EN</a> <a href="javascript:set_lang('fi')">FI</a> <a href="javascript:set_lang('sv')">SV</a></div>
+          <div>Language: <a href="javascript:set_lang('en')">EN</a> <a href="javascript:set_lang('fi')">FI</a> <a href="javascript:set_lang('sv')">SV</a></div>
+          </div>
         </md-content>
       </div>
     </md-sidenav>

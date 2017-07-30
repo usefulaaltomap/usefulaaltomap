@@ -95,7 +95,11 @@ buildings:
     aliases: [R014]
   - id: r015
     osm: 4252948
-    aliases: [R015, Library, Learning Center, Harald Herlin Learning Centre]
+    aliases: [R015, Aalto-yliopiston kirjasto, Main Library, Learning Center, Harald Herlin Learning Centre]
+    lore: >-
+      This used to be the main library.  In 2016, it was renovated and turned
+      into a modern library: the "Learning Centre".  Most people call it the
+      library still, as they should.
     children:
       - name: "Robert's Coffee"
         type: cafe
@@ -198,12 +202,14 @@ buildings:
     aliases: [R035]
     children:
       - name: IT Services
+        type: unit
   # Micronova
   - id: r036
     osm: 7585092
     aliases: [R036]
     children:
       - name: Nanofab
+        type: unit
   - id: tuas
     osm: 29012757
     aliases: [R037, TU, AS]
@@ -247,8 +253,13 @@ buildings:
     aliases: [R044]
   # Radisson blu
   - id: radisonblu
+    name: Radisson Blu
     osm: 4259289
-    aliases: [R056, Radisson Blue]
+    aliases: [R056]
+    children:
+      - id: ravintolaranta
+        osm: 2071892285
+        type: restaurant
   # Väre
   - id: r067
     osm: 402618642
