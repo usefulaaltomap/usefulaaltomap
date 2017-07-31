@@ -31,13 +31,17 @@
       display: block;
       line-height: 2;
     }
+
+    md-backdrop {
+      z-index: 300 !important;
+    }
   </style>
 <title>Useful Aalto Map</title>
   <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ui-leaflet/2.0.0/ui-leaflet.js"></script>
 </head>
-<body ng-cloak style="height:100%; margin:0" ng-app="usefulAaltoMap" ng-controller="main">
+<body ng-cloak style="height:100%; margin:0" ng-app="usefulAaltoMap">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
 
@@ -50,271 +54,14 @@
   <!-- Angular Material Library -->
   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
 
+  <!-- Client-side routing -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
 
-
-    <md-autocomplete
-      placeholder="Search"
-      style="position:fixed; top:10px; max-width:300px; width:80%; left:0; margin:0 auto; right:0; z-index: 1000"
-      md-selected-item="selectedItem"
-      md-selected-item-change="zoomOnObject(selectedItem)"
-      md-search-text="searchText"
-      md-items="item in getItems(searchText)"
-      md-item-text="getItemText(item)"
-      md-min-length="1"
-      md-menu-class="searchBarSuggestions"
-      md-match-case-insensitive="true"
-      md-delay="250">
-        <md-item-template>
-          <span md-highlight-text="searchText" class="item-title">{{get_lang(item, 'name') || item.id}} ({{ item['type'].toLowerCase() }})</span>
-          <span class="item-aliases">
-            <span md-highlight-text="searchText" ng-repeat="alias in item.aliases">{{alias}}{{$last ? '' : ', '}}</span>
-          </span>
-        </md-item-template>
-    </md-autocomplete>
-
-    <leaflet height="100%" center="map.center" markers="map.markers" paths="map.paths" watch-options="map.watchOptions"></leaflet>
-
-    <md-sidenav
-      class="md-sidenav-right"
-      style="z-index:100"
-      md-component-id="right"
-      md-whiteframe="4">
-      <div ng-controller="sidenavController">
-        <md-toolbar>
-          <h1 class="md-toolbar-tools">{{get_lang(object, 'name')}}</h1>
-        </md-toolbar>
-        <md-content layout-padding>
-          <div>
-          <span ng-show="object.name_fi"><b>FI:</b> {{object.name_fi}}<br></span>
-          <span ng-show="object.name_en"><b>EN:</b> {{object.name_en}}<br></span>
-          <span ng-show="object.name_sv"><b>SV:</b> {{object.name_sv}}<br></span>
-          <span ng-show="object.address"><b>Address:</b> {{object.address}}<br></span>
-          <span ng-show="object.opening_hours"><b>Open:</b> {{object.opening_hours}}<br></span>
-          <span ng-show="object.url || url_en || url_fi"><a href={{get_lang(object, 'url')}}>URL</a><br></span> <!-- TODO: this may not work -->
-          </div>
-          <div ng-show="object.aliases && object.aliases.length">
-            <b>Aliases:</b> <span ng-repeat="a in object.aliases">{{a}}{{$last ? '' : ', '}}</span>
-          </div>
-          <div style="font-size: 75%"  ng-show="object.note">
-            <b>Note:</b> <span>{{get_lang(object, 'note')}}</span>
-          </div>
-          <div style="font-size: 75%"  ng-show="object.children">
-            <b>Contains:</b>
-            <div ng-repeat="c in object.children" ng-if="objects[c].parents == null || objects[c].parents.length <= 1">
-              - <a href="javascript:;" ng-click="zoomOnObjectById(c)">{{get_lang(objects[c], 'name')}}</a> ({{objects[c].type}})
-            </div>
-          </div>
-          <div style="font-size: 75%"  ng-show="object.children">
-            <b>Contains part of:</b>
-            <div ng-repeat="c in object.children" ng-if="objects[c].parents.length > 1">
-              - <a href="javascript:;" ng-click="zoomOnObjectById(c)">{{get_lang(objects[c], 'name')}}</a> ({{objects[c].type}})
-            </div>
-          </div>
-          <div style="font-size: 75%" ng-show="object.parents">
-            <b>Contained in:</b>
-            <div ng-repeat="p in object.parents" ng-if="objects[p].type == 'building'">
-              - <a href="javascript:;" ng-click="zoomOnObjectById(p)">{{get_lang(objects[p], 'name')}}</a> ({{objects[p].type}})
-            </div>
-          </div>
-          <div style="font-size: 75%" ng-show="object.parents">
-            <b>Part of:</b>
-            <div ng-repeat="p in object.parents" ng-if="objects[p].type != 'building'">
-              - <a href="javascript:;" ng-click="zoomOnObjectById(p)">{{get_lang(objects[p], 'name')}}</a> ({{objects[p].type}})
-            </div>
-          </div>
-          <div style="font-size: 75%" ng-show="object.lore">
-            <b>Lore:</b> <span>{{get_lang(object, 'lore')}}</span>
-          </div>
-          <!-- Bottom -->
-          <div style="font-size: 50%; vertical-align: bottom;">
-          <div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfnzjS_3o4NeU1tzmpZ6CBn-pDRH9L1gyVB3cWA9WHEMim3Vg/viewform?usp=pp_url&entry.680957649={{object.id}}&entry.1500670776={{get_lang(object, 'name')}}">Submit new data or correction</a>
-          </div>
-          <div ng-show="object.osm_elements">
-            <b>OSM objects:</b> <span ng-repeat="c in object.osm_elements"><a href="https://www.openstreetmap.org/{{c[0]}}/{{c[1]}}">{{c[1]}}</a> </span>
-          </div>
-          <div>Language: <a href="javascript:set_lang('en')">EN</a> <a href="javascript:set_lang('fi')">FI</a> <a href="javascript:set_lang('sv')">SV</a></div>
-          </div>
-        </md-content>
-      </div>
-    </md-sidenav>
+  <script src="app.js"></script>
+  <script src="main/main.js"></script>
+  <script src="sidenav/sidenav.js"></script>
 
   <script>
-
-    /* Config constants TODO: NON-GLOBAL?*/
-    var BUILDING_DEFAULT_OUTLINE_WEIGHT = 1;
-    var BUILDING_DEFAULT_FILL_OPACITY = 0.1;
-    var BUILDING_HIGHLIGHT_OUTLINE_WEIGHT = 2;
-    var BUILDING_HIGHLIGHT_FILL_OPACITY = 0.2;
-    var LANG = "en";
-
-
-    angular.module('usefulAaltoMap', ['ui-leaflet', 'ngMaterial'])
-    .controller('main', function($http, $scope, $compile, leafletData, $mdSidenav, mapService) {
-
-    $scope.zoomOnObject = mapService.zoomOnObject;
-    $scope.openSideNav = mapService.openSideNav;
-    $scope.searchQuerySelected = mapService.searchQuerySelected;
-
-
-    /* Utility methods */
-    function get_lang(obj, name) {
-      // Search (for example) obj.name_en, obj.name, obj.name_fi, etc for best
-      // translation of an object.
-      if (obj == null) return;
-      if (name+"_"+LANG in obj)  return obj[name+"_"+LANG];
-      if (name          in obj)  return obj[name];
-      if (name+"_en"    in obj)  return obj[name+"_en"];
-      if (name+"_fi"    in obj)  return obj[name+"_fi"];
-      if (name+"_sv"    in obj)  return obj[name+"_sv"];
-    }
-    $scope.get_lang = get_lang;
-    function set_lang(lang) {
-      // Set language.  This doesnt' work right now.
-      LANG = lang;
-    }
-    $scope.set_lang = set_lang;
-
-    /* Core visualization methods */
-
-      /*if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(args) {
-          $scope.map.center.lat = args.coords.latitude;
-          $scope.map.center.lng = args.coords.longitude;
-        })
-      }*/
-
-      $scope.map = mapService.map;
-
-      function addBuilding(d) {
-        if (d.outline) {
-          message = get_lang(d, "name")
-          //if (d.name_fi) message += "\n<br> FI: " + d.name_fi;
-          //if (d.name_en) message += "\n<br> EN: " + d.name_en;
-          //if (d.name_sv) message += "\n<br> SV: " + d.name_sv;
-          if (d.aliases && d.aliases.length > 0)
-             message += "\n<br> (" + d.aliases.join(", ") + ")";
-          //if (d.children) {
-          //   message += "\n<br> Contains: " + d.children.map(function (x) { return mapService.data[x]['name']}).join(", ");
-          //}
-          $scope.map.paths[d.id] = {
-            clickable: true,
-            weight: BUILDING_DEFAULT_OUTLINE_WEIGHT,
-            fill: true,
-            fillColor: 'red',
-            fillOpacity: BUILDING_DEFAULT_FILL_OPACITY,
-            latlngs: d.outline.map(function(coords) {
-              return {
-                lat: coords[0],
-                lng: coords[1]
-              }
-            }),
-            data: d,
-            message: message
-          }
-        }
-      }
-
-      // When an object is selected.
-
-      $scope.zoomOnObjectById = function(id) {
-        //if (! ('outline' in mapService.data[id] || 'latlon' in mapService.data[id]))
-        //  openSidenav(mapService.data[id]);
-        $scope.zoomOnObject(mapService.data[id]);
-        openSidenav(mapService.data[id]);
-      }
-
-      $scope.getItemText = function(selectedItem) {
-        return get_lang(selectedItem, 'name') || selectedItem.id;
-      }
-
-      $scope.getItems = function(searchQuery) {
-        searchQuery = searchQuery.toLowerCase();  // What user enters
-
-        // Helper function for filtering search results
-        function match(str, minmatch) {
-          if (!str) return false;
-          if (minmatch && searchQuery.length < minmatch) return false;
-          // Searching for just a digit
-          if (searchQuery.match('/^[0-9]{1,2}$/')) {
-            return str.endsWith(searchQuery)
-          }
-          // Searching for a single letter - building letters
-          else if (searchQuery.length == 1) {
-            return str.toLowerCase() == searchQuery
-          }
-          // Searching for only two letters - match at start of each word only
-          else if (searchQuery.length == 2) {
-            return RegExp("\\b"+searchQuery, 'i').test(str)
-          }
-          // Generic search
-          else {
-            return str.toLowerCase().indexOf(searchQuery) > -1
-          }
-        }
-
-        // Check if the query matches an alias
-        function matchAliases(d) {
-          var matched = false;
-          angular.forEach(d.aliases, function(a) {
-            if (match(a)) { matched = true };
-          })
-          return matched;
-        }
-
-        return _.filter(mapService.data, function(d) {
-          return match(d.name) || match(d.name_fi) || match(d.name_en) || match(d.name_sv) || match(d.id) || matchAliases(d) || match(d.address, 7);
-        })
-      }
-
-      function openSidenav(obj) {
-        $scope.$broadcast('objectSelected', obj);
-        $mdSidenav('right').open()
-        /*.then(function() {
-          return;
-        })*/
-      }
-
-      $scope.$on('leafletDirectivePath.click', function(event, args) {
-        event.preventDefault();
-        openSidenav(mapService.data[args.modelName])
-      })
-
-      $scope.$on('leafletDirectivePath.mouseover', function(event, args) {
-        var data = mapService.data[args.modelName]
-        mapService.highlightObject(mapService.data[args.modelName]);
-        var pxBounds = args.leafletObject._pxBounds;
-        var popup = L.popup({autoPan: false, offset: {x: 0, y: -(pxBounds.max.y - pxBounds.min.y) / 2}})
-          .setLatLng(data.latlon)
-          .setContent(args.leafletObject.options.message)
-          .openOn(mapService.leafletMap)
-      })
-
-      $scope.$on('leafletDirectivePath.mouseout', function(event, args) {
-        var path = $scope.map.paths[args.modelName];
-
-        path.weight = BUILDING_DEFAULT_OUTLINE_WEIGHT;
-        path.fillOpacity = BUILDING_DEFAULT_FILL_OPACITY;
-      })
-
-      mapService.data = { };
-      $http.get('data.json')
-      .then(function(res) {
-        angular.forEach(res.data.locations, function(d) {
-          mapService.data[d.id] = d;
-        })
-        // Add objects to map
-        angular.forEach(mapService.data, function(d) {
-          switch (d.type) {
-            case 'building':
-              addBuilding(d)
-              break;
-            default:
-              // do nothing
-          }
-        })
-      })
-    })
 
     angular.module('usefulAaltoMap')
     .service('mapService', function(leafletData, utils, $timeout) {
@@ -419,24 +166,23 @@
           return newcoords;
       }
 
+      utils.get_lang = function(obj, name) {
+        // Search (for example) obj.name_en, obj.name, obj.name_fi, etc for best
+        // translation of an object.
+        if (obj == null) return;
+        if (name+"_"+LANG in obj)  return obj[name+"_"+LANG];
+        if (name          in obj)  return obj[name];
+        if (name+"_en"    in obj)  return obj[name+"_en"];
+        if (name+"_fi"    in obj)  return obj[name+"_fi"];
+        if (name+"_sv"    in obj)  return obj[name+"_sv"];
+      }
+
       return utils;
     })
 
-    angular.module('usefulAaltoMap')
-    .controller('sidenavController', function($scope, mapService) {
-
-      $scope.objects = mapService.data;
-
-      $scope.$on('objectSelected', function(event, object) {
-        $scope.object = object;
-      })
-
-      $scope.selectChild = function(id) {
-
-      }
-
-    })
-
   </script>
+
+  <div style="height:100%" ui-view="main"></div>
+  <div ui-view></div>
 </body>
 </html>

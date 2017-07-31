@@ -1,0 +1,23 @@
+<div style="height:100%">
+  <md-autocomplete
+    placeholder="Search"
+    style="position:fixed; top:10px; max-width:300px; width:80%; left:0; margin:0 auto; right:0; z-index: 200"
+    md-selected-item="selectedItem"
+    md-selected-item-change="goToState('app.selectedObject', {objectId: selectedItem.id})"
+    md-search-text="searchText"
+    md-items="item in getItems(searchText)"
+    md-item-text="getItemText(item)"
+    md-min-length="1"
+    md-menu-class="searchBarSuggestions"
+    md-match-case-insensitive="true"
+    md-delay="250">
+      <md-item-template>
+        <span md-highlight-text="searchText" class="item-title">{{get_lang(item, 'name') || item.id}} ({{ item['type'].toLowerCase() }})</span>
+        <span class="item-aliases">
+          <span md-highlight-text="searchText" ng-repeat="alias in item.aliases">{{alias}}{{$last ? '' : ', '}}</span>
+        </span>
+      </md-item-template>
+  </md-autocomplete>
+
+  <leaflet height="100%" center="map.center" markers="map.markers" paths="map.paths" watch-options="map.watchOptions"></leaflet>
+</div>

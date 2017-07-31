@@ -1,0 +1,64 @@
+<md-sidenav
+  class="md-sidenav-left"
+  style="z-index:1000"
+  md-component-id="left"
+  md-whiteframe="4">
+  <div>
+    <md-toolbar>
+      <h1 class="md-toolbar-tools">{{get_lang(object, 'name')}}</h1>
+    </md-toolbar>
+    <md-content layout-padding>
+      <div>
+      <span ng-show="object.name_fi"><b>FI:</b> {{object.name_fi}}<br></span>
+      <span ng-show="object.name_en"><b>EN:</b> {{object.name_en}}<br></span>
+      <span ng-show="object.name_sv"><b>SV:</b> {{object.name_sv}}<br></span>
+      <span ng-show="object.address"><b>Address:</b> {{object.address}}<br></span>
+      <span ng-show="object.opening_hours"><b>Open:</b> {{object.opening_hours}}<br></span>
+      <span ng-show="object.url || url_en || url_fi"><a href={{get_lang(object, 'url')}}>URL</a><br></span> <!-- TODO: this may not work -->
+      </div>
+      <div ng-show="object.aliases && object.aliases.length">
+        <b>Aliases:</b> <span ng-repeat="a in object.aliases">{{a}}{{$last ? '' : ', '}}</span>
+      </div>
+      <div style="font-size: 75%"  ng-show="object.note">
+        <b>Note:</b> <span>{{get_lang(object, 'note')}}</span>
+      </div>
+      <div style="font-size: 75%"  ng-show="object.children">
+        <b>Contains:</b>
+        <div ng-repeat="c in object.children" ng-if="objects[c].parents == null || objects[c].parents.length <= 1">
+          - <a ui-sref="app.selectedObject({objectId: c})">{{get_lang(objects[c], 'name')}}</a> ({{objects[c].type}})
+        </div>
+      </div>
+      <div style="font-size: 75%"  ng-show="object.children">
+        <b>Contains part of:</b>
+        <div ng-repeat="c in object.children" ng-if="objects[c].parents.length > 1">
+          - <a ui-sref="app.selectedObject({objectId: c})">{{get_lang(objects[c], 'name')}}</a> ({{objects[c].type}})
+        </div>
+      </div>
+      <div style="font-size: 75%" ng-show="object.parents">
+        <b>Contained in:</b>
+        <div ng-repeat="p in object.parents" ng-if="objects[p].type == 'building'">
+          - <a ui-sref="app.selectedObject({objectId: c})">{{get_lang(objects[p], 'name')}}</a> ({{objects[p].type}})
+        </div>
+      </div>
+      <div style="font-size: 75%" ng-show="object.parents">
+        <b>Part of:</b>
+        <div ng-repeat="p in object.parents" ng-if="objects[p].type != 'building'">
+          - <a ui-sref="app.selectedObject({objectId: c})">{{get_lang(objects[p], 'name')}}</a> ({{objects[p].type}})
+        </div>
+      </div>
+      <div style="font-size: 75%" ng-show="object.lore">
+        <b>Lore:</b> <span>{{get_lang(object, 'lore')}}</span>
+      </div>
+      <!-- Bottom -->
+      <div style="font-size: 50%; vertical-align: bottom;">
+      <div>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfnzjS_3o4NeU1tzmpZ6CBn-pDRH9L1gyVB3cWA9WHEMim3Vg/viewform?usp=pp_url&entry.680957649={{object.id}}&entry.1500670776={{get_lang(object, 'name')}}">Submit new data or correction</a>
+      </div>
+      <div ng-show="object.osm_elements">
+        <b>OSM objects:</b> <span ng-repeat="c in object.osm_elements"><a href="https://www.openstreetmap.org/{{c[0]}}/{{c[1]}}">{{c[1]}}</a> </span>
+      </div>
+      <div>Language: <a href="javascript:set_lang('en')">EN</a> <a href="javascript:set_lang('fi')">FI</a> <a href="javascript:set_lang('sv')">SV</a></div>
+      </div>
+    </md-content>
+  </div>
+</md-sidenav>
