@@ -18,8 +18,10 @@ buildings:
         type: restaurant
       - name: Aino cafe
         type: cafe
+        osm: node=5004956486
       - name: Elissa cafe
         type: cafe
+        osm: node=5004956487
   # Civil Engineering
   - id: r002
     osm: 7579330
@@ -133,6 +135,10 @@ buildings:
       - id: rkioski
         type: shopping
         osm: node=301625474
+      - id: kynajapaperi
+        osm: node=4840360722
+      - id: otafood
+        osm: node=5004956488
 
   # No building 21
   - id: r022
@@ -258,7 +264,7 @@ buildings:
     aliases: [R056]
     children:
       - id: ravintolaranta
-        osm: 2071892285
+        osm: node=2071892285
         type: restaurant
   # Väre
   - id: r067
