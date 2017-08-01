@@ -57,6 +57,8 @@ class Location():
         if self.osm_elements():
             data['osm_elements'] = [(t.replace('rel', 'relation'), v)
                                     for t,v in self.osm_elements()]
+        entrances = self.entrances()
+        if entrances: data['entrances'] = entrances
         return data
     @property
     def children(self):
@@ -163,6 +165,36 @@ class Location():
         if self.data.get('name_en'): names['name_en'] = self.data['name_en']
         if self.data.get('name_sv'): names['name_sv'] = self.data['name_sv']
         return names
+    def entrances(self):
+        """Make list of entrances of this building.
+
+        Returns: [ {'lat'=XX, 'lon'=XX, 'name'=XX, 'main'=True}, ... ]
+                 'name' and 'main' are both optional.
+        """
+        way = self.osm_data_location
+        if not way: return
+        if way['type'] != 'way': return
+        entrances = [ ]
+        for n in way['nodes']:
+            if 'tags' not in osm_data[n]:
+                continue
+            if osm_data[n]['tags'].get('entrance', None) not in {'yes', 'main', 'staircase'}:
+                continue
+            is_main = osm_data[n]['tags']['entrance'] == 'main'
+            is_wheelchair = osm_data[n]['tags'].get('wheelchair') == 'yes'
+            if osm_data[n]['tags'].get('access', 'yes') not in {'yes', 'permissive'}:
+                continue
+            name = osm_data[n]['tags'].get('name', osm_data[n]['tags'].get('ref'))
+            if len(name) > 3: name = None
+            lat, lon = round(osm_data[n]['lat'], 5), round(osm_data[n]['lon'], 5)
+            # Create data
+            e = dict(lat=lat, lon=lon)
+            if name: e['name'] = name
+            if is_main: e['main'] = is_main
+            entrances.append(e)
+            print(n, e, osm_data[n])
+        return entrances
+
 
 
 # assemble locations
