@@ -37,13 +37,13 @@
       <div style="font-size: 75%" ng-show="object.parents">
         <b>Contained in:</b>
         <div ng-repeat="p in object.parents" ng-if="objects[p].type == 'building'">
-          - <a ui-sref="app.selectedObject({objectId: c})">{{get_lang(objects[p], 'name')}}</a> ({{objects[p].type}})
+          - <a ui-sref="app.selectedObject({objectId: p})">{{get_lang(objects[p], 'name')}}</a> ({{objects[p].type}})
         </div>
       </div>
       <div style="font-size: 75%" ng-show="object.parents">
         <b>Part of:</b>
         <div ng-repeat="p in object.parents" ng-if="objects[p].type != 'building'">
-          - <a ui-sref="app.selectedObject({objectId: c})">{{get_lang(objects[p], 'name')}}</a> ({{objects[p].type}})
+          - <a ui-sref="app.selectedObject({objectId: p})">{{get_lang(objects[p], 'name')}}</a> ({{objects[p].type}})
         </div>
       </div>
       <div style="font-size: 75%" ng-show="object.lore">

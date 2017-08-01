@@ -35,6 +35,25 @@
     md-backdrop {
       z-index: 300 !important;
     }
+
+    .about {
+      position: fixed;
+      right: 0;
+      bottom: 16px;
+      background: rgba(255, 255, 255, 0.7);
+      font-size:11px;
+      z-index:800;
+      padding:0px 5px;
+    }
+
+    .about a {
+      color:rgb(0, 120, 168);
+      text-decoration:none;
+    }
+
+    .about a:hover {
+      text-decoration:underline;
+    }
   </style>
 <title>Useful Aalto Map</title>
   <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
@@ -184,5 +203,8 @@
 
   <div style="height:100%" ui-view="main"></div>
   <div ui-view></div>
+  <div class="about">
+    Unofficial | <a target="_blank" href="https://github.com/usefulaaltomapfi/usefulaaltomap/wiki">About</a>
+  </div>
 </body>
 </html>
