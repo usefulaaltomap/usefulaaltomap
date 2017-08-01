@@ -125,11 +125,11 @@ class Location():
         if 'osm' not in self.data: return None
         if isinstance(self.data['osm'], str) and self.data['osm'].startswith('node'):
             n = int(self.data['osm'].split('=')[1])
-            return (osm_data[n]['lat'], osm_data[n]['lon'])
+            return (round(osm_data[n]['lat'], 5), round(osm_data[n]['lon'], 5))
         latlon_path = self.outline
         if not latlon_path: return none
-        return ( sum(x[0] for x in latlon_path)/len(latlon_path),
-                 sum(x[1] for x in latlon_path)/len(latlon_path))
+        return ( round(sum(x[0] for x in latlon_path)/len(latlon_path), 5),
+                 round(sum(x[1] for x in latlon_path)/len(latlon_path), 5))
     @property
     def outline(self):
         if 'outline' in self.data: return self.data['outline']
