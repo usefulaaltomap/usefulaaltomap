@@ -1,3 +1,4 @@
+import fnmatch
 import json
 import os
 import re
@@ -7,11 +8,23 @@ import requests
 import yaml
 
 data = yaml.load(open('otaniemi.yml'))
-use_cache = False
+use_cache = True
 re_nametoid = re.compile('[^a-zA-Z0-9_]+')
 
 # Getting ways by ID:
 # wget -o /dev/null -O- 'http://overpass-api.de/api/interpreter?data=[out:json];(way(91227662);way(555));out;'
+
+# utility
+def update_maybe(dct, key, new_dct, new_key=None):
+    if new_key is None: new_key = key
+    if key in dct:
+        new_dct[new_key] = dct[key]
+def update_matching(dct, key_pattern, new_dct):
+    for key in dct:
+        if fnmatch.fnmatchcase(key, key_pattern):
+            new_dct[key] = dct[key]
+
+# Main class
 
 class Location():
     """This class will handle most logic of locations"""
@@ -20,6 +33,8 @@ class Location():
         if type: self.data['type'] = type
         if parent: self.data['parents'] = [parent]
         self.data['children'] = [ ]
+        # self-tests
+        assert 'type' in self.data
     def __repr__(self):
         return '%s(id=%s)'%(self.__class__.__name__, self.id)
     @property
@@ -59,6 +74,7 @@ class Location():
                                     for t,v in self.osm_elements()]
         entrances = self.entrances()
         if entrances: data['entrances'] = entrances
+        data.update(self.labels)
         return data
     @property
     def children(self):
@@ -185,16 +201,35 @@ class Location():
             if osm_data[n]['tags'].get('access', 'yes') not in {'yes', 'permissive'}:
                 continue
             name = osm_data[n]['tags'].get('name', osm_data[n]['tags'].get('ref'))
-            if len(name) > 3: name = None
+            if name and len(name) > 3: name = None
             lat, lon = round(osm_data[n]['lat'], 5), round(osm_data[n]['lon'], 5)
             # Create data
             e = dict(lat=lat, lon=lon)
             if name: e['name'] = name
             if is_main: e['main'] = is_main
             entrances.append(e)
-            print(n, e, osm_data[n])
+            #print(n, e, osm_data[n])
         return entrances
-
+    @property
+    def labels(self):
+        if self.data['type'] != 'building':
+            return { }
+        labels_dict = { }
+        # find buliding number
+        re_rnumber = re.compile(r'R(\d{2,3})', re.I)
+        Rnumber = None
+        if 'aliases' in self.data:
+            Rnumber = next(map(re_rnumber.search, self.data['aliases']), None)
+            if Rnumber:
+                Rnumber = str(int(Rnumber.group(1)))
+        update_matching(self.data, 'label*', labels_dict)
+        # If we have R-number, update labels to include it
+        if Rnumber:
+            for key in labels_dict:
+                labels_dict[key] = labels_dict[key] + '\n' + Rnumber
+            if 'label' not in labels_dict:
+                labels_dict['label'] = str(Rnumber)
+        return labels_dict
 
 
 # assemble locations

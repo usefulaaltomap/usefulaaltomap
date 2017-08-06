@@ -5,6 +5,7 @@ buildings:
     osm: 4252946
     osm_meta: rel=4148
     aliases: [R001, A, H, M, U, Y, Main Building]
+    label: Main
     note: >
       This buliding is large and confusing, but has reasonable directions inside.  Make sure
       you know the wing (letter) of the place you are going.  It could also be useful to know
@@ -25,12 +26,14 @@ buildings:
   # Civil Engineering
   - id: r002
     osm: 7579330
-    aliases: [R002]
+    label: R
+    aliases: [R002, R]
   # NBE / (physics)
   - id: r003
     osm: 98855202
     osm_meta: rel=1402504
     aliases: [R003, F, Health Technology House]
+    label: F
     note: >-
       To get to NBE, you must enter through the C door on Rakentajanaukio.  To get to
       lecture rooms and restaurants, use the A door on Otakaari.  Internal connection only
@@ -46,22 +49,28 @@ buildings:
   - id: r004
     osm: 24342454
     aliases: [R004, ELEC]
+    label: ELEC
+    label_fi: Sähko
   # K4, Sähkömiehentie 4
   - id: r005
     osm: 97664102
     aliases: [R005, K4]
+    label: K4
   # K3, Puumiehenkuja 5
   - id: r006
     osm: 156903284
     aliases: [R006, K3]
+    label: K3
   # K2, Puumiehenkuja 3
   - id: r007
     osm: 156903282
     aliases: [R007, K2]
+    label: K2
   # K1, Otakaari 4
   - id: r008
     osm: 156903276
     aliases: [R008, K1]
+    label: K1
     children:
       - id: sodexokone
         osm: node=589913032
@@ -70,6 +79,7 @@ buildings:
   - id: r009
     osm: 27930945
     aliases: [R009]
+    label: Nanotalo
   - id: r010
     osm: 4424188
     aliases: [R010]
@@ -77,6 +87,7 @@ buildings:
   - id: r011            # TODO: opening hours 7.45-18 academic year, 8-16 other.
     osm: 7588058
     aliases: [R011, CHEM]
+    label: CHEM
     children:
       - id: maukas
         osm: node=2381695985
@@ -113,6 +124,7 @@ buildings:
   - id: r017
     osm: 97662456
     aliases: [R017]
+    label: Maari
   - id: r018
     osm: 7244238
     aliases: [R018]
@@ -137,13 +149,16 @@ buildings:
         osm: node=301625474
       - id: kynajapaperi
         osm: node=4840360722
+        type: cafe
       - id: otafood
         osm: node=5004956488
+        type: restaurant
 
   # No building 21
   - id: r022
     osm: 26608151
     aliases: [R022, Administration]
+    label: Admin
     children:
       - name: Calori
         type: restaurant
@@ -157,10 +172,13 @@ buildings:
   # Design factory, Betonimiehenkuja 5
   - id: r025
     osm: 26608273
-    aliases: [R025, Design Factory]
+    aliases: [R025]
+    label: Design Factory
+  # Startup Sauna
   - id: r026
     osm: 26608317
     aliases: [R026]
+    label: Startup Sauna
   - id: r027
     osm: 7588940
     aliases: [R027]
@@ -168,15 +186,19 @@ buildings:
   - id: r028
     osm: 4259272
     aliases: [R028]
+    label: Otahalli
     children:
       - name: Unisport
+        type: location
   # Aalto Studios
   - id: r029
     osm: 24342456
     aliases: [R029, Aalto Studios]
+    label: Aalto Studios
     address: Otakaari 7
   # CS
   - id: r030
+    label: "CS / T"
     aliases: [R030, 'T', 'Subway Building', 'CS']
     osm: 91227662
     lore: >
@@ -199,6 +221,7 @@ buildings:
   - id: oih
     osm: 148683540
     aliases: [R032, OIH, ]
+    label: OIH
   # Water laboratory
   - id: r034
     osm: 4259026
@@ -213,14 +236,17 @@ buildings:
   - id: r036
     osm: 7585092
     aliases: [R036]
+    label: Micronova
     children:
       - name: Nanofab
         type: unit
   - id: tuas
     osm: 29012757
     aliases: [R037, TU, AS]
+    label: TUAS
     children:
       - name: Aalto Ventures Program
+        type: unit
       - name: Amica TUAS
         type: restaurant
         osm: node=580706218
@@ -228,6 +254,7 @@ buildings:
   - id: r038
     osm: 7589907
     aliases: [R038]
+    label: AYY
     name: Aalto Student Union AYY
   - id: r039
     osm: 27464085
@@ -236,6 +263,7 @@ buildings:
   - id: r040
     osm: 4252953
     aliases: [R040]
+    label: TF
     children:
       - name: Täffä
         type: restaurant
@@ -244,6 +272,7 @@ buildings:
   - id: r041
     name: Aalto Inn   #TODO: update OSM
     osm: 181643549
+    label: Aalto Inn
     aliases: [R041]
   # Student health
   - id: r042
@@ -257,6 +286,7 @@ buildings:
   - id: servinmokki
     osm: 4259265
     aliases: [R044]
+    Label: Smökki
   # Radisson blu
   - id: radisonblu
     name: Radisson Blu
@@ -270,6 +300,7 @@ buildings:
   - id: r067
     osm: 402618642
     aliases: [R067, School of Arts, Design and Architecture, School of Business]
+    label: Väre
   - id: r069
     osm: 402618641
     aliases: [R069, Metro Centre]
