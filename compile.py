@@ -170,10 +170,10 @@ class Location():
         osm = self.osm_metadata
         names = { }
         if osm and 'tags' in osm:
-            if 'name' in osm['tags']:     names['name']    = osm['tags']['name']
-            if 'int_name' in osm['tags']: names['name_en'] = osm['tags']['int_name']
-            if 'name:en' in osm['tags']:  names['name_en'] = osm['tags']['name:en']
-            if 'name:sv' in osm['tags']:  names['name_sv'] = osm['tags']['name:sv']
+            if 'name' in osm['tags']:     names['name']    = osm['tags']['name'].replace('Aalto ', '')
+            if 'int_name' in osm['tags']: names['name_en'] = osm['tags']['int_name'].replace('Aalto ', '')
+            if 'name:en' in osm['tags']:  names['name_en'] = osm['tags']['name:en'].replace('Aalto ', '')
+            if 'name:sv' in osm['tags']:  names['name_sv'] = osm['tags']['name:sv'].replace('Aalto ', '')
             if 'addr:street' in osm['tags']:
                 names['address'] = " ".join((osm['tags']['addr:street'], osm['tags']['addr:housenumber']))
         if self.data.get('name')   : names['name'] = self.data['name']
