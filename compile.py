@@ -34,7 +34,7 @@ class Location():
         if parent: self.data['parents'] = [parent]
         self.data['children'] = [ ]
         # self-tests
-        assert 'type' in self.data
+        assert 'type' in self.data, 'Missing type: %s'%self.id
     def __repr__(self):
         return '%s(id=%s)'%(self.__class__.__name__, self.id)
     @property

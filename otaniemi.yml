@@ -23,6 +23,16 @@ buildings:
       - name: Elissa cafe
         type: cafe
         osm: node=5004956487
+      - name: Student services
+        id: studentservices
+        type: service
+      - name: Learning Hub
+        type: service
+      - name: IT Service Desk Main
+        id: servicedesk_main
+        latlon: [60.18689, 24.82886]
+        type: service
+        opening_hours: Mo-Th 08:30-11:00, 12:00-15:00; Fr 08:30-09:30, 12:00-15:00; PH off
   # Civil Engineering
   - id: r002
     osm: 7579330
@@ -49,7 +59,7 @@ buildings:
   - id: r004
     osm: 24342454
     aliases: [R004, ELEC]
-    label: ELEC
+    label: Sähko / ELEC
     label_fi: Sähko
   # K4, Sähkömiehentie 4
   - id: r005
@@ -87,7 +97,7 @@ buildings:
   - id: r011            # TODO: opening hours 7.45-18 academic year, 8-16 other.
     osm: 7588058
     aliases: [R011, Ke, CHEM]
-    label: CHEM
+    label: Kemma / CHEM
     children:
       - id: maukas
         osm: node=2381695985
@@ -96,6 +106,7 @@ buildings:
   - id: r012
     osm: 7588374
     aliases: [R012, V]
+    label: Vuori
     children:
       - id: sodexovuori
         osm: node=2381696675
@@ -131,7 +142,6 @@ buildings:
   # Dipoli
   - id: dipoli
     osm: 4252954
-    name: Dipoli
     label: Dipoli
     aliases: [R019]
     children:
@@ -146,6 +156,8 @@ buildings:
     osm: 7589963
     aliases: [R020, Shopping centre]
     name: Otaniemi shopping center
+    label: Shops
+    label_fi: Kaupat
     children:
       # Alepa
       - id: alepa
@@ -164,6 +176,7 @@ buildings:
         type: restaurant
 
   # No building 21
+  # LMK2, admin
   - id: r022
     osm: 26608151
     aliases: [R022, Administration]
@@ -172,12 +185,20 @@ buildings:
       - name: Calori
         type: restaurant
         osm: node=2071854934
+      - name: IT Service Desk LMK2
+        id: servicedesk_lmk2
+        type: service
   - id: r023
     osm: 26608177
     aliases: [R023]
+  # MT3
   - id: r024
     osm: 27468640
     aliases: [R024]
+    children:
+      - name: IT Service Desk MT3
+        id: servicedesk_mt3
+        type: service
   # Design factory, Betonimiehenkuja 5
   - id: r025
     osm: 26608273
@@ -203,7 +224,7 @@ buildings:
   - id: r029
     osm: 24342456
     aliases: [R029, Aalto Studios]
-    label: Aalto Studios
+    label: Studios
     address: Otakaari 7
   # CS
   - id: r030
@@ -222,15 +243,22 @@ buildings:
         type: restaurant
         id: sodexo-cs
         osm: node=580704688
-      - name: Subway
+      - id: subway_cs
         type: restaurant
         osm: node=3575222399
+      - id: library_cs
+        osm: node=5012868057
+        type: service
   # No R031
   # Open Innovation House
   - id: oih
     osm: 148683540
     aliases: [R032, OIH, ]
     label: OIH
+    children:
+      - id: oih_cafe
+        osm: node=5012868059
+        type: cafe
   # Water laboratory
   - id: r034
     osm: 4259026
@@ -260,6 +288,16 @@ buildings:
       - name: Amica TUAS
         type: restaurant
         osm: node=580706218
+      - id: library_tuas
+        type: service
+        osm: node=5012868058
+      - name: IT Service Desk TUAS
+        id: servicedesk_tuas
+        latlon: [60.18698, 24.81854]
+        type: service
+        note: >-
+          Open at least during the stated times, but people may be available at
+          other times as well.
   # Student union
   - id: r038
     osm: 7589907
@@ -300,6 +338,7 @@ buildings:
   # Radisson blu
   - id: radisonblu
     name: Radisson Blu
+    label: Radisson Blu
     osm: 4259289
     aliases: [R056]
     children:
@@ -369,7 +408,11 @@ other:
     name: Valmio
     osm: node=4840360721
     type: restaurant
-
+  - id: itservicedesks
+    name: IT Service Desks
+    name_fi: IT Käyttäjäpalvelut
+    parents: [servicedesk_main, servicedesk_tuas, servicedesk_lmk2, servicedesk_mt3]
+    type: unit
 
 
 
