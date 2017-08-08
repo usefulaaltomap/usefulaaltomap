@@ -230,6 +230,14 @@ class Location():
             if 'label' not in labels_dict:
                 labels_dict['label'] = str(Rnumber)
         return labels_dict
+    @property
+    def priority(self):
+        """Priority for sorting.  higher=sooner"""
+        if self.data['type'] == 'building':    return 400
+        if self.data['type'] == 'department':  return 300
+        if self.data['type'] == 'unit':        return 200
+        if self.data['type'] == 'service':     return 100
+        return 0
 
 
 # assemble locations
@@ -248,6 +256,7 @@ for building in data.get('other', []):
     for child in building.get('children', []):
         locations.append(Location(child, parent=L.id))
         print(locations[-1].id, locations[-1].data)
+locations.sort(key=lambda x: x.priority, reverse=True)
 # Crosslink children
 locations_lookup = { }
 for L in locations:
@@ -255,6 +264,9 @@ for L in locations:
 for L in locations:
     for L_parent_id in L.data.get('parents', []):
         locations_lookup[L_parent_id].data['children'].append(L.id)
+for L in locations:
+    L.data.get('children', []).sort(key=lambda x: locations_lookup[x].priority, reverse=True)
+    L.data.get('parents', []).sort(key=lambda x: locations_lookup[x].priority, reverse=True)
 
 
 # Find the OSM data that needs downloading
