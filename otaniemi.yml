@@ -86,7 +86,7 @@ buildings:
   # Chemistry
   - id: r011            # TODO: opening hours 7.45-18 academic year, 8-16 other.
     osm: 7588058
-    aliases: [R011, CHEM]
+    aliases: [R011, Ke, CHEM]
     label: CHEM
     children:
       - id: maukas
@@ -95,7 +95,7 @@ buildings:
   # Vuori / next to chemistry
   - id: r012
     osm: 7588374
-    aliases: [R012]
+    aliases: [R012, V]
     children:
       - id: sodexovuori
         osm: node=2381696675
@@ -226,6 +226,7 @@ buildings:
   - id: r034
     osm: 4259026
     aliases: [R034]
+  # Vaisalantie 8
   - id: r035
     osm: 51725020
     aliases: [R035]
@@ -668,7 +669,7 @@ other:
     name_en: Department of Built Environment
     name_fi: Rakennetun ympäristön laitos
     type: department
-    parents: [r008, r034, ENG]
+    parents: [r008, r035, ENG]
     url_en: http://builtenv.aalto.fi/en/
     url_fi: http://builtenv.aalto.fi/fi/
   # SCI
