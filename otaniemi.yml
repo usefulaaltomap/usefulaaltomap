@@ -128,10 +128,19 @@ buildings:
   - id: r018
     osm: 7244238
     aliases: [R018]
-  - id: r019
+  # Dipoli
+  - id: dipoli
     osm: 4252954
     name: Dipoli
+    label: Dipoli
     aliases: [R019]
+    children:
+      - id: cafecarre
+        osm: node=5022009311
+        type: cafe
+      - id: reima
+        osm: node=5022009310
+        type: restaurant
   # Old shopping center
   - id: r020
     osm: 7589963
