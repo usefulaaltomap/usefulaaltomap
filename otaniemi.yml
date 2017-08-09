@@ -113,7 +113,7 @@ buildings:
     label_fi: Sähko
   # K4, Sähkömiehentie 4
   - id: r005
-    osm: 97664102
+    osm: 7584026
     aliases: [R005, K4]
     label: K4
   # K3, Puumiehenkuja 5
@@ -183,7 +183,7 @@ buildings:
     aliases: [R016, Aalto Ice Tank]
   # Maari
   - id: r017
-    osm: 97662456
+    osm: 7584131
     aliases: [R017]
     label: Maari
   - id: r018
