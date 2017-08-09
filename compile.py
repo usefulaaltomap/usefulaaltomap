@@ -47,9 +47,8 @@ class Location():
             id=self.id,
             type=self.data.get('type'),
             )
-        if 'osm' in self.data:
-            data['latlon'] = self.latlon
-            data['outline'] = self.outline
+        if self.latlon: data['latlon']   = self.latlon
+        if self.outline: data['outline'] = self.outline
         # aliases: loc_name from OSM and then Aalto-specific
         data['aliases'] = [ ]
         if self.osm_metadata and 'loc_name' in self.osm_metadata['tags']:
@@ -62,18 +61,18 @@ class Location():
                 aliases = [aliases]
             data['aliases'].extend(aliases)
         data.update(self.names)
-        if self.data.get('parents'):      data['parents'] = self.data['parents']
-        if self.data.get('children'):     data['children'] = self.data['children']
-        if self.data.get('lore'):         data['lore'] = self.data['lore']
-        if self.data.get('note'):         data['note'] = self.data['note']
+        update_maybe(self.data, 'parents', data)
+        update_maybe(self.data, 'children', data)
+        update_maybe(self.data, 'lore', data)
+        update_maybe(self.data, 'note', data)
+        update_maybe(self.data, 'opening_hours', data)
         data['osm_id'] = [ ]
         if 'osm' in self.data:  data['osm_id'].append(self.data['osm'])
         if 'osm_meta' in self.data:  data['osm_id'].append(self.data['osm_meta'])
         if self.osm_elements():
             data['osm_elements'] = [(t.replace('rel', 'relation'), v)
                                     for t,v in self.osm_elements()]
-        entrances = self.entrances()
-        if entrances: data['entrances'] = entrances
+        if self.entrances(): data['entrances'] = self.entrances()
         data.update(self.labels)
         return data
     @property
@@ -176,10 +175,8 @@ class Location():
             if 'name:sv' in osm['tags']:  names['name_sv'] = osm['tags']['name:sv'].replace('Aalto ', '')
             if 'addr:street' in osm['tags']:
                 names['address'] = " ".join((osm['tags']['addr:street'], osm['tags']['addr:housenumber']))
-        if self.data.get('name')   : names['name'] = self.data['name']
-        if self.data.get('name_fi'): names['name_fi'] = self.data['name_fi']
-        if self.data.get('name_en'): names['name_en'] = self.data['name_en']
-        if self.data.get('name_sv'): names['name_sv'] = self.data['name_sv']
+        update_matching(self.data, 'name*', names)
+        update_matching(self.data, 'address*', names)
         return names
     def entrances(self):
         """Make list of entrances of this building.
