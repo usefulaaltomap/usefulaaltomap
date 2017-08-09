@@ -186,11 +186,12 @@
           return newcoords;
       }
 
-      utils.get_lang = function(obj, name) {
+      utils.get_lang = function(obj, name, lang) {
         // Search (for example) obj.name_en, obj.name, obj.name_fi, etc for best
         // translation of an object.
         if (obj == null) return;
-        if (name+"_"+LANG in obj)  return obj[name+"_"+LANG];
+        if (!lang) lang = LANG;
+        if (name+"_"+lang in obj)  return obj[name+"_"+lang];
         if (name          in obj)  return obj[name];
         if (name+"_en"    in obj)  return obj[name+"_en"];
         if (name+"_fi"    in obj)  return obj[name+"_fi"];

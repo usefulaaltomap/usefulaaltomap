@@ -9,9 +9,9 @@
     </md-toolbar>
     <md-content layout-padding>
       <div>
-      <span ng-show="object.name_fi"><b>FI:</b> {{object.name_fi}}<br></span>
-      <span ng-show="object.name_en"><b>EN:</b> {{object.name_en}}<br></span>
-      <span ng-show="object.name_sv"><b>SV:</b> {{object.name_sv}}<br></span>
+      <span ng-show="name_fi"><b>FI:</b> {{name_fi}}<br></span>
+      <span ng-show="name_en"><b>EN:</b> {{name_en}}<br></span>
+      <span ng-show="name_sv"><b>SV:</b> {{name_sv}}<br></span>
       <span ng-show="object.address"><b>Address:</b> {{object.address}}<br></span>
       <span ng-show="object.opening_hours"><b>Open:</b> {{object.opening_hours}}<br></span>
       <span ng-show="object.url || url_en || url_fi"><a href={{get_lang(object, 'url')}}>URL</a><br></span> <!-- TODO: this may not work -->
