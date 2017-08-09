@@ -140,11 +140,19 @@ class Location():
     def latlon(self):
         if 'latlon' in self.data: return self.data['latlon']
         if 'osm' not in self.data: return None
+        # If this is an OSM node
         if isinstance(self.data['osm'], str) and self.data['osm'].startswith('node'):
             n = int(self.data['osm'].split('=')[1])
             return (round(osm_data[n]['lat'], 5), round(osm_data[n]['lon'], 5))
+        # Find main entrance?
+        entrances = self.entrances()
+        if entrances:
+            for e in entrances:
+                if e.get('main'):
+                    return (e['lat'], e['lon'])
+        # Average of all points in the object - hack.
         latlon_path = self.outline
-        if not latlon_path: return none
+        if not latlon_path: return None
         return ( round(sum(x[0] for x in latlon_path)/len(latlon_path), 5),
                  round(sum(x[1] for x in latlon_path)/len(latlon_path), 5))
     @property
