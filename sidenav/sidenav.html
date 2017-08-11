@@ -57,12 +57,14 @@
       </div>
       <!-- Bottom -->
       <div style="font-size: 50%; vertical-align: bottom;">
+      <hr>
       <div>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSfnzjS_3o4NeU1tzmpZ6CBn-pDRH9L1gyVB3cWA9WHEMim3Vg/viewform?usp=pp_url&entry.680957649={{object.id}}&entry.1500670776={{get_lang(object, 'name')}}">Submit new data or correction</a>
       </div>
       <div ng-show="object.osm_elements">
         <b>OSM objects:</b> <span ng-repeat="c in object.osm_elements"><a href="https://www.openstreetmap.org/{{c[0]}}/{{c[1]}}">{{c[1]}}</a> </span>
       </div>
+      <div>Useful Aalto Map is an open source project to help make the Aalto campus more navigable.  Please help us by collecting data (use the links above) or help with programming or design. See our <a href="https://github.com/usefulaaltomapfi/usefulaaltomap/wiki">Github project</a> for more info.</div>
       <div>Language: <a href="javascript:set_lang('en')">EN</a> <a href="javascript:set_lang('fi')">FI</a> <a href="javascript:set_lang('sv')">SV</a></div>
       </div>
     </md-content>
