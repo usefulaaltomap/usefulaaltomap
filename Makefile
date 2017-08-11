@@ -5,8 +5,10 @@ WEBFILES=index.html data.json main sidenav/ *.js
 
 default: data.json
 
-# Downloads from OSM, generates data.json
-data.json: otaniemi.yml compile.py
+# Downloads from OSM, generates data.json (identical rules)
+osm_raw_data.json: otaniemi.yml
+	python3 compile.py data.json
+data.json: otaniemi.yml compile.py osm_raw_data.json
 	python3 compile.py data.json
 
 # Re-download the OSM data (making a backup)
