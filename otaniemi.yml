@@ -169,7 +169,9 @@ buildings:
     aliases: [R014]
   - id: r015
     osm: 4252948
-    aliases: [R015, Aalto-yliopiston kirjasto, Main Library, Learning Center, Harald Herlin Learning Centre]
+    aliases: [R015, Aalto-yliopiston kirjasto, Main Library, Learning Center,
+              HH-center, HH-keskus
+           ]
     lore: >-
       This used to be the main library.  In 2016, it was renovated and turned
       into a modern library: the "Learning Centre".  Most people call it the
