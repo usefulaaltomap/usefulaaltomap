@@ -38,7 +38,7 @@ buildings:
         name_sv: A flygel
         osm: 514232744
         type: location
-        note: >-
+        lore: >-
           Originally from "arkkitehtuuri", the architecture department.  Alvar Aalto,
           the architect who designed the building, only used white marble for this
           wing and the library to symbolize these being the only civilized parts of
@@ -49,7 +49,7 @@ buildings:
         name_sv: H flygel
         osm: 514232720
         type: location
-        note: >-
+        lore: >-
           This wing is almost impossible to find.  You have to go either up or down from
           the Alvari restaurant, and connect on either the 0th or 2nd floor.  "H" stands
           for "hallinto", the original administration wing.  Note how you symbolically
@@ -60,7 +60,7 @@ buildings:
         name_sv: M flygel
         osm: 514232739
         type: location
-        note: >-
+        lore: >-
           Originally from "maanmittaus" (surveying).
       - id: uwing
         name: U siipi
@@ -68,7 +68,7 @@ buildings:
         name_sv: U flygel
         osm: 514232732
         type: location
-        note: >-
+        lore: >-
           The "U" comes from "uusi" (new) - the new part of the building.
       - id: ywing
         name: Y siipi
@@ -76,7 +76,7 @@ buildings:
         name_sv: Y flygel
         osm: 514232725
         type: location
-        note: >-
+        lore: >-
           Originally from "yleinen" (general), for the "general department" that
           was located in this wing.  Math used to be part of the general department,
           and it's just coincidence that the math department is in the M-wing now.
