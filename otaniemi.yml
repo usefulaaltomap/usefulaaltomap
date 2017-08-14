@@ -15,8 +15,13 @@ buildings:
       - id: alvari
         osm: node=301814516
         type: restaurant
-      - name: Silenteri
+      - name: Silinteri
         type: restaurant
+        osm: node=5034218017
+        notes: >-
+          This is a "staff restaurant".  No student discount and
+          slightly more expensive, and extremely limited seating, but
+          theoretically anyone can eat here.
       - name: Aino cafe
         type: cafe
         osm: node=5004956486
@@ -35,7 +40,7 @@ buildings:
       - id: awing
         name: A siipi
         name_en: A wing
-        name_sv: A flygel
+        name_sv: A flygeln
         osm: 514232744
         type: location
         lore: >-
@@ -46,18 +51,22 @@ buildings:
       - id: hwing
         name: H siipi
         name_en: H wing
-        name_sv: H flygel
+        name_sv: H flygeln
         osm: 514232720
         type: location
+        note: >-
+          This wing is almost impossible to find.  From the outside,
+          use the door to the south of the main entrance, (up some
+          exterior stairs).  From the inside, you have to go either up
+          or down from the Alvari restaurant, and connect on either
+          the 0th or 2nd floor.  Good luck!
         lore: >-
-          This wing is almost impossible to find.  You have to go either up or down from
-          the Alvari restaurant, and connect on either the 0th or 2nd floor.  "H" stands
-          for "hallinto", the original administration wing.  Note how you symbolically
-          ascend the stairs to get to it.
+          "H" stands for "hallinto", the original administration wing.
+          Note how you symbolically ascend the stairs to get to it.
       - id: mwing
         name: M siipi
         name_en: M wing
-        name_sv: M flygel
+        name_sv: M flygeln
         osm: 514232739
         type: location
         lore: >-
@@ -65,7 +74,7 @@ buildings:
       - id: uwing
         name: U siipi
         name_en: U wing
-        name_sv: U flygel
+        name_sv: U flygeln
         osm: 514232732
         type: location
         lore: >-
@@ -73,7 +82,7 @@ buildings:
       - id: ywing
         name: Y siipi
         name_en: Y wing
-        name_sv: Y flygel
+        name_sv: Y flygeln
         osm: 514232725
         type: location
         lore: >-
@@ -281,7 +290,7 @@ buildings:
   # CS
   - id: r030
     label: "CS / T"
-    aliases: [R030, 'T', 'Subway Building', 'CS']
+    aliases: [R030, 'T', 'Subway Building', 'CS', Tikkitalo]
     osm: 91227662
     lore: >
        In 2015 a Subway restaurant opened here.  They added a huge sign
@@ -291,6 +300,7 @@ buildings:
       - name: Paniikki
         type: room
         osm: 91227653
+        address: CS T106
       - name: Sodexo
         type: restaurant
         id: sodexo-cs
@@ -351,6 +361,11 @@ buildings:
         note: >-
           Open at least during the stated times, but people may be available at
           other times as well.
+    lore: >-
+      If you know this building originally had the departments of
+      Industrias Engineering and Management (TUotantotalouden = TUTA,
+      still there) and Automation and Systems Technology (=AS, now merged
+      with others), the name makes a lot of sense.
   # Student union
   - id: r038
     osm: 7589907
@@ -369,12 +384,17 @@ buildings:
       - name: Täffä
         type: restaurant
         osm: node=580707759
+        lore: >-
+          The only restaurant still student-owned.
   # Aalto Inn
   - id: r041
     name: Aalto Inn   #TODO: update OSM
     osm: 181643549
     label: Aalto Inn
     aliases: [R041]
+    lore: >-
+      This is basically a long-term residence for Aalto-affiliated
+      visitors.  Booking through your departments.
   # Student health
   - id: r042
     osm: 4266890
