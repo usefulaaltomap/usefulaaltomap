@@ -7,10 +7,14 @@ buildings:
     aliases: [R001, A, H, M, U, Y, Main Building]
     label: Main
     note: >
-      This buliding is large and confusing, but has reasonable directions inside.  Make sure
-      you know the wing (letter) of the place you are going.  It could also be useful to know
-      what entrance (letter) you should use, but this is different from the wing letters.
-      Also, not everything connected on the upper levels!
+      This buliding is large and confusing, but has reasonable
+      maps inside.  Make sure you know the wing (letter) of the
+      place you are going (not the same as entrance letters or lecture
+      hall letters!).  In general, single letters are lecture halls
+      that could be anywhere (use the maps), letter+number (e.g. Y123)
+      is within that wing, and company names are lecture
+      halls in U-wing.  Also, not everything connected on the upper
+      levels: go to your wing first, then go up.
     children:
       - id: alvari
         osm: node=301814516
@@ -18,7 +22,7 @@ buildings:
       - name: Silinteri
         type: restaurant
         osm: node=5034218017
-        notes: >-
+        note: >-
           This is a "staff restaurant".  No student discount and
           slightly more expensive, and extremely limited seating, but
           theoretically anyone can eat here.
@@ -118,7 +122,7 @@ buildings:
   - id: r004
     osm: 24342454
     aliases: [R004, ELEC]
-    label: Sähko / ELEC
+    label: Sähko
     label_fi: Sähko
   # K4, Sähkömiehentie 4
   - id: r005
@@ -156,7 +160,7 @@ buildings:
   - id: r011            # TODO: opening hours 7.45-18 academic year, 8-16 other.
     osm: 7588058
     aliases: [R011, Ke, CHEM]
-    label: Kemma / CHEM
+    label: Kemma
     children:
       - id: maukas
         osm: node=2381695985
@@ -184,7 +188,9 @@ buildings:
     lore: >-
       This used to be the main library.  In 2016, it was renovated and turned
       into a modern library: the "Learning Centre".  Most people call it the
-      library still, as they should.
+      library still, as they should.  Let's just agree that the
+      building is the "Otaniemi Library" and the learning center is
+      inside of it so that everyone can be happy.
     children:
       - name: "Robert's Coffee"
         type: cafe
@@ -205,6 +211,13 @@ buildings:
     osm: 4252954
     label: Dipoli
     aliases: [R019]
+    lore: >-
+      This was originally built for the TKK student union, but they
+      ran out of money partway through, so you can still see the
+      "stairs to nowhere" going to the third floor.  Aalto bought it
+      some time ago, and in 2017 it opened as the new administration
+      building.  The architecture here is quite unique - search and
+      read about it some.
     children:
       - id: cafecarre
         osm: node=5022009311
