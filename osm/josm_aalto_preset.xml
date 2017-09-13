@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0" version="0.1" author="Richard Darst">
+
+  <item name="Aalto / Room" type="node,closedway">
+    <label text="Room" />
+    <combo key="room" text="Type" values="yes,class" default="class" use_last_as_default="true" match="key"/>
+    <text key="ref" text="Ref (room number)" />
+    <text key="name" text="Name (if any besides room number)" />
+    <combo key="access" text="Access" default="university" values="yes,no,private,permissive,university" use_last_as_default="true" />
+    <space />
+    <text key="level" text="Floor (actually floor-1)" />
+    <text key="description" text="Description (e.g. location)" />
+  </item>
+
+  <item name="Aalto / Printer" type="node,closedway">
+    <label text="Printer" />
+    <key key="amenity" value="printer" match="keyvalue"/>
+    <text key="ref" text="Ref (room number)" />
+    <combo key="access" text="Access" default="university" values="yes,no,private,permissive,university" use_last_as_default="true" />
+    <space />
+    <text key="level" text="Floor (actually floor-1)" />
+    <text key="description" text="Description (e.g. location)" />
+  </item>
+
+</presets>
