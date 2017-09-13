@@ -15,6 +15,14 @@ buildings:
       is within that wing, and company names are lecture
       halls in U-wing.  Also, not everything connected on the upper
       levels: go to your wing first, then go up.
+    lore: >-
+      In 2016, this became the undergraduate center.  Previously, it
+      was known as many things, among them the "main building".  Now,
+      ACRE decided that Dipoli would be the main building.  This has
+      made the name "main building" completly useless: if you ever say
+      this, people will first think of this building, and maybe Dipoli
+      second.  We all just agree that this will always be the main
+      building, and Dipoli is always called Dipoli.
     children:
       - id: alvari
         osm: node=301814516
@@ -35,12 +43,15 @@ buildings:
       - name: Student services
         id: studentservices
         type: service
-      - name: IT Service Desk Main
-        id: servicedesk_main
+      - name: IT Service Desk Kandi
+        id: servicedesk_kandi
         latlon: [60.18692, 24.82891]
         type: service
         opening_hours: Mo-Th 08:00-15:45; Fr 08:00-13:00, 14:00-15:30 ; 1 Aug-18 Aug Mo-Th 08:30-11:00, 12:00-15:00; 1 Aug-18 Aug Fr 08:30-09:30, 12:00-13:00, 14:00-15:00; PH off
         address: Room U133a
+      - id: studenthub
+        osm: 514232691
+        type: location
       - id: awing
         name: A siipi
         name_en: A wing
@@ -93,9 +104,6 @@ buildings:
           Originally from "yleinen" (general), for the "general department" that
           was located in this wing.  Math used to be part of the general department,
           and it's just coincidence that the math department is in the M-wing now.
-      - id: studenthub
-        osm: 514232691
-        type: location
   # Civil Engineering
   - id: r002
     osm: 7579330
@@ -217,7 +225,12 @@ buildings:
       "stairs to nowhere" going to the third floor.  Aalto bought it
       some time ago, and in 2017 it opened as the new administration
       building.  The architecture here is quite unique - search and
-      read about it some.
+      read about it some.  In 2017, ACRE decided to call this the
+      "Main Building", forgetting the fact that this makes the name
+      meaningless: Otakaari 1 is(was) the "main building", and now no
+      one can ever use the name "main building" without ambiguity.
+      We all just agree: the undergraduate center will always be the
+      main building, and we always call this building Dipoli.
     children:
       - id: cafecarre
         osm: node=5022009311
@@ -225,6 +238,12 @@ buildings:
       - id: reima
         osm: node=5022009310
         type: restaurant
+      - id: tenhola
+        osm: node=5022009278
+        type: cafe
+      - name: IT Service Desk Dipoli
+        id: servicedesk_dipoli
+        type: service
   # Old shopping center
   - id: r020
     osm: 7589963
@@ -259,9 +278,6 @@ buildings:
       - name: Calori
         type: restaurant
         osm: node=2071854934
-      - name: IT Service Desk LMK2
-        id: servicedesk_lmk2
-        type: service
   - id: r023
     osm: 26608177
     aliases: [R023]
@@ -304,7 +320,7 @@ buildings:
   - id: r030
     label: "CS / T"
     aliases: [R030, 'T', 'Subway Building', 'CS', Tikkitalo]
-    osm: 91227662
+    osm: 4217650
     lore: >
        In 2015 a Subway restaurant opened here.  They added a huge sign
        saying "Subway", ignoring the fact that it was bigger than any mention
@@ -330,6 +346,13 @@ buildings:
     osm: 148683540
     aliases: [R032, OIH, ]
     label: OIH
+    lore: >-
+      In 2017, ACRE rented two floors of this building to a school
+      with 350 students, without thinking about where they would eat.
+      Through no fault of their own, they overloaded the T-building
+      cafeteria where they were supposed to eat, and no one could get
+      food.  How do you rent to a school without thinking about how
+      people will eat?
     children:
       - id: oih_cafe
         osm: node=5012868059
@@ -366,7 +389,7 @@ buildings:
       - id: library_tuas
         type: service
         osm: node=5012868058
-      - name: IT Service Desk TUAS
+      - name: IT Service Desk Maari
         id: servicedesk_tuas
         latlon: [60.18698, 24.81854]
         type: service
@@ -421,6 +444,10 @@ buildings:
     osm: 4259265
     aliases: [R044]
     Label: Smökki
+  # Rantasauna
+  - id: rantasauna
+    osm: 26139146
+    aliases: [R045]
   # Radisson blu
   - id: radisonblu
     name: Radisson Blu
@@ -497,8 +524,16 @@ other:
   - id: itservicedesks
     name: IT Service Desks
     name_fi: IT Käyttäjäpalvelut
-    parents: [servicedesk_main, servicedesk_tuas, servicedesk_lmk2, servicedesk_mt3]
+    parents: [servicedesk_kandi, servicedesk_tuas, servicedesk_dipoli, servicedesk_mt3]
     type: unit
+  - id: tervystalo
+    name: Tervystalo Maari
+    osm: node=5012868031
+    type: service
+  - id: tervystalo2
+    name: Tervystalo Metallimiehenkuja
+    osm: node=5020264817
+    type: service
 
 
 
