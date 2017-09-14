@@ -31,7 +31,10 @@ class Location():
     def __init__(self, yamldata, type=None, parent=None):
         self.data = yamldata.copy()
         if type: self.data['type'] = type
-        if parent: self.data['parents'] = [parent]
+        if isinstance(parent, (list,tuple)):
+            self.data['parents'] = parent
+        else:
+            if parent: self.data['parents'] = [parent]
         self.data['children'] = [ ]
         # self-tests
         assert 'type' in self.data, 'Missing type: %s'%self.id
@@ -284,8 +287,11 @@ for L in locations:
 if use_cache and os.path.exists('osm_raw_data.json'):
     r = json.loads(open('osm_raw_data.json').read())
 else:
-    rcommand = "[out:json];(%s);out;"%(
-                 ";".join('%s(%s)%s'%(t,osmid, ';>' if t=='way' else '') for t, osmid in osm_ways))
+    rquery = [ '%s(%s)%s'%(t,osmid, ';>' if t=='way' else '') for t, osmid in osm_ways ]
+    rquery.append('node(60.1823,24.81394,60.1906,24.8338)[amenity=printer]')
+    rquery.append('node(60.1823,24.81394,60.1906,24.8338)[room]')
+
+    rcommand = "[out:json];(%s);out;"%(";".join(rquery))
     r = requests.get('http://overpass-api.de/api/interpreter',
                 params=dict(data=rcommand))
     if r.status_code != 200:
@@ -303,13 +309,67 @@ for elem in r['elements']:
     osm_data[elem['id']] = elem
 
 
+# Parse things found from the map directly, not in the yaml
+# rooms
+def find_containing_building(latlon):
+    """Find the building that contains item"""
+    import matplotlib.path
+    for building in locations:
+        if building.data['type'] != 'building': continue
+        path = matplotlib.path.Path(building.outline)
+        if path.contains_point(latlon):
+            return building
+# Rooms
+for obj in r['elements']:
+    if 'tags' in obj and obj['type'] == 'node' and obj['tags'].get('room') == 'class':
+        tags = obj['tags']
+        building = find_containing_building((obj['lat'], obj['lon']))
+        if building is None:
+            print("WARN: building not found for %r"%obj)
+            continue
+        yamldata = dict(id=building.id+'-'+tags['ref'],
+                        ref=tags['ref'],
+                        aliases=[tags['ref']],
+                        name=tags.get('name', tags['ref']),
+                        osm="%s=%d"%(obj['type'], obj['id']),
+                        floor=int(tags.get('level', 0))+1)
+        update_maybe(tags, 'name', yamldata)
+        update_maybe(tags, 'description', yamldata, 'note')
+        room = Location(yamldata, type='room', parent=building.id)
+        building.data['children'].append(room.id)
+        locations.append(room)
+# Printers
+yamldata = dict(id='printers',
+                name="All printers",
+                )
+all_printers= Location(yamldata, type='service')
+locations.append(all_printers)
+for obj in r['elements']:
+    if 'tags' in obj and obj['type'] == 'node' and obj['tags'].get('amenity') == 'printer':
+        tags = obj['tags']
+        building = find_containing_building((obj['lat'], obj['lon']))
+        if building is None:
+            print("WARN: building not found for %r"%obj)
+            continue
+        yamldata = dict(id=building.id+'-printer-'+str(obj['id']),
+                        osm="%s=%d"%(obj['type'], obj['id']),
+                        floor=int(tags.get('level', 0))+1)
+        yamldata['name'] = 'Printer'
+        if 'ref' in tags: yamldata['name'] += ' '+tags['ref']
+        update_maybe(tags, 'name', yamldata)
+        update_maybe(tags, 'ref', yamldata)
+        update_maybe(tags, 'description', yamldata, 'note')
+        printer = Location(yamldata, type='service', parent=[building.id, all_printers.id])
+        building.data['children'].append(printer.id)
+        all_printers.data['children'].append(printer.id)
+        locations.append(printer)
+
 
 # Create the JSON data
 newdata = [ ]
 for L in locations:
     print(L.id)
     newdata.append(L.json())
-
 
 
 newdata = dict(
