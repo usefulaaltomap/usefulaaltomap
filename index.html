@@ -95,6 +95,7 @@
           zoom: 17
         },
         paths: {},
+        markers: {},
         watchOptions: {
           individual: { type: 'watch' },
           type: 'watchCollection'
@@ -117,12 +118,24 @@
         //mapS.openSidenav(obj);
         if (obj.outline != null) {
           mapS.leafletMap.fitBounds(obj.outline);
-          mapS.highlightObject(obj);
+          mapS.highlightObject(obj, true);
         } else if (obj.latlon != null) {
           //$scope.leafletMap.fitBounds([[obj.latlon[0]-.0007, obj.latlon[1]-.0007],[obj.latlon[0]+.0007, obj.latlon[1]+.0007]]);
           mapS.leafletMap.flyTo(obj.latlon, 18);
           //$scope.leafletMap.panTo(obj.latlon);
-          mapS.highlightObject(obj);
+          mapS.map.markers = {
+            marker: {
+              lat: obj.latlon[0],
+              lng: obj.latlon[1],
+              focus: true,
+              icon: {
+                iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-shadow.png',
+                iconAnchor: [12, 41]
+              }
+            }
+          }
+          mapS.highlightObject(obj, true);
         } else if (obj.parents && obj.parents.length >= 1) {
           var outline = utils.coordUnion(_.map(obj.parents, function(id) {
             return mapS.data[id];
@@ -130,7 +143,7 @@
           if (outline != null) {
             mapS.leafletMap.fitBounds(outline);
           }
-          mapS.highlightObject(obj);
+          mapS.highlightObject(obj, true);
         } else {
           // Has no geographic information, but display info.
           //openSidenav(obj);   //TODO: doesn't work...
@@ -142,18 +155,28 @@
           p.fillOpacity = BUILDING_DEFAULT_FILL_OPACITY;
           p.weight = BUILDING_DEFAULT_OUTLINE_WEIGHT;
         })
+        mapS.map.markers = {};
       }
 
-      mapS.highlightObject = function(obj) {
+      mapS.highlightObject = function(obj, strong) {
         // Visually mark this object as selected.  Recurses to parent
         // objects, too.
         // TODO: highlight this object
         // ...
+        var fillOpacity, weight;
+        if (strong) {
+          fillOpacity = BUILDING_HIGHLIGHT_FILL_OPACITY_STRONG;
+          weight = BUILDING_HIGHLIGHT_OUTLINE_WEIGHT_STRONG;
+        }
+        else {
+          fillOpacity = BUILDING_HIGHLIGHT_FILL_OPACITY_WEAK;
+          weight = BUILDING_HIGHLIGHT_OUTLINE_WEIGHT_WEAK;
+        }
         switch (obj.type) {
           case 'building':
             var path = mapS.map.paths[obj.id];
-            path.fillOpacity = BUILDING_HIGHLIGHT_FILL_OPACITY;
-            path.weight = BUILDING_HIGHLIGHT_OUTLINE_WEIGHT;
+            path.fillOpacity = fillOpacity;
+            path.weight = weight;
             break;
         }
         if (obj.parents && obj.parents.length >= 1) {
