@@ -30,7 +30,6 @@ $scope.set_lang = set_lang;
   // When an object is selected.
   
   $scope.goToState = function(stateName, params) {
-    console.log(params)
     $state.go(stateName, params);
   }
 

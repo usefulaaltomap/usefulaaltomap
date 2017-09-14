@@ -110,6 +110,7 @@
       })
 
       mapS.zoomOnObject = function(obj) {
+        mapS.clearHighlights();
         if (obj == null) return;
         // When an object is selected from search.
         // TODO: add more types
@@ -134,6 +135,13 @@
           // Has no geographic information, but display info.
           //openSidenav(obj);   //TODO: doesn't work...
         }
+      }
+
+      mapS.clearHighlights = function() {
+        _.forEach(mapS.map.paths, function(p) {
+          p.fillOpacity = BUILDING_DEFAULT_FILL_OPACITY;
+          p.weight = BUILDING_DEFAULT_OUTLINE_WEIGHT;
+        })
       }
 
       mapS.highlightObject = function(obj) {

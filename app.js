@@ -25,6 +25,7 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
                 if (d.aliases && d.aliases.length > 0)
                    message += "\n<br> (" + d.aliases.join(", ") + ")";
                 mapService.map.paths[d.id] = {
+                  type: "polygon",
                   clickable: true,
                   weight: BUILDING_DEFAULT_OUTLINE_WEIGHT,
                   fill: true,
@@ -71,7 +72,12 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
   })
   .state('app.map', {
     template: '',
-    url: '/'
+    url: '/',
+    resolve: {
+      clearHighlights: function(mapService) {
+        mapService.clearHighlights();
+      }
+    }
   })
   .state('app.selectedObject', {
     templateUrl: '/sidenav/sidenav.html',
