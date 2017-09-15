@@ -110,7 +110,11 @@
         })
       })
 
+      // This is invoked when an object is selected for focus.  It
+      // should center on that object, and then call the function
+      // highlightObject which (recursively) highlights it on the map.
       mapS.zoomOnObject = function(obj) {
+        console.log('zoomOnObject ' + obj.id + ' ' + obj.parents)
         mapS.clearHighlights();
         if (obj == null) return;
         // When an object is selected from search.
@@ -123,26 +127,16 @@
           //$scope.leafletMap.fitBounds([[obj.latlon[0]-.0007, obj.latlon[1]-.0007],[obj.latlon[0]+.0007, obj.latlon[1]+.0007]]);
           mapS.leafletMap.flyTo(obj.latlon, 18);
           //$scope.leafletMap.panTo(obj.latlon);
-          mapS.map.markers = {
-            marker: {
-              lat: obj.latlon[0],
-              lng: obj.latlon[1],
-              focus: true,
-              icon: {
-                iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png',
-                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-shadow.png',
-                iconAnchor: [12, 41]
-              }
-            }
-          }
           mapS.highlightObject(obj, true);
         } else if (obj.parents && obj.parents.length >= 1) {
+          console.log('zoom object - strong recursive highlight' + obj.id)
           var outline = utils.coordUnion(_.map(obj.parents, function(id) {
             return mapS.data[id];
           }));
           if (outline != null) {
             mapS.leafletMap.fitBounds(outline);
           }
+          console.log('zoom object - strong recursive highlight (now)' + obj.id)
           mapS.highlightObject(obj, true);
         } else {
           // Has no geographic information, but display info.
@@ -163,6 +157,7 @@
         // objects, too.
         // TODO: highlight this object
         // ...
+        console.log('highlightObject...')
         var fillOpacity, weight;
         if (strong) {
           fillOpacity = BUILDING_HIGHLIGHT_FILL_OPACITY_STRONG;
@@ -179,11 +174,39 @@
             path.weight = weight;
             break;
         }
-        if (obj.parents && obj.parents.length >= 1) {
+
+        if (obj.type == 'building') {
+          console.log('highlighting building' + obj.id)
+          var path = mapS.map.paths[obj.id];
+          path.fillOpacity = fillOpacity;
+          path.weight = weight;
+        } else if (obj.latlon && strong!=false) {
+          console.log('highlighting latlon' + obj.id)
+	  if (mapS.map.markers == null ) { mapS.map.markers = { } }
+          mapS.map.markers[obj.id.replace(/-/g,'_')] = {
+              lat: obj.latlon[0],
+              lng: obj.latlon[1],
+              focus: true,
+              icon: {
+                iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-shadow.png',
+                iconAnchor: [12, 41]
+              }
+            }
+        } else if (strong!=false && obj.parents && obj.parents.length >= 1) {
+          console.log('highlighting parents strong' + obj.id)
           obj.parents.forEach(function (parent) {
-            mapS.highlightObject(mapS.data[parent]);
+              console.log('highlighting ' + parent.id)
+              mapS.highlightObject(mapS.data[parent], true);
           })
         }
+
+        //// Weakly highlight all parent objects
+        //if (obj.parents && obj.parents.length >= 1) {
+        //  obj.parents.forEach(function (parent) {
+        //    mapS.highlightObject(mapS.data[parent], false);
+        //  })
+        //}
       }
 
       mapS.searchQuerySelected = function(obj) {
