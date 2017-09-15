@@ -323,6 +323,7 @@ def find_containing_building(latlon):
 for obj in r['elements']:
     if 'tags' in obj and obj['type'] == 'node' and obj['tags'].get('room') == 'class':
         tags = obj['tags']
+        if tags.get('access') not in {'yes', 'university', 'permissive'}: continue
         building = find_containing_building((obj['lat'], obj['lon']))
         if building is None:
             print("WARN: building not found for %r"%obj)
@@ -339,29 +340,35 @@ for obj in r['elements']:
         building.data['children'].append(room.id)
         locations.append(room)
 # Printers
-yamldata = dict(id='printers',
-                name="All printers",
+yamldata = dict(id='secureprint',
+                name="All printers (secureprint)",
                 )
-all_printers= Location(yamldata, type='service')
+all_printers= Location(yamldata, type='service', parent=[])
 locations.append(all_printers)
 for obj in r['elements']:
     if 'tags' in obj and obj['type'] == 'node' and obj['tags'].get('amenity') == 'printer':
         tags = obj['tags']
+        if tags.get('access') not in {'yes', 'university', 'permissive'}: continue
         building = find_containing_building((obj['lat'], obj['lon']))
         if building is None:
             print("WARN: building not found for %r"%obj)
             continue
+        # Construct basic data
         yamldata = dict(id=building.id+'-printer-'+str(obj['id']),
                         osm="%s=%d"%(obj['type'], obj['id']),
                         floor=int(tags.get('level', 0))+1)
         yamldata['name'] = 'Printer'
+        if tags.get('access') == 'private':        yamldata['name'] += ' (private)'
+        elif tags.get('printer') == 'secureprint': yamldata['name'] += ' (secureprint)'
         if 'ref' in tags: yamldata['name'] += ' '+tags['ref']
         update_maybe(tags, 'name', yamldata)
         update_maybe(tags, 'ref', yamldata)
         update_maybe(tags, 'description', yamldata, 'note')
+        # Create and link printer
         printer = Location(yamldata, type='service', parent=[building.id, all_printers.id])
         building.data['children'].append(printer.id)
-        all_printers.data['children'].append(printer.id)
+        if tags.get('printer') == 'secureprint':
+            all_printers.data['parents'].append(printer.id)
         locations.append(printer)
 
 
