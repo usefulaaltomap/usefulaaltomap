@@ -4,7 +4,7 @@ buildings:
   - id: main
     osm: 4252946
     osm_meta: rel=4148
-    aliases: [R001, A, H, M, U, Y, Main Building]
+    aliases: [R001, A, H, M, U, Y, Kandi, Main Building]
     label: Main
     note: >
       This buliding is large and confusing, but has reasonable
@@ -113,15 +113,16 @@ buildings:
   - id: r003
     osm: 98855202
     osm_meta: rel=1402504
-    aliases: [R003, F, Health Technology House]
+    aliases: [R003, F, F-talo, F-building]
     label: F
     note: >-
       To get to NBE, you must enter through the C door on Rakentajanaukio.  To get to
       lecture rooms and restaurants, use the A door on Otakaari.  Internal connection only
       for staff.
-    lore: Originally the Applied Physics (Fysiikka) building.  Physics has moved long-ago,
-          and apparently in 2015 was renamed "Health Technology House" without any of the
-          occupants knowing, but people still call it the F-building.
+    lore: >-
+      Originally the Applied Physics (Fysiikka) building.  Physics has moved long-ago,
+      and apparently in 2015 was renamed "Health Technology House" without any of the
+      occupants knowing, but we will always call it the F-building.
     children:
       - name: Kvarkki
         osm: node=577022359
