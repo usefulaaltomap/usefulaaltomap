@@ -69,6 +69,8 @@ class Location():
         update_maybe(self.data, 'lore', data)
         update_maybe(self.data, 'note', data)
         update_maybe(self.data, 'opening_hours', data)
+        update_maybe(self.data, 'floor', data)
+        update_maybe(self.data, 'ref', data)
         data['osm_id'] = [ ]
         if 'osm' in self.data:  data['osm_id'].append(self.data['osm'])
         if 'osm_meta' in self.data:  data['osm_id'].append(self.data['osm_meta'])
@@ -241,11 +243,12 @@ class Location():
     @property
     def priority(self):
         """Priority for sorting.  higher=sooner"""
-        if self.data['type'] == 'building':    return 400
-        if self.data['type'] == 'department':  return 300
-        if self.data['type'] == 'unit':        return 200
-        if self.data['type'] == 'service':     return 100
-        return 0
+        if self.data['type'] == 'building':    return (-400, )
+        if self.data['type'] == 'department':  return (-300, )
+        if self.data['type'] == 'unit':        return (-200, )
+        if self.data['type'] == 'service':     return (-100, self.data.get('name', ''))
+        if self.data['type'] == 'room':        return (100, self.data.get('name', ''))
+        return (0, )
 
 
 # assemble locations
@@ -264,7 +267,7 @@ for building in data.get('other', []):
     for child in building.get('children', []):
         locations.append(Location(child, parent=L.id))
         print(locations[-1].id, locations[-1].data)
-locations.sort(key=lambda x: x.priority, reverse=True)
+locations.sort(key=lambda x: x.priority)
 # Crosslink children
 locations_lookup = { }
 for L in locations:
@@ -272,9 +275,6 @@ for L in locations:
 for L in locations:
     for L_parent_id in L.data.get('parents', []):
         locations_lookup[L_parent_id].data['children'].append(L.id)
-for L in locations:
-    L.data.get('children', []).sort(key=lambda x: locations_lookup[x].priority, reverse=True)
-    L.data.get('parents', []).sort(key=lambda x: locations_lookup[x].priority, reverse=True)
 
 
 # Find the OSM data that needs downloading
@@ -323,28 +323,34 @@ def find_containing_building(latlon):
 for obj in r['elements']:
     if 'tags' in obj and obj['type'] == 'node' and obj['tags'].get('room') == 'class':
         tags = obj['tags']
+        print(tags)
         if tags.get('access') not in {'yes', 'university', 'permissive'}: continue
         building = find_containing_building((obj['lat'], obj['lon']))
         if building is None:
             print("WARN: building not found for %r"%obj)
             continue
-        yamldata = dict(id=building.id+'-'+tags['ref'],
-                        ref=tags['ref'],
-                        aliases=[tags['ref']],
-                        name=tags.get('name', tags['ref']),
+        if 'name' not in tags and 'ref' not in tags:
+            raise ValueError("Neither name nor ref in %s"%(tags,))
+        yamldata = dict(id=building.id+'-'+tags.get('ref', tags.get('name')),
+                        name=tags.get('name', tags.get('ref')),
                         osm="%s=%d"%(obj['type'], obj['id']),
                         floor=int(tags.get('level', 0))+1)
         update_maybe(tags, 'name', yamldata)
+        update_maybe(tags, 'ref', yamldata)
         update_maybe(tags, 'description', yamldata, 'note')
+        if 'ref' in tags:
+            yamldata['aliases'] = [tags['ref']]
         room = Location(yamldata, type='room', parent=building.id)
         building.data['children'].append(room.id)
         locations.append(room)
+        locations_lookup[yamldata['id']] = room
 # Printers
 yamldata = dict(id='secureprint',
                 name="All printers (secureprint)",
                 )
 all_printers= Location(yamldata, type='service', parent=[])
 locations.append(all_printers)
+locations_lookup[yamldata['id']] = all_printers
 for obj in r['elements']:
     if 'tags' in obj and obj['type'] == 'node' and obj['tags'].get('amenity') == 'printer':
         tags = obj['tags']
@@ -370,6 +376,14 @@ for obj in r['elements']:
         if tags.get('printer') == 'secureprint':
             all_printers.data['parents'].append(printer.id)
         locations.append(printer)
+        locations_lookup[yamldata['id']] = printer
+
+
+
+for L in locations:
+    L.data.get('children', []).sort(key=lambda x: locations_lookup[x].priority)
+    L.data.get('parents', []).sort(key=lambda x: locations_lookup[x].priority)
+locations.sort(key=lambda x: x.priority)
 
 
 # Create the JSON data

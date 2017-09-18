@@ -15,6 +15,8 @@
       <span ng-show="object.address"><b>Address:</b> {{object.address}}<br></span>
       <span ng-show="object.opening_hours"><b>Open:</b> {{object.opening_hours}}<br></span>
       <span ng-show="object.url || url_en || url_fi"><a href={{get_lang(object, 'url')}}>URL</a><br></span> <!-- TODO: this may not work -->
+      <span ng-show="object.floor"><b>Floor:</b> {{ object.floor }}<br></span>
+      <span ng-show="object.ref"><b>Room:</b> {{ object.ref }}<br></span>
       </div>
       <div ng-show="object.aliases && object.aliases.length">
         <b>Aliases:</b> <span ng-repeat="a in object.aliases track by $index">{{a}}{{$last ? '' : ', '}}</span>
