@@ -1,6 +1,6 @@
 PYTHON='python3'
 RAW=osm_raw_data.json
-WEBFILES=index.html data.json main sidenav/ *.js
+WEBFILES=index.html data.json data.json-readable otaniemi.yml main sidenav *.js
 
 
 
@@ -19,5 +19,5 @@ refresh:
 	$(PYTHON) compile.py data.json
 
 deploy: data.json
-	test ! -z "$(HOST)" && echo "specify host:   make ... HOST=hostname"
+	@test ! -z "$(HOST)" || ( echo "ERROR: specify host:   make ... HOST=hostname" ; false )
 	rsync -aivP $(WEBFILES) $(HOST):/srv/usefulaaltomap/www/
