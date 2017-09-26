@@ -79,7 +79,7 @@ $scope.set_lang = set_lang;
     }
 
     return _.filter(mapService.data, function(d) {
-      return match(d.name) || match(d.name_fi) || match(d.name_en) || match(d.name_sv) || match(d.id) || matchAliases(d) || match(d.address, 7);
+      return !d.nosearch && (match(d.name) || match(d.name_fi) || match(d.name_en) || match(d.name_sv) || match(d.id) || matchAliases(d) || match(d.address, 7));
     })
   }
 

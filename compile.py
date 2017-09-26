@@ -74,6 +74,7 @@ class Location():
         update_maybe(self.data, 'note', data)
         update_maybe(self.data, 'opening_hours', data)
         update_maybe(self.data, 'ref', data)
+        update_maybe(self.data, 'nosearch', data)
         if 'level' in data:
             self.data['floor'] = floor_number(data['level'])
         data['osm_id'] = [ ]
@@ -236,6 +237,7 @@ class Location():
             yamldata = dict(id=id_,
                             name=name2,
                             osm='node=%s'%n,
+                            nosearch=True,
                             )
             ent = Location(yamldata, type='entrance', parent=self.id)
             entrances_objects.append(ent)
