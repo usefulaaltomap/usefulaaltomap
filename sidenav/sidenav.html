@@ -24,27 +24,27 @@
       <div style="font-size: 75%"  ng-show="object.note">
         <b>Note:</b> <span>{{get_lang(object, 'note')}}</span>
       </div>
-      <div style="font-size: 75%"  ng-show="object.children">
+      <div style="font-size: 75%"  ng-show="selectContains(object).length > 0">
         <b>Contains:</b>
-        <div ng-repeat="c in object.children" ng-if="objects[c].parents == null || objects[c].parents.length <= 1">
+        <div ng-repeat="c in selectContains(object)">
           - <a ui-sref="app.selectedObject({objectId: c})">{{get_lang(objects[c], 'name')}}</a> ({{objects[c].type}})
         </div>
       </div>
-      <div style="font-size: 75%"  ng-show="object.children">
+      <div style="font-size: 75%"  ng-show="selectContainsPartOf(object).length > 0">
         <b>Contains part of:</b>
-        <div ng-repeat="c in object.children" ng-if="objects[c].parents.length > 1">
+        <div ng-repeat="c in selectContainsPartOf(object)">
           - <a ui-sref="app.selectedObject({objectId: c})">{{get_lang(objects[c], 'name')}}</a> ({{objects[c].type}})
         </div>
       </div>
-      <div style="font-size: 75%" ng-show="object.parents">
+      <div style="font-size: 75%" ng-show="selectContainedIn(object).length > 0">
         <b>Contained in:</b>
-        <div ng-repeat="p in object.parents" ng-if="objects[p].type == 'building'">
+        <div ng-repeat="p in selectContainedIn(object)">
           - <a ui-sref="app.selectedObject({objectId: p})">{{get_lang(objects[p], 'name')}}</a> ({{objects[p].type}})
         </div>
       </div>
-      <div style="font-size: 75%" ng-show="object.parents">
+      <div style="font-size: 75%" ng-show="selectPartOf(object).length > 0">
         <b>Part of:</b>
-        <div ng-repeat="p in object.parents" ng-if="objects[p].type != 'building'">
+        <div ng-repeat="p in selectPartOf(object)">
           - <a ui-sref="app.selectedObject({objectId: p})">{{get_lang(objects[p], 'name')}}</a> ({{objects[p].type}})
         </div>
       </div>
