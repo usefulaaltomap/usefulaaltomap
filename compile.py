@@ -8,7 +8,7 @@ import requests
 import yaml
 
 data = yaml.load(open('otaniemi.yml'))
-use_cache = False
+use_cache = True
 re_nametoid = re.compile('[^a-zA-Z0-9_]+')
 
 # Getting ways by ID:
