@@ -215,7 +215,8 @@ class Location():
             if osm_data[n]['tags'].get('entrance', None) not in {'yes', 'main', 'staircase'}:
                 continue
             is_main = osm_data[n]['tags']['entrance'] == 'main'
-            is_wheelchair = osm_data[n]['tags'].get('wheelchair') == 'yes'
+            is_wheelchair = osm_data[n]['tags'].get('wheelchair') in ('yes', 'designated')
+            no_wheelchair = osm_data[n]['tags'].get('wheelchair') in ('no', 'limited')
             if osm_data[n]['tags'].get('access', 'yes') not in {'yes', 'permissive'}:
                 continue
             name = osm_data[n]['tags'].get('name', osm_data[n]['tags'].get('ref'))
@@ -229,10 +230,10 @@ class Location():
             entrances.append(e)
             # Make the full object
             if name is None:
-                name2 = 'Entrance%s'%(' (main)' if is_main else '', )
+                name2 = 'Entrance%s%s'%(' (main)' if is_main else '', ' \u267F' if is_wheelchair else '')
                 id_ = '%s-ent-%s'%(self.id, n)
             else:
-                name2 = 'Entrance %s%s'%(name, ' (main)' if is_main else '')
+                name2 = 'Entrance %s%s%s'%(name, ' (main)' if is_main else '', ' \u267F' if is_wheelchair else '')
                 id_ = '%s-ent-%s'%(self.id, name)
             yamldata = dict(id=id_,
                             name=name2,
