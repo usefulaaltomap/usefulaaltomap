@@ -14,7 +14,7 @@ data.json: otaniemi.yml compile.py osm_raw_data.json
 
 # Re-download the OSM data (making a backup)
 refresh:
-	test -f $(RAW)-`date +%Y-%m-%d_%H:%M` || mv $(RAW) $(RAW)-`date +%Y-%m-%d_%H:%M` || true
+	test -f $(RAW)-`date +%Y-%m-%d` || mv $(RAW) $(RAW)-`date +%Y-%m-%d` || true
 	rm $(RAW) || true
 	$(PYTHON) compile.py data.json
 
