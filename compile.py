@@ -336,11 +336,15 @@ for obj in r['elements']:
             continue
         if 'name' not in tags and 'ref' not in tags:
             raise ValueError("Neither name nor ref in %s"%(tags,))
-        yamldata = dict(id=building.id+'-'+tags.get('ref', tags.get('name')),
-                        name=tags.get('name', tags.get('ref')),
+        id_ = building.id+'-'+tags.get('ref', tags.get('name'))
+        if 'ref' in tags and 'name' in tags:
+            name = '%s: %s'%(tags.get('ref'), tags.get('name'))
+        else:
+            name = tags.get('name', tags.get('ref'))
+        yamldata = dict(id=id_,
+                        name=name,
                         osm="%s=%d"%(obj['type'], obj['id']),
                         floor=floor_number(tags.get('level', 0)))
-        update_maybe(tags, 'name', yamldata)
         update_maybe(tags, 'ref', yamldata)
         update_maybe(tags, 'description', yamldata, 'note')
         if 'ref' in tags:
