@@ -219,7 +219,7 @@ buildings:
   - id: dipoli
     osm: 4252954
     label: Dipoli
-    aliases: [R019]
+    aliases: [R019, "Fake Main Building"]
     lore: >-
       This was originally built for the TKK student union, but they
       ran out of money partway through, so you can still see the
