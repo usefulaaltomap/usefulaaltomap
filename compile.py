@@ -82,7 +82,7 @@ class Location():
         if self.osm_elements():
             data['osm_elements'] = [(t.replace('rel', 'relation'), v)
                                     for t,v in self.osm_elements()]
-        if self.entrances(): data['entrances'] = self.entrances()
+        if self.entrances(): data['entrances'] = self.entrances()[0]
         data.update(self.labels)
         return data
     @property
@@ -157,7 +157,7 @@ class Location():
         # Find main entrance?
         entrances = self.entrances()
         if entrances:
-            for e in entrances:
+            for e in entrances[0]:
                 if e.get('main'):
                     return (e['lat'], e['lon'])
         # Average of all points in the object - hack.
@@ -205,7 +205,9 @@ class Location():
         way = self.osm_data_location
         if not way: return
         if way['type'] != 'way': return
+        if self.data['type'] != 'building': return
         entrances = [ ]
+        entrances_objects = [ ]
         for n in way['nodes']:
             if 'tags' not in osm_data[n]:
                 continue
@@ -216,6 +218,7 @@ class Location():
             if osm_data[n]['tags'].get('access', 'yes') not in {'yes', 'permissive'}:
                 continue
             name = osm_data[n]['tags'].get('name', osm_data[n]['tags'].get('ref'))
+            if name is None: continue
             if name and len(name) > 3: name = None
             lat, lon = round(osm_data[n]['lat'], 5), round(osm_data[n]['lon'], 5)
             # Create data
@@ -223,8 +226,20 @@ class Location():
             if name: e['name'] = name
             if is_main: e['main'] = is_main
             entrances.append(e)
-            #print(n, e, osm_data[n])
-        return entrances
+            # Make the full object
+            if name is None:
+                name2 = 'Entrance%s'%(' (main)' if is_main else '', )
+                id_ = '%s-ent-%s'%(self.id, n)
+            else:
+                name2 = 'Entrance %s%s'%(name, ' (main)' if is_main else '')
+                id_ = '%s-ent-%s'%(self.id, name)
+            yamldata = dict(id=id_,
+                            name=name2,
+                            osm='node=%s'%n,
+                            )
+            ent = Location(yamldata, type='entrance', parent=self.id)
+            entrances_objects.append(ent)
+        return entrances, entrances_objects
     @property
     def labels(self):
         if self.data['type'] != 'building':
@@ -253,6 +268,7 @@ class Location():
         if self.data['type'] == 'unit':        return (-200, )
         if self.data['type'] == 'service':     return (-100, self.data.get('name', ''))
         if self.data['type'] == 'room':        return (100, self.data.get('name', ''))
+        if self.data['type'] == 'entrance':    return (200, self.data.get('name', ''))
         return (0, )
 
 
@@ -273,13 +289,14 @@ for building in data.get('other', []):
         locations.append(Location(child, parent=L.id))
         print(locations[-1].id, locations[-1].data)
 locations.sort(key=lambda x: x.priority)
-# Crosslink children
 locations_lookup = { }
 for L in locations:
     locations_lookup[L.id] = L
+# Crosslink children
 for L in locations:
     for L_parent_id in L.data.get('parents', []):
         locations_lookup[L_parent_id].data['children'].append(L.id)
+
 
 
 # Find the OSM data that needs downloading
@@ -386,6 +403,16 @@ for obj in r['elements']:
             all_printers.data['parents'].append(printer.id)
         locations.append(printer)
         locations_lookup[yamldata['id']] = printer
+# Entrances
+for L in locations:
+    if L.entrances():
+        for entrance in L.entrances()[1]:
+            #if L.children is None: L.children = [ ]
+            L.data['children'].append(entrance.id)
+            locations.append(entrance)
+            locations_lookup[entrance.id] = entrance
+            pass
+
 
 
 
