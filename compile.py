@@ -409,6 +409,6 @@ newdata = dict(
 
 if len(sys.argv) > 1:
     open(sys.argv[1], 'w').write(json.dumps(newdata, separators=(',', ':')))
-    open(sys.argv[1]+'-readable', 'w').write(json.dumps(newdata, indent=2))
+    open(sys.argv[1]+'-readable', 'w').write(json.dumps(newdata, indent=2, sort_keys=True))
 else:
     print(json.dumps(newdata, indent=4))
