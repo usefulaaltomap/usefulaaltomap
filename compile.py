@@ -18,6 +18,7 @@ re_nametoid = re.compile('[^a-zA-Z0-9_]+')
 def update_maybe(dct, key, new_dct, new_key=None):
     if new_key is None: new_key = key
     if key in dct:
+        if isinstance(dct[key], list) and len(dct[key]) == 0: return
         new_dct[new_key] = dct[key]
 def update_matching(dct, key_pattern, new_dct):
     for key in dct:
@@ -67,6 +68,7 @@ class Location():
             if not isinstance(aliases, (list, tuple)):
                 aliases = [aliases]
             data['aliases'].extend(aliases)
+        if len(data['aliases']) == 0: del data['aliases']
         data.update(self.names)
         update_maybe(self.data, 'parents', data)
         update_maybe(self.data, 'children', data)
@@ -77,9 +79,9 @@ class Location():
         update_maybe(self.data, 'nosearch', data)
         if 'level' in data:
             self.data['floor'] = floor_number(data['level'])
-        data['osm_id'] = [ ]
-        if 'osm' in self.data:  data['osm_id'].append(self.data['osm'])
-        if 'osm_meta' in self.data:  data['osm_id'].append(self.data['osm_meta'])
+        #data['osm_id'] = [ ]
+        #if 'osm' in self.data:  data['osm_id'].append(self.data['osm'])
+        #if 'osm_meta' in self.data:  data['osm_id'].append(self.data['osm_meta'])
         if self.osm_elements():
             data['osm_elements'] = [(t.replace('rel', 'relation'), v)
                                     for t,v in self.osm_elements()]
