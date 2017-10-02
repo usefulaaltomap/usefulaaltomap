@@ -36,10 +36,11 @@ class Location():
     def __init__(self, yamldata, type=None, parent=None):
         self.data = yamldata.copy()
         if type: self.data['type'] = type
+        self.data.setdefault('parents', [])
         if isinstance(parent, (list,tuple)):
-            self.data['parents'] = parent
+            self.data['parents'].extend(parent)
         else:
-            if parent: self.data['parents'] = [parent]
+            if parent: self.data['parents'].append(parent)
         self.data['children'] = [ ]
         # self-tests
         assert 'type' in self.data, 'Missing type: %s'%self.id
