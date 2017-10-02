@@ -640,6 +640,11 @@ other:
     parents: [arabia, ARTS]
     url: http://media.aalto.fi/
     url_en: http://media.aalto.fi/en/
+    children:
+      - id: medialab
+        name: Media Lab Helsinki
+        type: unit
+        parents: [r024]
   - id: dept:film
     name_en: Department of Film, Television and Scenography
     name_fi: Elokuvataiteen ja lavastustaiteen laitos
