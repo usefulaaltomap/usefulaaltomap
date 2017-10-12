@@ -273,9 +273,10 @@ class Location():
         if self.data['type'] == 'department':  return (-300, )
         if self.data['type'] == 'unit':        return (-200, )
         if self.data['type'] == 'service':     return (-100, self.data.get('name', ''))
+        if self.data['type'] == 'wing':        return ( 50, self.data.get('name', ''))
         if self.data['type'] == 'room':        return (100, self.data.get('name', ''))
         if self.data['type'] == 'entrance':    return (200, self.data.get('name', ''))
-        return (0, )
+        return (0, self.data.get('name', ''))
 
 
 # assemble locations
