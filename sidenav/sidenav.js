@@ -38,27 +38,27 @@ angular.module('usefulAaltoMap')
 
   $scope.selectContains = function(object) {
       return object.children.filter( function (c) {
-	  return $scope.objects[c].parents == null || $scope.objects[c].parents.length <= 1
+	  return c in $scope.objects && ($scope.objects[c].parents == null || $scope.objects[c].parents.length <= 1)
       } )
   }
 
   $scope.selectContainsPartOf = function(object) {
       return object.children.filter( function (c) {
-	  return $scope.objects[c].parents != null && $scope.objects[c].parents.length > 1
+	  return c in $scope.objects && ($scope.objects[c].parents != null && $scope.objects[c].parents.length > 1)
       } )
   }
 
   $scope.selectContainedIn = function(object) {
       if (object.parents == null) return [];
       return object.parents.filter( function (p) {
-	  return $scope.objects[p].type == 'building'
+	  return p in $scope.objects && $scope.objects[p].type == 'building'
       } )
   }
 
   $scope.selectPartOf = function(object) {
       if (object.parents == null) return [];
       return object.parents.filter( function (p) {
-	  return $scope.objects[p].type != 'building'
+	  return p in $scope.objects && $scope.objects[p].type != 'building'
       } )
   }
 
