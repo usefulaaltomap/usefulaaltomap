@@ -52,23 +52,23 @@ buildings:
       - id: studenthub
         osm: 514232691
         type: location
-      - id: awing
-        name: A siipi
-        name_en: A wing
-        name_sv: A flygeln
+      - id: main-awing
+        name: A siipi Main
+        name_en: A wing Main
+        name_sv: A flygeln Main
         osm: 514232744
-        type: location
+        type: wing
         lore: >-
           Originally from "arkkitehtuuri", the architecture department.  Alvar Aalto,
           the architect who designed the building, only used white marble for this
           wing and the library to symbolize these being the only civilized parts of
           campus.
-      - id: hwing
-        name: H siipi
-        name_en: H wing
-        name_sv: H flygeln
+      - id: main-hwing
+        name: H siipi Main
+        name_en: H wing Main
+        name_sv: H flygeln Main
         osm: 514232720
-        type: location
+        type: wing
         note: >-
           This wing is almost impossible to find.  From the outside,
           use the door to the south of the main entrance, (up some
@@ -78,28 +78,28 @@ buildings:
         lore: >-
           "H" stands for "hallinto", the original administration wing.
           Note how you symbolically ascend the stairs to get to it.
-      - id: mwing
-        name: M siipi
-        name_en: M wing
-        name_sv: M flygeln
+      - id: main-mwing
+        name: M siipi Main
+        name_en: M wing Main
+        name_sv: M flygeln Main
         osm: 514232739
-        type: location
+        type: wing
         lore: >-
           Originally from "maanmittaus" (surveying).
-      - id: uwing
-        name: U siipi
-        name_en: U wing
-        name_sv: U flygeln
+      - id: main-uwing
+        name: U siipi Main
+        name_en: U wing Main
+        name_sv: U flygeln Main
         osm: 514232732
-        type: location
+        type: wing
         lore: >-
           The "U" comes from "uusi" (new) - the new part of the building.
-      - id: ywing
-        name: Y siipi
-        name_en: Y wing
-        name_sv: Y flygeln
+      - id: main-ywing
+        name: Y siipi Main
+        name_en: Y wing Main
+        name_sv: Y flygeln Main
         osm: 514232725
-        type: location
+        type: wing
         lore: >-
           Originally from "yleinen" (general), for the "general department" that
           was located in this wing.  Math used to be part of the general department,
@@ -174,6 +174,42 @@ buildings:
       - id: maukas
         osm: node=2381695985
         type: restaurant
+      - id: r011-ywing
+        name: A siipi Kemma
+        name_en: A wing Kemma
+        name_sv: A flygeln Kemma
+        osm: 532048006
+        type: location
+      - id: r011-bwing
+        name: B siipi Kemma
+        name_en: B wing Kemma
+        name_sv: B flygeln Kemma
+        osm: 532048005
+        type: location
+      - id: r011-cwing
+        name: C siipi Kemma
+        name_en: C wing Kemma
+        name_sv: C flygeln Kemma
+        osm: 532048004
+        type: location
+      - id: r011-dwing
+        name: D siipi Kemma
+        name_en: D wing Kemma
+        name_sv: D flygeln Kemma
+        osm: 532048003
+        type: location
+      - id: r011-ewing
+        name: E siipi Kemma
+        name_en: E wing Kemma
+        name_sv: E flygeln Kemma
+        osm: 532048002
+        type: location
+      - id: r011-fwing
+        name: F siipi Kemma
+        name_en: F wing Kemma
+        name_sv: F flygeln Kemma
+        osm: 532048001
+        type: location
   # Vuori / next to chemistry
   - id: r012
     osm: 7588374
@@ -341,6 +377,27 @@ buildings:
       - id: library_cs
         osm: node=5012868057
         type: service
+      - id: r030-awing
+        name: A siipi CS
+        name_en: A wing CS
+        name_sv: A flygeln CS
+        osm: 532048009
+        type: wing
+      - id: r030-bwing
+        name: B siipi CS
+        name_en: B wing CS
+        name_sv: B flygeln CS
+        osm: 532048008
+        type: wing
+      - id: r030-cwing
+        name: C siipi CS
+        name_en: C wing CS
+        name_sv: C flygeln CS
+        osm: 532048007
+        type: wing
+        note: >-
+          The C wing is "just" the atrium and some rooms directly
+          connected to it.
   # No R031
   # Open Innovation House
   - id: oih
@@ -398,6 +455,32 @@ buildings:
         note: >-
           Open at least during the stated times, but people may be available at
           other times as well.
+      - id: tuas-x5xxwing
+        name: x5xx siipi TUAS
+        name_en: x5xx wing TUAS
+        name_sv: x5xx flygeln TUAS
+        osm: 532048012
+        type: wing
+      - id: tuas-x1xxwing
+        name: x1xx siipi TUAS
+        name_en: x1xx wing TUAS
+        name_sv: x1xx flygeln TUAS
+        osm: 532048011
+        type: wing
+      - id: tuas-159xwing
+        name: 159x siipi TUAS
+        name_en: 159x wing TUAS
+        name_sv: 159x flygeln TUAS
+        osm: 532048010
+        type: wing
+        note: >-
+          Not a real wing, but the 159x conference rooms are isolated
+          and hard to find if you don't know it.  First floor only.
+    note: >-
+      Some wings are marked here, but numbering is not entirely
+      consistent.  To get to 4th floor, you have to take the elevator
+      or stairs within the x1xx wing, not the obvious glass elevator
+      (just keep walking back and you'll find it)
     lore: >-
       If you know this building originally had the departments of
       Industrias Engineering and Management (TUotantotalouden = TUTA,
