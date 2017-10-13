@@ -5,6 +5,10 @@ var BUILDING_HIGHLIGHT_OUTLINE_WEIGHT_WEAK = 2;
 var BUILDING_HIGHLIGHT_FILL_OPACITY_WEAK = 0.15;
 var BUILDING_HIGHLIGHT_OUTLINE_WEIGHT_STRONG = 3;
 var BUILDING_HIGHLIGHT_FILL_OPACITY_STRONG = 0.25;
+
+var OBJECT_HIGHLIGHT_OUTLINE_WEIGHT_STRONG = 3;
+var OBJECT_HIGHLIGHT_FILL_OPACITY_STRONG = .25;
+
 var LANG = "en";
 
 angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
@@ -27,6 +31,8 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
                 if (d.aliases && d.aliases.length > 0)
                    message += "\n<br> (" + d.aliases.join(", ") + ")";
                 mapService.map.paths[d.id] = {
+                  id: d.id,
+                  data: d,
                   type: "polygon",
                   clickable: true,
                   weight: BUILDING_DEFAULT_OUTLINE_WEIGHT,
@@ -39,7 +45,6 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
                       lng: coords[1]
                     }
                   }),
-                  data: d,
                   mouseoverMessage: message
                 }
               }
@@ -48,7 +53,10 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
 
             return $http.get('data.json')
             .then(function(res) {
+              // All data: id -> {data}
               mapService.data = { };
+              // Object IDs which should be displayed by default: id -> true
+               mapService.defaultObjects = { };
               angular.forEach(res.data.locations, function(d) {
                 mapService.data[d.id] = d;
               })
@@ -56,7 +64,8 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
               angular.forEach(mapService.data, function(d) {
                 switch (d.type) {
                   case 'building':
-                    addBuilding(d)
+                    addBuilding(d);
+		    mapService.defaultObjects[d.id] = true;
                     break;
                   default:
                     // do nothing

@@ -145,6 +145,15 @@
       }
 
       mapS.clearHighlights = function() {
+        // Remove any current paths which are not in the "default
+        // objects" set.
+        _.forEach(mapS.map.paths, function(p) {
+          if (! (p.id in mapS.defaultObjects)) {
+            console.log('deleting ' + p.id);
+            delete mapS.map.paths[p.id.replace(/-/g,'_')];
+          }
+        })
+        // Set all the default building outlines back to default.
         _.forEach(mapS.map.paths, function(p) {
           p.fillOpacity = BUILDING_DEFAULT_FILL_OPACITY;
           p.weight = BUILDING_DEFAULT_OUTLINE_WEIGHT;
@@ -157,7 +166,6 @@
         // objects, too.
         // TODO: highlight this object
         // ...
-        console.log('highlightObject...')
         var fillOpacity, weight;
         if (strong) {
           fillOpacity = BUILDING_HIGHLIGHT_FILL_OPACITY_STRONG;
@@ -176,12 +184,25 @@
         }
 
         if (obj.type == 'building') {
-          console.log('highlighting building' + obj.id)
+          console.log('highlighting building=' + obj.id)
           var path = mapS.map.paths[obj.id];
           path.fillOpacity = fillOpacity;
           path.weight = weight;
+        } else if (obj.outline) {
+          console.log('highlighting outline=' + obj.id)
+          mapS.map.paths[obj.id.replace(/-/g,'_')] = {
+            id: obj.id,
+            type: "polygon",
+            fill: true,
+            fillColor: 'blue',
+            fillOpacity: OBJECT_HIGHLIGHT_FILL_OPACITY_STRONG,
+            weight: OBJECT_HIGHLIGHT_OUTLINE_WEIGHT_STRONG,
+            latlngs: obj.outline.map(function(coords) {
+              return {lat: coords[0], lng: coords[1]};
+                }),
+          }
         } else if (obj.latlon && strong!=false) {
-          console.log('highlighting latlon' + obj.id)
+          console.log('highlighting latlon=' + obj.id)
 	  if (mapS.map.markers == null ) { mapS.map.markers = { } }
           mapS.map.markers[obj.id.replace(/-/g,'_')] = {
               lat: obj.latlon[0],
@@ -194,7 +215,7 @@
               }
             }
         } else if (strong!=false && obj.parents && obj.parents.length >= 1) {
-          console.log('highlighting parents strong' + obj.id)
+          console.log('highlighting parents strong=' + obj.id)
           obj.parents.forEach(function (parent) {
               console.log('highlighting ' + parent.id)
               mapS.highlightObject(mapS.data[parent], true);
