@@ -223,7 +223,6 @@ class Location():
             if osm_data[n]['tags'].get('access', 'yes') not in {'yes', 'permissive'}:
                 continue
             name = osm_data[n]['tags'].get('name', osm_data[n]['tags'].get('ref'))
-            if name is None: continue
             if name and len(name) > 3: name = None
             lat, lon = round(osm_data[n]['lat'], 5), round(osm_data[n]['lon'], 5)
             # Create data
