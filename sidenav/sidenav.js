@@ -37,12 +37,14 @@ angular.module('usefulAaltoMap')
   })
 
   $scope.selectContains = function(object) {
+      if (object.children == null) return [];
       return object.children.filter( function (c) {
 	  return c in $scope.objects && ($scope.objects[c].parents == null || $scope.objects[c].parents.length <= 1)
       } )
   }
 
   $scope.selectContainsPartOf = function(object) {
+      if (object.children == null) return [];
       return object.children.filter( function (c) {
 	  return c in $scope.objects && ($scope.objects[c].parents != null && $scope.objects[c].parents.length > 1)
       } )
