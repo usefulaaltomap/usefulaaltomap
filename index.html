@@ -8,6 +8,7 @@
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css">
+  <link rel="stylesheet" href="main/main.css">
   <style>
     .leaflet-pane {
       z-index:100;
@@ -198,6 +199,7 @@
         } else if (obj.latlon && strong!=false) {
           console.log('highlighting latlon=' + obj.id)
 	  if (mapS.map.markers == null ) { mapS.map.markers = { } }
+          message = utils.get_lang(obj, "name")
           mapS.map.markers[obj.id.replace(/-/g,'_')] = {
               lat: obj.latlon[0],
               lng: obj.latlon[1],
@@ -207,7 +209,7 @@
                 shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-shadow.png',
                 iconAnchor: [12, 41]
               },
-            mouseoverMessage: utils.get_lang(obj, "name"),
+            mouseoverMessage: message,
             }
         } else if (strong!=false && obj.parents && obj.parents.length >= 1) {
           console.log('highlighting parents strong=' + obj.id)

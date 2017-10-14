@@ -29,7 +29,7 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
               if (d.outline) {
                 message = utils.get_lang(d, "name")
                 if (d.aliases && d.aliases.length > 0)
-                   message += "\n<br> (" + d.aliases.join(", ") + ")";
+                   message += "\n<br> <span class=aliases>(" + d.aliases.join(", ") + ")</span>";
                 mapService.map.paths[d.id] = {
                   id: d.id,
                   data: d,
