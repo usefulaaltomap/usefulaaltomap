@@ -166,6 +166,7 @@
         // objects, too.
         // TODO: highlight this object
         // ...
+        console.log('highlightObject ' + obj.id + ' ' + strong)
         var fillOpacity, weight;
         if (strong) {
           fillOpacity = BUILDING_HIGHLIGHT_FILL_OPACITY_STRONG;
@@ -174,13 +175,6 @@
         else {
           fillOpacity = BUILDING_HIGHLIGHT_FILL_OPACITY_WEAK;
           weight = BUILDING_HIGHLIGHT_OUTLINE_WEIGHT_WEAK;
-        }
-        switch (obj.type) {
-          case 'building':
-            var path = mapS.map.paths[obj.id];
-            path.fillOpacity = fillOpacity;
-            path.weight = weight;
-            break;
         }
 
         if (obj.type == 'building') {

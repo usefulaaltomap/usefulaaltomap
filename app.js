@@ -86,7 +86,8 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
     url: '/',
     resolve: {
       clearHighlights: function(mapService) {
-        mapService.clearHighlights();
+        // Following line resets view when you leave sidenav.
+        //mapService.clearHighlights();
       }
     }
   })
