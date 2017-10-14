@@ -206,7 +206,8 @@
                 iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png',
                 shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-shadow.png',
                 iconAnchor: [12, 41]
-              }
+              },
+            mouseoverMessage: utils.get_lang(obj, "name"),
             }
         } else if (strong!=false && obj.parents && obj.parents.length >= 1) {
           console.log('highlighting parents strong=' + obj.id)

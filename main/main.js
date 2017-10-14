@@ -111,4 +111,19 @@ $scope.set_lang = set_lang;
     path.weight = BUILDING_DEFAULT_OUTLINE_WEIGHT;
     path.fillOpacity = BUILDING_DEFAULT_FILL_OPACITY;
   })
+
+  $scope.$on('leafletDirectiveMarker.mouseover', function(event, args) {
+    var data = mapService.data[args.modelName.replace(/_/g,'-')];
+    var popup = L.popup({autoPan: false, offset: {x: 0, y: -35}})
+      .setLatLng(data.latlon)
+      .setContent(args.leafletObject.options.mouseoverMessage)
+      .openOn(mapService.leafletMap)
+  })
+
+  $scope.$on('leafletDirectiveMarker.click', function(event, args) {
+    event.preventDefault();
+    openSidenav(args.modelName.replace(/_/g,'-'))
+  })
+
+
 })
