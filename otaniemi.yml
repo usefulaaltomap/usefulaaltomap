@@ -281,6 +281,7 @@ buildings:
       - name: IT Service Desk Dipoli
         id: servicedesk_dipoli
         type: service
+        latlon: [60.18525, 24.83262]
   # Old shopping center
   - id: r020
     osm: 7589963
