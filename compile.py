@@ -394,7 +394,8 @@ for obj in r['elements']:
         # Construct basic data
         yamldata = dict(id=building.id+'-printer-'+str(obj['id']),
                         osm="%s=%d"%(obj['type'], obj['id']),
-                        level=tags.get('level', 0))
+                        level=tags.get('level', 0),
+                        nosearch=True)
         yamldata['name'] = 'Printer'
         if tags.get('access') == 'private':        yamldata['name'] += ' (private)'
         elif tags.get('printer') == 'secureprint': yamldata['name'] += ' (secureprint)'
