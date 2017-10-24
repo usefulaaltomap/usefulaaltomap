@@ -78,8 +78,8 @@ class Location():
         update_maybe(self.data, 'opening_hours', data)
         update_maybe(self.data, 'ref', data)
         update_maybe(self.data, 'nosearch', data)
-        if 'level' in data:
-            self.data['floor'] = floor_number(data['level'])
+        if 'level' in self.data:
+            data['floor'] = floor_number(self.data['level'])
         #data['osm_id'] = [ ]
         #if 'osm' in self.data:  data['osm_id'].append(self.data['osm'])
         #if 'osm_meta' in self.data:  data['osm_id'].append(self.data['osm_meta'])
@@ -367,7 +367,7 @@ for obj in r['elements']:
         yamldata = dict(id=id_,
                         name=name,
                         osm="%s=%d"%(obj['type'], obj['id']),
-                        floor=floor_number(tags.get('level', 0)))
+                        level=tags.get('level', 0))
         update_maybe(tags, 'ref', yamldata)
         update_maybe(tags, 'description', yamldata, 'note')
         if 'ref' in tags:
@@ -394,7 +394,7 @@ for obj in r['elements']:
         # Construct basic data
         yamldata = dict(id=building.id+'-printer-'+str(obj['id']),
                         osm="%s=%d"%(obj['type'], obj['id']),
-                        floor=floor_number(tags.get('level', 0)))
+                        level=tags.get('level', 0))
         yamldata['name'] = 'Printer'
         if tags.get('access') == 'private':        yamldata['name'] += ' (private)'
         elif tags.get('printer') == 'secureprint': yamldata['name'] += ' (secureprint)'
