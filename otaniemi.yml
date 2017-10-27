@@ -259,25 +259,36 @@ buildings:
     lore: >-
       This was originally built for the TKK student union, but they
       ran out of money partway through, so you can still see the
-      "stairs to nowhere" going to the third floor.  Aalto bought it
+      "stairs to nowhere" going to the third floor.  The architecture
+      here is quite unique - search and read about it some.  Aalto bought it
       some time ago, and in 2017 it opened as the new administration
-      building.  The architecture here is quite unique - search and
-      read about it some.  In 2017, ACRE decided to call this the
+      building.  In 2017, someone decided to call this the
       "Main Building", forgetting the fact that this makes the name
       meaningless: Otakaari 1 is(was) the "main building", and now no
       one can ever use the name "main building" without ambiguity.
       We all just agree: the undergraduate center will always be the
       main building, and we always call this building Dipoli.
+      Actually, they tried to call Lämpömiehenkuja 2 the "main
+      building", which absolutely no one not in the administration
+      paid attention to.  Apparently the administration confuses
+      "Administration" with "Main".
     children:
-      - id: cafecarre
+      - id: carre
         osm: node=5022009311
         type: cafe
       - id: reima
         osm: node=5022009310
         type: restaurant
+        notes: >-
+          The "student" restaurant in Dipoli.
       - id: tenhola
         osm: node=5022009278
         type: cafe
+      - id: metso
+        osm: node=5022009279
+        type: restaurant
+        notes: >-
+          The "fancy" restaurant in Dipoli.  Prices 20-30€.
       - name: IT Service Desk Dipoli
         id: servicedesk_dipoli
         type: service
@@ -347,7 +358,7 @@ buildings:
     label: Otahalli
     children:
       - name: Unisport
-        type: location
+        type: service
   # Aalto Studios
   - id: r029
     osm: 24342456
@@ -416,6 +427,9 @@ buildings:
       - id: oih_cafe
         osm: node=5012868059
         type: cafe
+      - id: eit_rawmaterials
+        type: unit
+        name: EIT RawMaterials
   # Water laboratory
   - id: r034
     osm: 4259026
@@ -519,7 +533,10 @@ buildings:
   # Student health
   - id: r042
     osm: 4266890
-    aliases: [R042]
+    aliases: [R042, YHTS, SHVS, FSHS]
+    name: Ylioppilaiden terveydenhoitosäätiö
+    name_sv: Studenternas hälsovårdsstiftelse
+    name_en: Finnish Student Health Service
   # Chappel
   - id: chappel
     osm: 4266572
@@ -618,6 +635,9 @@ other:
   - id: tervystalo2
     name: Tervystalo Metallimiehenkuja
     osm: node=5020264817
+    type: service
+  - id: convroom
+    osm: 515942280
     type: service
 
 
@@ -991,5 +1011,5 @@ other:
     name: EIT Digital
     type: unit
     aliases: [EIT ICT Labs, SCI]
-    parents: []
+    parents: [oih]
     url: "http://sci.aalto.fi/en/departments/#eit"
