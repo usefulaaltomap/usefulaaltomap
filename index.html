@@ -151,7 +151,7 @@
         _.forEach(mapS.map.paths, function(p) {
           if (! (p.id in mapS.defaultObjects)) {
             console.log('deleting ' + p.id);
-            delete mapS.map.paths[p.id.replace(/-/g,'_')];
+            delete mapS.map.paths[p.id.replace(/-|\./g,'_')];
           }
         })
         // Set all the default building outlines back to default.
@@ -185,7 +185,7 @@
           path.weight = weight;
         } else if (obj.outline) {
           console.log('highlighting outline=' + obj.id)
-          mapS.map.paths[obj.id.replace(/-/g,'_')] = {
+          mapS.map.paths[obj.id.replace(/-|\./g,'_')] = {
             id: obj.id,
             type: "polygon",
             fill: true,
@@ -200,7 +200,7 @@
           console.log('highlighting latlon=' + obj.id)
 	  if (mapS.map.markers == null ) { mapS.map.markers = { } }
           message = utils.get_lang(obj, "name")
-          mapS.map.markers[obj.id.replace(/-/g,'_')] = {
+          mapS.map.markers[obj.id.replace(/-|\./g,'_')] = {
               lat: obj.latlon[0],
               lng: obj.latlon[1],
               focus: true,
