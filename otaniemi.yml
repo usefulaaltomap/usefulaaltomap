@@ -52,6 +52,12 @@ buildings:
       - id: studenthub
         osm: 514232691
         type: location
+      - id: startingpoint
+        latlon: [60.18655, 24.82870]
+        name: Starting Point
+        ref: Y199a
+        opening_hours: Mo-Fr 11:00-13:00; PH off
+        type: service
       - id: main-awing
         name: A siipi Main
         name_en: A wing Main
