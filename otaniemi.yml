@@ -116,7 +116,7 @@ buildings:
     label: R
     aliases: [R002, R]
   # NBE / (physics)
-  - id: r003
+  - id: F
     osm: 98855202
     osm_meta: rel=1402504
     aliases: [R003, F, F-talo, F-building]
@@ -140,22 +140,22 @@ buildings:
     label: Sähko
     label_fi: Sähko
   # K4, Sähkömiehentie 4
-  - id: r005
+  - id: K4
     osm: 7584026
     aliases: [R005, K4]
     label: K4
   # K3, Puumiehenkuja 5
-  - id: r006
+  - id: K3
     osm: 156903284
     aliases: [R006, K3]
     label: K3
   # K2, Puumiehenkuja 3
-  - id: r007
+  - id: K2
     osm: 156903282
     aliases: [R007, K2]
     label: K2
   # K1, Otakaari 4
-  - id: r008
+  - id: K1
     osm: 156903276
     aliases: [R008, K1]
     label: K1
@@ -231,7 +231,7 @@ buildings:
   - id: r014
     osm: 7588741
     aliases: [R014]
-  - id: r015
+  - id: kirjasto
     osm: 4252948
     aliases: [R015, Aalto-yliopiston kirjasto, Main Library, Learning Center,
               HH-center, HH-keskus
@@ -250,7 +250,7 @@ buildings:
     osm: 4259025
     aliases: [R016, Aalto Ice Tank]
   # Maari
-  - id: r017
+  - id: maari
     osm: 7584131
     aliases: [R017]
     label: Maari
@@ -372,7 +372,7 @@ buildings:
     label: Studios
     address: Otakaari 7
   # CS
-  - id: r030
+  - id: cs
     label: "CS / T"
     aliases: [R030, 'T', 'Subway Building', 'CS', Tikkitalo]
     osm: 4217650
@@ -694,9 +694,9 @@ other:
     name_sv: Högskolan för ingenjörsvetenskaper
     aliases: [ENG]
     type: school
-    parents: [r008, r034,       # Built Env
+    parents: [K1, r034,       # Built Env
               r002,             # Civil
-              r008, r006, r007, r005, r016, r025, # Mechanical
+              K1, K3, K2, K4, r016, r025, # Mechanical
               ]
     url_en: http://eng.aalto.fi/en/
     url_fi: http://eng.aalto.fi/fi/
@@ -707,7 +707,7 @@ other:
     name_sv: Högskolan för teknikvetenskaper
     aliases: [SCI]
     type: school
-    parents: [main, r003, r008, r009, r030, oih, r036, tuas]
+    parents: [main, F, K1, r009, cs, oih, r036, tuas]
     url_en: http://sci.aalto.fi/en/
     url_fi: http://sci.aalto.fi/fi/
     url_sv: http://sci.aalto.fi/sv/
@@ -898,7 +898,7 @@ other:
     name_fi: Sähkötekniikan ja automaation laitos
     name_sv: Instititutionen för elektroteknik och automation
     type: department
-    parents: [r030, tuas, r036, ELEC]
+    parents: [cs, tuas, r036, ELEC]
     url_en: http://eea.aalto.fi/en/
     url_fi: http://eea.aalto.fi/fi/
   - id: dept:ele
@@ -914,7 +914,7 @@ other:
     name_fi: Signaalinkäsittelyn ja akustiikan laitos
     name_sv: Institutionen för signalbehandling och akustik
     type: department
-    parents: [r030, r004, tuas, r003, ELEC]
+    parents: [cs, r004, tuas, F, ELEC]
     url_en: http://spa.aalto.fi/en/
     url_fi: http://spa.aalto.fi/fi/
   - id: dept:comnet
@@ -922,7 +922,7 @@ other:
     name_fi: Tietoliikenne- ja tietoverkkotekniikan laitos
     name_sv: Institutionen för kommunikations- och nätverkteknik
     type: department
-    parents: [r030, tuas, ELEC]
+    parents: [cs, tuas, ELEC]
     url_en: http://comnet.aalto.fi/en/
     url_fi: http://comnet.aalto.fi/fi/
   - id: unit:nanofab
@@ -944,7 +944,7 @@ other:
     name_en: Department of Mechanical Engineering
     name_fi: Konetekniikan laitos
     type: department
-    parents: [r008, r007, r006, r005, r025, r016, ENG]
+    parents: [K1, K2, K3, K4, r025, r016, ENG]
     url_en: http://mecheng.aalto.fi/en/
     url_fi: http://mecheng.aalto.fi/fi/
   - id: dept:civileng
@@ -958,7 +958,7 @@ other:
     name_en: Department of Built Environment
     name_fi: Rakennetun ympäristön laitos
     type: department
-    parents: [r008, r035, ENG]
+    parents: [K1, r035, ENG]
     url_en: http://builtenv.aalto.fi/en/
     url_fi: http://builtenv.aalto.fi/fi/
   # SCI
@@ -976,7 +976,7 @@ other:
     name_sv: Institutionen för datateknik
     type: department
     aliases: [CS]
-    parents: [r030, tuas, SCI]
+    parents: [cs, tuas, SCI]
     url_en: http://cs.aalto.fi/en/
     url_fi: http://cs.aalto.fi/fi/
   - id: dept:tuta
@@ -1001,7 +1001,7 @@ other:
     name_fi: Neurotieteen ja lääketieteellisen tekniikan laitos
     name_sv: Institutionen för neurovetenskap och biomedicinsk teknik
     type: department
-    parents: [r003, SCI]
+    parents: [F, SCI]
     note: "Rakentajanaukio 2 C entrance only, 2nd-3rd floors"
     url_en: http://nbe.aalto.fi/en/
     url_fi: http://nbe.aalto.fi/fi/
@@ -1011,7 +1011,7 @@ other:
     name_sv: Forskningsinstitutet för informationsteknologi
     aliases: [HIIT]
     type: unit
-    parents: [r030, "dept:cs"]
+    parents: [cs, "dept:cs"]
     url_en: http://www.hiit.fi/
   - id: unit:eit
     name: EIT Digital
