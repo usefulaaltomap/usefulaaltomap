@@ -573,10 +573,10 @@ buildings:
     label: Väre
   - id: r069
     osm: 402618641
-    aliases: [R069, Metro Centre]
+    aliases: [R069, Metro Centre, Metro entrance A]
   - id: metro2
     osm: 408595707
-    name: Metro entrance 2
+    name: Metro entrance B
     #aliases: [Metro entrance 2]
 
 # Töölö
