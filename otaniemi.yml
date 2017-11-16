@@ -581,7 +581,7 @@ buildings:
 
 # Töölö
   # Töölö main building
-  - id: chydenia
+  - id: r101
     aliases: [Töölö Päärakennus, Töölö main building]
     osm: 124297669
     osm_meta: rel=1697955
