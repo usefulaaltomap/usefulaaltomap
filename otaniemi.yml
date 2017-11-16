@@ -142,22 +142,22 @@ buildings:
   # K4, Sähkömiehentie 4
   - id: K4
     osm: 7584026
-    aliases: [R005, K4]
+    aliases: [R005]
     label: K4
   # K3, Puumiehenkuja 5
   - id: K3
     osm: 156903284
-    aliases: [R006, K3]
+    aliases: [R006]
     label: K3
   # K2, Puumiehenkuja 3
   - id: K2
     osm: 156903282
-    aliases: [R007, K2]
+    aliases: [R007]
     label: K2
   # K1, Otakaari 4
   - id: K1
     osm: 156903276
-    aliases: [R008, K1]
+    aliases: [R008]
     label: K1
     children:
       - id: sodexokone
@@ -374,7 +374,7 @@ buildings:
   # CS
   - id: cs
     label: "CS / T"
-    aliases: [R030, 'T', 'Subway Building', 'CS', Tikkitalo]
+    aliases: [R030, 'T', 'Subway Building', 'CS']
     osm: 4217650
     lore: >
        In 2015 a Subway restaurant opened here.  They added a huge sign
