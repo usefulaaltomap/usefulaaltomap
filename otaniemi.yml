@@ -609,6 +609,19 @@ buildings:
     osm: 96286289
     osm_meta: node=1116096931
 
+  # Töölö Towers (A building)
+  - id: r106a
+    name: Töölön Tornit A
+    name_en: Töölö Towers A
+    osm: 23210476
+  # Töölö Towers (B building)
+  - id: r106-25
+    name: Töölön Tornit B
+    name_en: Töölö Towers B
+    osm: 23210490
+
+
+
 # Arabia
   - id: arabia
     name: Aalto Arabia Building
