@@ -327,12 +327,12 @@ buildings:
   # LMK2, admin
   - id: r022
     osm: 26608151
-    aliases: [R022, Administration]
-    label: Admin
-    children:
-      - name: Calori
-        type: restaurant
-        osm: node=2071854934
+    aliases: [R022]
+    #label: Admin
+    #children:   # closed 2017 when admin moved to dipoli
+    #  - name: Calori
+    #    type: restaurant
+    #    osm: node=2071854934
   - id: r023
     osm: 26608177
     aliases: [R023]
