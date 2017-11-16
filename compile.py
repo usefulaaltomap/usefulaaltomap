@@ -157,7 +157,7 @@ class Location():
         # If this is an OSM node
         if isinstance(self.data['osm'], str) and self.data['osm'].startswith('node'):
             n = int(self.data['osm'].split('=')[1])
-            return (round(osm_data[n]['lat'], 5), round(osm_data[n]['lon'], 5))
+            return (round(osm_data[n]['lat'], 6), round(osm_data[n]['lon'], 6))
         # Find main entrance?
         entrances = self.entrances()
         if entrances:
@@ -167,8 +167,8 @@ class Location():
         # Average of all points in the object - hack.
         latlon_path = self.outline
         if not latlon_path: return None
-        return ( round(sum(x[0] for x in latlon_path)/len(latlon_path), 5),
-                 round(sum(x[1] for x in latlon_path)/len(latlon_path), 5))
+        return ( round(sum(x[0] for x in latlon_path)/len(latlon_path), 6),
+                 round(sum(x[1] for x in latlon_path)/len(latlon_path), 6))
     @property
     def outline(self):
         if 'outline' in self.data: return self.data['outline']
@@ -177,7 +177,7 @@ class Location():
         if locdat['type'] != 'way':
             return None
         if 'nodes' in locdat:
-            nodes = [ (round(osm_data[n]['lat'], 5), round(osm_data[n]['lon'], 5))
+            nodes = [ (round(osm_data[n]['lat'], 6), round(osm_data[n]['lon'], 6))
                      for n in locdat['nodes'] ]
             return nodes
             # Convex halls reduce data size a bit (currently to 70% but looks much worse)
@@ -224,7 +224,7 @@ class Location():
                 continue
             name = osm_data[n]['tags'].get('name', osm_data[n]['tags'].get('ref'))
             if name and len(name) > 3: name = None
-            lat, lon = round(osm_data[n]['lat'], 5), round(osm_data[n]['lon'], 5)
+            lat, lon = round(osm_data[n]['lat'], 6), round(osm_data[n]['lon'], 6)
             # Create data
             e = dict(lat=lat, lon=lon)
             if name: e['name'] = name
