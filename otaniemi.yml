@@ -599,26 +599,17 @@ buildings:
     name: Aalto Arkadia
     osm: 124476546
     osm_meta: node=298645132
-  # Töölö Towers
-  - id: toolotowers
-    name: Töölö Towers
-    osm: 234804200
   # Aalto EE building
   - id: domusgadium
     name: Domus Gaudium
     osm: 96286289
     osm_meta: node=1116096931
-
-  # Töölö Towers (A building)
-  - id: r106a
-    name: Töölön Tornit A
-    name_en: Töölö Towers A
-    osm: 23210476
-  # Töölö Towers (B building)
-  - id: r106-25
-    name: Töölön Tornit B
-    name_en: Töölö Towers B
-    osm: 23210490
+  # Töölö Towers
+  - id: toolotowers
+    name: Töölön Tornit
+    name_en: Töölö Towers
+    address: Pohjoinen Hesperiankatu 23
+    osm: 234804200
 
 
 
