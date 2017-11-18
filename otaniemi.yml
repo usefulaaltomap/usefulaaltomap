@@ -571,10 +571,10 @@ buildings:
     osm: 402618642
     aliases: [R067, School of Arts, Design and Architecture, School of Business]
     label: Väre
-  - id: r069
+  - id: metroA
     osm: 402618641
     aliases: [R069, Metro Centre, Metro entrance A]
-  - id: metro2
+  - id: metroB
     osm: 408595707
     name: Metro entrance B
     #aliases: [Metro entrance 2]
