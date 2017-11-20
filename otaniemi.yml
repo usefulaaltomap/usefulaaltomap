@@ -76,14 +76,25 @@ buildings:
         osm: 514232720
         type: wing
         note: >-
-          This wing is almost impossible to find.  From the outside,
-          use the door to the south of the main entrance, (up some
-          exterior stairs).  From the inside, you have to go either up
-          or down from the Alvari restaurant, and connect on either
-          the 0th or 2nd floor.  Good luck!
+          This is practically above Alvari.  Go up to the second or
+          third floors from the lobby, then over to it.
         lore: >-
           "H" stands for "hallinto", the original administration wing.
           Note how you symbolically ascend the stairs to get to it.
+      - id: main-kwing
+        name: K siipi Main
+        name_en: K wing Main
+        name_sv: K flygeln Main
+        osm: 540151861
+        type: wing
+        note: >-
+          This wing is almost impossible to find.  From the outside,
+          use the door to the south of the main entrance, (up some
+          exterior stairs).  From the inside, you have to go either up
+          or down from the Alvari restaurant, and connect from either
+          the 0th or 2nd floor.  Good luck!
+        lore: >-
+          Perhaps "K" stands for "Kirjaamo", or the Aalto Registry.
       - id: main-mwing
         name: M siipi Main
         name_en: M wing Main
