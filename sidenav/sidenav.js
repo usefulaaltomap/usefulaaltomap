@@ -64,6 +64,9 @@ angular.module('usefulAaltoMap')
       } )
   }
 
+  $scope.getURL = function(object) {
+    return $scope.get_lang(object, 'url');
+  }
 
 
 })

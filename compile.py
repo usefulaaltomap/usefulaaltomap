@@ -78,6 +78,7 @@ class Location():
         update_maybe(self.data, 'opening_hours', data)
         update_maybe(self.data, 'ref', data)
         update_maybe(self.data, 'nosearch', data)
+        update_matching(self.data, 'url*', data)
         if 'level' in self.data:
             data['floor'] = floor_number(self.data['level'])
         #data['osm_id'] = [ ]
