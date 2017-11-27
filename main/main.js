@@ -113,7 +113,7 @@ $scope.set_lang = set_lang;
   })
 
   $scope.$on('leafletDirectiveMarker.mouseover', function(event, args) {
-    var data = mapService.data[args.modelName.replace(/_/g,'-')];
+    var data = mapService.data[args.modelName.replace(/_h_/g,'-').replace(/_p_/g,'.')];
     var popup = L.popup({autoPan: false, offset: {x: 0, y: -35}})
       .setLatLng(data.latlon)
       .setContent(args.leafletObject.options.mouseoverMessage)
@@ -122,7 +122,7 @@ $scope.set_lang = set_lang;
 
   $scope.$on('leafletDirectiveMarker.click', function(event, args) {
     event.preventDefault();
-    openSidenav(args.modelName.replace(/_/g,'-'))
+    openSidenav(args.modelName.replace(/_h_/g,'-').replace(/_p_/g,'.'))
   })
 
 
