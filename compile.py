@@ -382,7 +382,13 @@ for obj in r['elements']:
             continue
         if 'name' not in tags and 'ref' not in tags:
             raise ValueError("Neither name nor ref in %s"%(tags,))
-        id_ = building.id+'-'+tags.get('ref', tags.get('name'))
+        if 'usefulaaltomap:id' in tags:
+            if tags['usefulaaltomap:id'].startswith('*'):
+                id_ = building.id+'-'+tags['usefulaaltomap:id']
+            else:
+                id_ = tags['usefulaaltomap:id']
+        else:
+            id_ = building.id+'-'+tags.get('ref', tags.get('name'))
         if 'ref' in tags and 'name' in tags:
             name = '%s: %s'%(tags.get('ref'), tags.get('name'))
         else:
