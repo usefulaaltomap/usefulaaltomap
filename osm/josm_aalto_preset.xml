@@ -10,6 +10,9 @@
     <space />
     <text key="level" text="Level (actually floor-1)" />
     <text key="description" text="Description (e.g. location)" />
+    <space />
+    <text key="usefulaaltomap:id" text="ID (begin with * to prefix with building name, the default)"/>
+    <check key="usefulaaltomap:show" value_on='yes' value_off='no' text="Show on usefulaalto map (default uses 'access'+other data)"/>
   </item>
 
   <item name="Aalto / Printer" type="node,closedway">
@@ -22,6 +25,16 @@
     <text key="level" text="Level (actually floor-1)" />
     <text key="description" text="Description (e.g. location)" />
     <check key="printer" value_on='secureprint' disable_off="true" default="on" text="Secureprint?" />
+    <space />
+    <text key="usefulaaltomap:id" text="ID (begin with * to prefix with building name, the default)"/>
+    <check key="usefulaaltomap:show" value_on='yes' value_off='no' text="Show on usefulaalto map (default uses 'access'+other data)"/>
+</item>
+
+  <item name="Aalto / Usefulaaltomap metadata" type="node,closedway,way">
+    <label text="Usefulaaltomap metadata" />
+
+    <text key="usefulaaltomap:id" text="ID (begin with * to prefix with building name, the default)" match="key"/>
+    <check key="usefulaaltomap:show" value_on='yes' value_off='no' text="Show on usefulaalto map (default uses 'access'+other data)" match="key"/>
   </item>
 
 </presets>
