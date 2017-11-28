@@ -222,14 +222,25 @@ class Location():
         for n in way['nodes']:
             if 'tags' not in osm_data[n]:
                 continue
-            if osm_data[n]['tags'].get('entrance', None) not in {'yes', 'main', 'staircase'}:
+            tags = osm_data[n]['tags']
+            is_private = False
+            if tags.get('access', 'yes') not in {'yes', 'permissive'}:
+                is_private = True
+
+            if tags.get('usefulaaltomap:show') in {'no'}:
                 continue
-            is_main = osm_data[n]['tags']['entrance'] == 'main'
-            is_wheelchair = osm_data[n]['tags'].get('wheelchair') in ('yes', 'designated')
-            no_wheelchair = osm_data[n]['tags'].get('wheelchair') in ('no', 'limited')
-            if osm_data[n]['tags'].get('access', 'yes') not in {'yes', 'permissive'}:
-                continue
-            name = osm_data[n]['tags'].get('name', osm_data[n]['tags'].get('ref'))
+            elif tags.get('usefulaaltomap:show') in {'yes'}:
+                pass
+            else:
+                if tags.get('entrance', None) not in {'yes', 'main', 'staircase'}:
+                    continue
+                if is_private:
+                    continue
+            is_main = tags['entrance'] == 'main'
+            is_wheelchair = tags.get('wheelchair') in ('yes', 'designated')
+            no_wheelchair = tags.get('wheelchair') in ('no', 'limited')
+
+            name = tags.get('name', tags.get('ref'))
             if name and len(name) > 3: name = None
             lat, lon = round(osm_data[n]['lat'], 6), round(osm_data[n]['lon'], 6)
             # Create data
@@ -238,17 +249,22 @@ class Location():
             if is_main: e['main'] = is_main
             entrances.append(e)
             # Make the full object
+            name_suffix = '%s%s%s%s'%(' (main)' if is_main else '',
+                                      ' (service)' if tags['entrance'] == 'service' else '',
+                                      ' \u267F' if is_wheelchair else '',
+                                      ' \u26D4' if is_private else '')
             if name is None:
-                name2 = 'Entrance%s%s'%(' (main)' if is_main else '', ' \u267F' if is_wheelchair else '')
+                name2 = 'Entrance' + name_suffix
                 id_ = '%s-ent-%s'%(self.id, n)
             else:
-                name2 = 'Entrance %s%s%s'%(name, ' (main)' if is_main else '', ' \u267F' if is_wheelchair else '')
+                name2 = 'Entrance %s%s'%(name, name_suffix)
                 id_ = '%s-ent-%s'%(self.id, name)
             yamldata = dict(id=id_,
                             name=name2,
                             osm='node=%s'%n,
                             nosearch=True,
                             )
+            if is_private: yamldata['access'] = 'private'
             ent = Location(yamldata, type='entrance', parent=self.id)
             entrances_objects.append(ent)
         return entrances, entrances_objects
