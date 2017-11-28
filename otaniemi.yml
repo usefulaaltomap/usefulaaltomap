@@ -58,7 +58,7 @@ buildings:
         ref: Y199a
         opening_hours: Mo-Fr 11:00-13:00; PH off
         type: service
-      - id: main-awing
+      - id: A
         name: A siipi Main
         name_en: A wing Main
         name_sv: A flygeln Main
@@ -69,7 +69,7 @@ buildings:
           the architect who designed the building, only used white marble for this
           wing and the library to symbolize these being the only civilized parts of
           campus.
-      - id: main-hwing
+      - id: H
         name: H siipi Main
         name_en: H wing Main
         name_sv: H flygeln Main
@@ -81,6 +81,7 @@ buildings:
         lore: >-
           "H" stands for "hallinto", the original administration wing.
           Note how you symbolically ascend the stairs to get to it.
+      # Not named "K" because that might be confused with kirjasto?
       - id: main-kwing
         name: K siipi Main
         name_en: K wing Main
@@ -95,7 +96,7 @@ buildings:
           the 0th or 2nd floor.  Good luck!
         lore: >-
           Perhaps "K" stands for "Kirjaamo", or the Aalto Registry.
-      - id: main-mwing
+      - id: M
         name: M siipi Main
         name_en: M wing Main
         name_sv: M flygeln Main
@@ -103,7 +104,7 @@ buildings:
         type: wing
         lore: >-
           Originally from "maanmittaus" (surveying).
-      - id: main-uwing
+      - id: U
         name: U siipi Main
         name_en: U wing Main
         name_sv: U flygeln Main
@@ -111,7 +112,7 @@ buildings:
         type: wing
         lore: >-
           The "U" comes from "uusi" (new) - the new part of the building.
-      - id: main-ywing
+      - id: Y
         name: Y siipi Main
         name_en: Y wing Main
         name_sv: Y flygeln Main
@@ -393,7 +394,7 @@ buildings:
     name: Aalto Studios
     address: Otakaari 7
   # CS
-  - id: cs
+  - id: T
     label: "CS / T"
     aliases: [R030, 'T', 'Subway Building', 'CS']
     osm: 4217650
@@ -733,7 +734,7 @@ other:
     name_sv: Högskolan för teknikvetenskaper
     aliases: [SCI]
     type: school
-    parents: [main, F, K1, r009, cs, oih, r036, tuas]
+    parents: [main, F, K1, r009, T, oih, r036, tuas]
     url_en: http://sci.aalto.fi/en/
     url_fi: http://sci.aalto.fi/fi/
     url_sv: http://sci.aalto.fi/sv/
@@ -924,7 +925,7 @@ other:
     name_fi: Sähkötekniikan ja automaation laitos
     name_sv: Instititutionen för elektroteknik och automation
     type: department
-    parents: [cs, tuas, r036, ELEC]
+    parents: [T, tuas, r036, ELEC]
     url_en: http://eea.aalto.fi/en/
     url_fi: http://eea.aalto.fi/fi/
   - id: dept:ele
@@ -940,7 +941,7 @@ other:
     name_fi: Signaalinkäsittelyn ja akustiikan laitos
     name_sv: Institutionen för signalbehandling och akustik
     type: department
-    parents: [cs, r004, tuas, F, ELEC]
+    parents: [T, r004, tuas, F, ELEC]
     url_en: http://spa.aalto.fi/en/
     url_fi: http://spa.aalto.fi/fi/
   - id: dept:comnet
@@ -948,7 +949,7 @@ other:
     name_fi: Tietoliikenne- ja tietoverkkotekniikan laitos
     name_sv: Institutionen för kommunikations- och nätverkteknik
     type: department
-    parents: [cs, tuas, ELEC]
+    parents: [T, tuas, ELEC]
     url_en: http://comnet.aalto.fi/en/
     url_fi: http://comnet.aalto.fi/fi/
   - id: unit:nanofab
@@ -1002,7 +1003,7 @@ other:
     name_sv: Institutionen för datateknik
     type: department
     aliases: [CS]
-    parents: [cs, tuas, SCI]
+    parents: [T, tuas, SCI]
     url_en: http://cs.aalto.fi/en/
     url_fi: http://cs.aalto.fi/fi/
   - id: dept:tuta
@@ -1037,7 +1038,7 @@ other:
     name_sv: Forskningsinstitutet för informationsteknologi
     aliases: [HIIT]
     type: unit
-    parents: [cs, "dept:cs"]
+    parents: [T, "dept:cs"]
     url_en: http://www.hiit.fi/
   - id: unit:eit
     name: EIT Digital
@@ -1050,3 +1051,4 @@ other:
 
 redirects:
   cs-C105: T2
+  cs-A238: T4
