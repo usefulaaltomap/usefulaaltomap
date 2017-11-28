@@ -321,11 +321,13 @@ buildings:
       # Alepa
       - id: alepa
         name: Alepa Otaniemi
+        aliases: [Ruokakauppa, Grocery store]
         type: shopping
         osm: node=301625473
       # R-Kioski
       - id: rkioski
         type: shopping
+        aliases: [Lähikauppa, Convenience store]
         osm: node=301625474
       - id: kynajapaperi
         osm: node=4840360722
@@ -333,6 +335,12 @@ buildings:
       - id: otafood
         osm: node=5004956488
         type: restaurant
+      # ATM
+      - id: r020-atm
+        name: ATM
+        aliases: [Pankkiautomaatti, Automated teller machine]
+        type: service
+        osm: node=263964909
 
   # No building 21
   # LMK2, admin
@@ -381,6 +389,7 @@ buildings:
     osm: 24342456
     aliases: [R029, Aalto Studios]
     label: Studios
+    name: Aalto Studios
     address: Otakaari 7
   # CS
   - id: cs
@@ -523,7 +532,8 @@ buildings:
     osm: 7589907
     aliases: [R038]
     label: AYY
-    name: Aalto Student Union AYY
+    name: Aalto-yliopiston ylioppilaskunta
+    name_en: Aalto University Student Union
   - id: r039
     osm: 27464085
     aliases: [R039]
