@@ -71,6 +71,7 @@ class Location():
             data['aliases'].extend(aliases)
         if len(data['aliases']) == 0: del data['aliases']
         data.update(self.names)
+        self.address_aliases(data)  # updates in place
         update_maybe(self.data, 'parents', data)
         update_maybe(self.data, 'children', data)
         update_maybe(self.data, 'lore', data)
@@ -201,6 +202,11 @@ class Location():
         update_matching(self.data, 'name*', names)
         update_matching(self.data, 'address*', names)
         return names
+    def address_aliases(self, data):
+        if data['type'] != 'building': return {}
+        if 'address' in data:
+            if data['address'].startswith('Otakaari '):
+                data['aliases'].append(data['address'].replace('Otakaari ', 'OK'))
     def entrances(self):
         """Make list of entrances of this building.
 
