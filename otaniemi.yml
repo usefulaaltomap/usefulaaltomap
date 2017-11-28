@@ -1044,3 +1044,8 @@ other:
     aliases: [EIT ICT Labs, SCI]
     parents: [oih]
     url: "http://sci.aalto.fi/en/departments/#eit"
+
+
+
+redirects:
+  cs-C105: T2

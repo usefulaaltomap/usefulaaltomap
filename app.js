@@ -60,6 +60,8 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
               angular.forEach(res.data.locations, function(d) {
                 mapService.data[d.id] = d;
               })
+              // Redirections
+              mapService.redirects = res.data.redirects;
               // Add objects to map
               angular.forEach(mapService.data, function(d) {
                 switch (d.type) {
@@ -114,10 +116,18 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
           if (obj) {
             return $q.resolve(obj);
           }
-          else {
-            console.log("No object found with id " + objId)
-            $state.go('app.map')
+          // Use the "redirects" data to see if our ID has been changed.
+          if (mapService.redirects && objId in mapService.redirects) {
+            var obj = mapService.data[mapService.redirects[objId]];
+            if (obj) {
+              $state.go("app.selectedObject", { objectId: mapService.redirects[objId] });
+              return $q.resolve(obj); // unreachable, hopefully (but backup display)
+            } else {
+              console.log("Tried to remap object, but failed: " + objId)
+            }
           }
+          console.log("No object found with id " + objId)
+          $state.go('app.map')
         })
         .catch(console.log)
       }

@@ -467,6 +467,7 @@ for L in locations:
 
 newdata = dict(
     locations=newdata,
+    redirects=data['redirects'],
     search=[],
     )
 
