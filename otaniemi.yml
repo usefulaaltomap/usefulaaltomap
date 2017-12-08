@@ -343,6 +343,10 @@ buildings:
         aliases: [Pankkiautomaatti, Automated teller machine]
         type: service
         osm: node=263964909
+      # Pharmacy
+      - id: r020-pharmacy
+        osm: node=263964923
+        type: service
 
   # No building 21
   # LMK2, admin
@@ -536,6 +540,12 @@ buildings:
     label: AYY
     name: Aalto-yliopiston ylioppilaskunta
     name_en: Aalto University Student Union
+    children:
+      - id: AYY-servicepoint
+        name: AYY Jäsenpalvelupisteet
+        name_en: AYY service point
+        osm: node=263978267
+        type: service
   - id: r039
     osm: 27464085
     aliases: [R039]
@@ -665,12 +675,20 @@ other:
     name: Tervystalo Maari
     osm: node=5012868031
     type: service
+    note: Aalto-provided health services for staff are in the other Tervystalo location.
   - id: tervystalo2
     name: Tervystalo Metallimiehenkuja
     osm: node=5020264817
     type: service
   - id: convroom
     osm: 515942280
+    type: service
+  - id: r020-postbox
+    name: Postilattikko
+    name_en: Post box
+    aliases: [Mail box]
+    osm: node=2379476285
+    note: Collection times Mo-Fr 16:00
     type: service
 
 
