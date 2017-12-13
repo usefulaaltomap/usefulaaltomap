@@ -671,13 +671,13 @@ other:
     name_fi: IT Käyttäjäpalvelut
     parents: [servicedesk_kandi, servicedesk_tuas, servicedesk_dipoli, servicedesk_mt3]
     type: unit
-  - id: tervystalo
-    name: Tervystalo Maari
+  - id: terveystalo
+    name: Terveystalo Maari
     osm: node=5012868031
     type: service
-    note: Aalto-provided health services for staff are in the other Tervystalo location.
-  - id: tervystalo2
-    name: Tervystalo Metallimiehenkuja
+    note: Aalto-provided health services for staff are in the other Terveystalo location.
+  - id: terveystalo2
+    name: Terveystalo Metallimiehenkuja
     osm: node=5020264817
     type: service
   - id: convroom
