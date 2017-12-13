@@ -684,7 +684,7 @@ other:
     osm: 515942280
     type: service
   - id: r020-postbox
-    name: Postilattikko
+    name: Postilaatikko
     name_en: Post box
     aliases: [Mail box]
     osm: node=2379476285
