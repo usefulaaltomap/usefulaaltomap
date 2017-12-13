@@ -314,7 +314,7 @@ buildings:
   # Old shopping center
   - id: r020
     osm: 7589963
-    aliases: [R020, Kaupat]
+    aliases: [R020, Ostari]
     name: Otaniemen ostoskeskus
     name_en: Otaniemi shopping center
     label: Shops
