@@ -329,7 +329,7 @@ buildings:
       # R-Kioski
       - id: rkioski
         type: shopping
-        aliases: [Lähikauppa, Convenience store]
+        aliases: [Kioski, Convenience store]
         osm: node=301625474
       - id: kynajapaperi
         osm: node=4840360722
