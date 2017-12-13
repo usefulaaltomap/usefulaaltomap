@@ -340,7 +340,7 @@ buildings:
       # ATM
       - id: r020-atm
         name: ATM
-        aliases: [Pankkiautomaatti, Automated teller machine]
+        aliases: [Otto-automaatti, Pankkiautomaatti, Automated teller machine]
         type: service
         osm: node=263964909
       # Pharmacy
