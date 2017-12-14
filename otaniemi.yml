@@ -555,8 +555,7 @@ buildings:
     aliases: [R040, Urdsgjallar]
     label: TF
     children:
-      - name: Teknologföreningen
-        aliases: [Täffä]
+      - name: Täffä
         type: restaurant
         osm: node=580707759
         lore: >-
