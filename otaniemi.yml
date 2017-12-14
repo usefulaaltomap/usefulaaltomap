@@ -314,7 +314,7 @@ buildings:
   # Old shopping center
   - id: r020
     osm: 7589963
-    aliases: [R020, Kaupat]
+    aliases: [R020, Ostari]
     name: Otaniemen ostoskeskus
     name_en: Otaniemi shopping center
     label: Shops
@@ -329,7 +329,7 @@ buildings:
       # R-Kioski
       - id: rkioski
         type: shopping
-        aliases: [Lähikauppa, Convenience store]
+        aliases: [Kioski, Convenience store]
         osm: node=301625474
       - id: kynajapaperi
         osm: node=4840360722
@@ -340,7 +340,7 @@ buildings:
       # ATM
       - id: r020-atm
         name: ATM
-        aliases: [Pankkiautomaatti, Automated teller machine]
+        aliases: [Otto-automaatti, Pankkiautomaatti, Automated teller machine]
         type: service
         osm: node=263964909
       # Pharmacy
@@ -552,10 +552,11 @@ buildings:
   # TF
   - id: r040
     osm: 4252953
-    aliases: [R040]
+    aliases: [R040, Urdsgjallar]
     label: TF
     children:
-      - name: Täffä
+      - name: Teknologföreningen
+        aliases: [Täffä]
         type: restaurant
         osm: node=580707759
         lore: >-
@@ -671,20 +672,20 @@ other:
     name_fi: IT Käyttäjäpalvelut
     parents: [servicedesk_kandi, servicedesk_tuas, servicedesk_dipoli, servicedesk_mt3]
     type: unit
-  - id: tervystalo
-    name: Tervystalo Maari
+  - id: terveystalo
+    name: Terveystalo Maari
     osm: node=5012868031
     type: service
-    note: Aalto-provided health services for staff are in the other Tervystalo location.
-  - id: tervystalo2
-    name: Tervystalo Metallimiehenkuja
+    note: Aalto-provided health services for staff are in the other Terveystalo location.
+  - id: terveystalo2
+    name: Terveystalo Metallimiehenkuja
     osm: node=5020264817
     type: service
   - id: convroom
     osm: 515942280
     type: service
   - id: r020-postbox
-    name: Postilattikko
+    name: Postilaatikko
     name_en: Post box
     aliases: [Mail box]
     osm: node=2379476285
