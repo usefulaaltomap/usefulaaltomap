@@ -364,7 +364,7 @@ buildings:
   # MT3
   - id: r024
     osm: 27468640
-    aliases: [R024]
+    aliases: [R024, MT3]
     children:
       - name: IT Service Desk MT3
         id: servicedesk_mt3
