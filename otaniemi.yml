@@ -607,6 +607,11 @@ buildings:
   - id: metroA
     osm: 402618641
     aliases: [R069, Metro Centre, Metro entrance A]
+    children:
+      - id: metroA-rkioski
+        osm: node=5317875517
+        type: service
+        name: R-Kioski Metro A
   - id: metroB
     osm: 408595707
     name: Metro entrance B
