@@ -466,6 +466,10 @@ buildings:
   - id: r034
     osm: 4259026
     aliases: [R034]
+    children:
+      - id: fatlizard
+        osm: node=5323641949
+        type: restaurant
   # Vaisalantie 8
   - id: r035
     osm: 51725020
