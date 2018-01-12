@@ -151,6 +151,12 @@ buildings:
     aliases: [R004, ELEC]
     label: Sähko
     label_fi: Sähko
+    children:
+      - name: Elepaja
+        id: elepaja
+        room: I131
+        type: service
+        url: https://elepaja.aalto.fi
   # K4, Sähkömiehentie 4
   - id: K4
     osm: 7584026
