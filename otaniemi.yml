@@ -148,15 +148,24 @@ buildings:
   # ELEC building
   - id: r004
     osm: 24342454
-    aliases: [R004, ELEC]
-    label: Sähko
-    label_fi: Sähko
+    aliases: [R004, A-grid, Vanha Sähkötekniikka, Old Electrical Engineering]
+    label: A Grid
+    note: >-
+      2016 and earlier, this used to be the School of Electrical
+      Engineering main building.  During 2017, it was renovated as a
+      new start-up hub, "A Grid", and the old Electrical Engineering
+      departments mostly moved to other places.
     children:
       - name: Elepaja
         id: elepaja
         room: I131
         type: service
         url: https://elepaja.aalto.fi
+      - name: Acoustics Laboratory
+        id: acousticslab
+        type: unit
+        latlon: [60.1887, 24.8313]
+        url: http://acousticslab.aalto.fi/en/
   # K4, Sähkömiehentie 4
   - id: K4
     osm: 7584026
@@ -403,6 +412,11 @@ buildings:
     label: Studios
     name: Aalto Studios
     address: Otakaari 7
+    children:
+      - name: Studio Kipsari
+        type: restaurant
+        id: studiokipsari
+        # osm: node=...
   # CS
   - id: T
     label: "CS / T"
