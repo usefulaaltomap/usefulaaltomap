@@ -7,7 +7,7 @@ buildings:
     aliases: [R001, A, H, M, U, Y, Kandi, Main Building]
     label: Main
     note: >
-      This buliding is large and confusing, but has reasonable
+      This building is large and confusing, but has reasonable
       maps inside.  Make sure you know the wing (letter) of the
       place you are going (not the same as entrance letters or lecture
       hall letters!).  In general, single letters are lecture halls
@@ -491,6 +491,13 @@ buildings:
     children:
       - name: Nanofab
         type: unit
+      - name: Amica Micronova
+        id: amica-micronova
+        type: restaurant
+        osm: node=5081929842
+        note: No student discounts
+        url_en: http://www.amica.fi/en/restaurants/ravintolat-kaupungeittain/espoo/vtt-micronova/
+        url_fi: http://www.amica.fi/ravintolat/ravintolat-kaupungeittain/espoo/vtt-micronova/
   - id: tuas
     osm: 29012757
     aliases: [R037, TU, AS]
@@ -540,7 +547,7 @@ buildings:
       (just keep walking back and you'll find it)
     lore: >-
       If you know this building originally had the departments of
-      Industrias Engineering and Management (TUotantotalouden = TUTA,
+      Industrial Engineering and Management (TUotantotalouden = TUTA,
       still there) and Automation and Systems Technology (=AS, now merged
       with others), the name makes a lot of sense.
   # Student union
