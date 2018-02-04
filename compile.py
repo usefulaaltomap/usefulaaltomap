@@ -209,7 +209,7 @@ class Location():
         if 'address' in data:
             for replacement, name in [ ('OK', 'Otakaari'),
                                        ('SMT', 'Servin Maijan tie'),
-                                       ('JMV', 'Jämeräntaival'),
+                                       ('JMT', 'Jämeräntaival'),
                                        ('SK', 'Servinkuja'),
                                        ('OR', 'Otaranta'),
                                      ]:

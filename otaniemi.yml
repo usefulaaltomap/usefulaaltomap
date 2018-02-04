@@ -1131,42 +1131,42 @@ studentvillage:
     osm: 4259187
   - id: SMT1       # SMT 1
     osm: 4259263
-  - id: JMV10      # JMV 10 (north)
+  - id: JMT10      # JMT 10 (north)
     osm: 24334281
-  - id: JMV11n     # JMV 11 (north)
+  - id: JMT11n     # JMT 11 (north)
     osm: 26139101
-  - id: JMV10      # JMV 10 (south)
+  - id: JMT10      # JMT 10 (south)
     osm: 24334282
-  - id: JVM11sw    # JMV 11 (south-west)
+  - id: JVM11sw    # JMT 11 (south-west)
     osm: 24334286
-  - id: JMV11se    # JMV 11 (south-east)
+  - id: JMT11se    # JMT 11 (south-east)
     osm: 24332800
-  - id: JMV9       # JMV 9
+  - id: JMT9       # JMT 9
     osm: 24332799
-  - id: JVM7A      # JMV 7A
+  - id: JVM7A      # JMT 7A
     osm: 24333771
-  - id: JMV7C      # JMV 7C
+  - id: JMT7C      # JMT 7C
     osm: 24333796
-  - id: JMV7B      # JMV 7B
+  - id: JMT7B      # JMT 7B
     osm: 24333770
-  - id: JVM6       # JMV 6
+  - id: JVM6       # JMT 6
     osm: 24334231
-  - id: JMV5C      # JMV 5C
+  - id: JMT5C      # JMT 5C
     osm: 24333883
-  - id: JMV5A      # JMV 5A
+  - id: JMT5A      # JMT 5A
     osm: 24333899
-  - id: JMV5       # JMV 5
+  - id: JMT5       # JMT 5
     osm: 24333918
     # TODO: tatamisali, Dernecon, Gorsu
-  - id: JMV5B      # JMV 5B
+  - id: JMT5B      # JMT 5B
     osm: 24333934
-  - id: JMV3A      # JMV 3A
+  - id: JMT3A      # JMT 3A
     osm: 24333970
-  - id: JMV3B      # JMV 3B
+  - id: JMT3B      # JMT 3B
     osm: 24334035
-  - id: JMV3C      # JMV 3C
+  - id: JMT3C      # JMT 3C
     osm: 24333952
-  - id: JMV1       # JMV 1
+  - id: JMT1       # JMT 1
     osm: 24334123
   - id: OK20       # OK 20
     osm: 24334160
