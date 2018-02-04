@@ -98,8 +98,14 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
   .state('app.selectedObject', {
     templateUrl: '/sidenav/sidenav.html',
     controller: 'sidenavController',
-    url: '/select/:objectId',
+    url: '/select/:objectId/:routeIdx?',
+    params:{
+      routeIdx:""
+    },
     resolve: {
+      routeIdx: function($stateParams) {
+        return($stateParams.routeIdx);
+      },
       object: function($stateParams, mapService, $q, $state, $timeout) {
 
         var objId = $stateParams.objectId;

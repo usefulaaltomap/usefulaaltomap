@@ -22,6 +22,20 @@
       <div ng-show="object.aliases && object.aliases.length">
         <b>Aliases:</b> <span ng-repeat="a in object.aliases track by $index">{{a}}{{$last ? '' : ', '}}</span>
       </div>
+      <div style="font-size: 75%" ng-show="object.routes && object.routes.length">
+        <b>Getting here:</b>
+        <div ng-repeat="r in object.routes track by $index" ng-init="$routeIndex = $index">
+          * <a ng-click="routeIdx && routeIdx==$routeIndex  ? goToState('app.selectedObject',{objectId:object.id,routeIdx: ''}) : goToState('app.selectedObject',{objectId:object.id,routeIdx: $routeIndex})" href="">
+            {{r.label}}
+            </a>
+            
+            <div ng-show="routeIdx && routeIdx==$routeIndex" id=route_{{object.id}}_{{$routeIndex}}>
+              <div ng-repeat="s in r.stages track by $index">
+                - {{s.instruction}}
+              </div>
+            </div>
+        </div>
+      </div>
       <div style="font-size: 75%"  ng-show="object.note">
         <b>Note:</b> <span>{{get_lang(object, 'note')}}</span>
       </div>
