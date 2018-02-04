@@ -1107,7 +1107,7 @@ studentvillage:
     osm: 4266885
   - id: SMT12n     # SMT 12 (north)
     osm: 4266886
-  - id: SMT12      # SMT 12 (south)
+  - id: SMT12s     # SMT 12 (south)
     osm: 4266887
   - id: SK3B       # SK 3B
     osm: 24342605
@@ -1133,7 +1133,7 @@ studentvillage:
     osm: 4259263
   - id: JMV10      # JMV 10 (north)
     osm: 24334281
-  - id: JMV11      # JMV 11 (north)
+  - id: JMV11n     # JMV 11 (north)
     osm: 26139101
   - id: JMV10      # JMV 10 (south)
     osm: 24334282
@@ -1170,15 +1170,15 @@ studentvillage:
     osm: 24334123
   - id: OK20       # OK 20
     osm: 24334160
-  - id: OK8A       # OR 8A
+  - id: OR8A       # OR 8A
     osm: 24342700
-  - id: OK8B       # OK 8B
+  - id: OR8B       # OR 8B
     osm: 24342691
-  - id: OK8C       # OK 8C
+  - id: OR8C       # OR 8C
     osm: 24342761
-  - id: OK8D       # OK 8D
+  - id: OR8D       # OR 8D
     osm: 24342769
-  - id: OK8E       # OK 8E
+  - id: OR8E       # OR 8E
     osm: 24342775
 
 
