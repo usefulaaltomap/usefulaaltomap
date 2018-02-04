@@ -1139,6 +1139,7 @@ studentvillage:
     osm: 24334282
   - id: JVM11sw    # JMT 11 (south-west)
     osm: 24334286
+    # TODO: cafe peliluola
   - id: JMT11se    # JMT 11 (south-east)
     osm: 24332800
   - id: JMT9       # JMT 9
@@ -1151,23 +1152,25 @@ studentvillage:
     osm: 24333770
   - id: JVM6       # JMT 6
     osm: 24334231
-  - id: JMT5C      # JMT 5C
-    osm: 24333883
+    # TODO: yogurt place?
   - id: JMT5A      # JMT 5A
     osm: 24333899
-  - id: JMT5       # JMT 5
-    osm: 24333918
     # TODO: tatamisali, Dernecon, Gorsu
   - id: JMT5B      # JMT 5B
     osm: 24333934
+  - id: JMT5C      # JMT 5C
+    osm: 24333883
   - id: JMT3A      # JMT 3A
     osm: 24333970
+    # TODO: polytekkarimuseo
+    # TODO: hackerspace
   - id: JMT3B      # JMT 3B
     osm: 24334035
   - id: JMT3C      # JMT 3C
     osm: 24333952
   - id: JMT1       # JMT 1
     osm: 24334123
+    # TODO: Teekkarien autokerho TAK
   - id: OK20       # OK 20
     osm: 24334160
   - id: OR8A       # OR 8A
