@@ -439,6 +439,7 @@ for R in routes:
 if use_cache and os.path.exists('osm_raw_data.json'):
     r = json.loads(open('osm_raw_data.json').read())
 else:
+    assert all(map(lambda x: len(x)==2,osm_ways)), "some osm_ways not of form ['type','id']: %s" % str(list(filter(lambda x:len(x)!=2,osm_ways)))
     rquery = [ '%s(%s)%s'%(t,osmid, ';>' if t=='way' else '') for t, osmid in osm_ways ]
     rquery.append('node(60.1823,24.81394,60.1906,24.8338)[amenity=printer]')
     rquery.append('node(60.1823,24.81394,60.1906,24.8338)[room]')
