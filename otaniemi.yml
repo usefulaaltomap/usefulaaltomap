@@ -1102,6 +1102,85 @@ other:
     url: "http://sci.aalto.fi/en/departments/#eit"
 
 
+studentvillage:
+  - id: SMT10      # SMT 10
+    osm: 4266885
+  - id: SMT12n     # SMT 12 (north)
+    osm: 4266886
+  - id: SMT12      # SMT 12 (south)
+    osm: 4266887
+  - id: SK3B       # SK 3B
+    osm: 24342605
+  - id: SK3A       # SK 3A
+    osm: 4259186
+  - id: SK5B       # SK 5B
+    osm: 11074082
+  - id: SMT6       # SMT 6
+    osm: 4259184
+  - id: SMT8       # SMT 8
+    osm: 4266889
+  - id: SK1        # SK 1
+    osm: 4259185
+  - id: SK6        # SK 6
+    osm: 4259181
+  - id: SK2n       # SK 2 (north)
+    osm: 4259182
+  - id: SK2s       # SK 2 (south)
+    osm: 4259183
+  - id: SMT3       # SMT 3
+    osm: 4259187
+  - id: SMT1       # SMT 1
+    osm: 4259263
+  - id: JMV10      # JMV 10 (north)
+    osm: 24334281
+  - id: JMV11      # JMV 11 (north)
+    osm: 26139101
+  - id: JMV10      # JMV 10 (south)
+    osm: 24334282
+  - id: JVM11sw    # JMV 11 (south-west)
+    osm: 24334286
+  - id: JMV11se    # JMV 11 (south-east)
+    osm: 24332800
+  - id: JMV9       # JMV 9
+    osm: 24332799
+  - id: JVM7A      # JMV 7A
+    osm: 24333771
+  - id: JMV7C      # JMV 7C
+    osm: 24333796
+  - id: JMV7B      # JMV 7B
+    osm: 24333770
+  - id: JVM6       # JMV 6
+    osm: 24334231
+  - id: JMV5C      # JMV 5C
+    osm: 24333883
+  - id: JMV5A      # JMV 5A
+    osm: 24333899
+  - id: JMV5       # JMV 5
+    osm: 24333918
+    # TODO: tatamisali, Dernecon, Gorsu
+  - id: JMV5B      # JMV 5B
+    osm: 24333934
+  - id: JMV3A      # JMV 3A
+    osm: 24333970
+  - id: JMV3B      # JMV 3B
+    osm: 24334035
+  - id: JMV3C      # JMV 3C
+    osm: 24333952
+  - id: JMV1       # JMV 1
+    osm: 24334123
+  - id: OK20       # OK 20
+    osm: 24334160
+  - id: OK8A       # OR 8A
+    osm: 24342700
+  - id: OK8B       # OK 8B
+    osm: 24342691
+  - id: OK8C       # OK 8C
+    osm: 24342761
+  - id: OK8D       # OK 8D
+    osm: 24342769
+  - id: OK8E       # OK 8E
+    osm: 24342775
+
 
 redirects:
   cs-C105: T2

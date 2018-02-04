@@ -207,6 +207,12 @@ class Location():
         if 'address' in data:
             if data['address'].startswith('Otakaari '):
                 data['aliases'].append(data['address'].replace('Otakaari ', 'OK'))
+            if data['address'].startswith('Servin Maijan tie '):
+                data['aliases'].append(data['address'].replace('Servin Maijan tie ', 'SMT'))
+            if data['address'].startswith('Jämeräntaival '):
+                data['aliases'].append(data['address'].replace('Jämeräntaival ', 'JMV'))
+            if data['address'].startswith('Servinkuja '):
+                data['aliases'].append(data['address'].replace('Servinkuja ', 'SK'))
     def entrances(self):
         """Make list of entrances of this building.
 
@@ -312,6 +318,13 @@ for building in data.get('buildings', []):
         print(locations[-1].id, locations[-1].data)
 for building in data.get('other', []):
     L = Location(building)
+    print(L.id, L.data)
+    locations.append(L)
+    for child in building.get('children', []):
+        locations.append(Location(child, parent=L.id))
+        print(locations[-1].id, locations[-1].data)
+for building in data.get('studentvillage', []):
+    L = Location(building, type='studenthousing')
     print(L.id, L.data)
     locations.append(L)
     for child in building.get('children', []):
