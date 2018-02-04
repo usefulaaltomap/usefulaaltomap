@@ -203,16 +203,18 @@ class Location():
         update_matching(self.data, 'address*', names)
         return names
     def address_aliases(self, data):
-        if data['type'] != 'building': return {}
+        if data['type'] not in {'building', 'studenthousing'}: return {}
         if 'address' in data:
-            if data['address'].startswith('Otakaari '):
-                data['aliases'].append(data['address'].replace('Otakaari ', 'OK'))
-            if data['address'].startswith('Servin Maijan tie '):
-                data['aliases'].append(data['address'].replace('Servin Maijan tie ', 'SMT'))
-            if data['address'].startswith('Jämeräntaival '):
-                data['aliases'].append(data['address'].replace('Jämeräntaival ', 'JMV'))
-            if data['address'].startswith('Servinkuja '):
-                data['aliases'].append(data['address'].replace('Servinkuja ', 'SK'))
+            for replacement, name in [ ('OK', 'Otakaari'),
+                                       ('SMT', 'Servin Maijan tie'),
+                                       ('JMV', 'Jämeräntaival'),
+                                       ('SK', 'Servinkuja'),
+                                       ('OR', 'Otaranta'),
+                                     ]:
+                if data['address'].startswith('%s '%name):
+                    if 'aliases' not in data: data['aliases'] = [ ]
+                    data['aliases'].append(data['address'].replace(
+                                               '%s '%name, replacement))
     def entrances(self):
         """Make list of entrances of this building.
 
