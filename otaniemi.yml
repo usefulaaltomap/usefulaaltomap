@@ -88,12 +88,19 @@ buildings:
         name_sv: K flygeln Main
         osm: 540151861
         type: wing
+        routes:
+          - label: From outside
+            stages:
+              - instruction: Use the door to the south of the main entrance, up some exterior stairs
+                osm: way=27496989,way=239853844,node=5034222525
+          - label: From inside (main entrance), via 2nd floor
+            stages:
+              - instruction: Go up the stairs from the Alvari restaurant to the 2nd floor
+                osm: way=44953545,way=44953546
+              - instruction: Follow the corridor through to the end of H wing, down the stairs behind a door on your right
+                osm: way=44953547,way=515500708,way=515500711
         note: >-
-          This wing is almost impossible to find.  From the outside,
-          use the door to the south of the main entrance, (up some
-          exterior stairs).  From the inside, you have to go either up
-          or down from the Alvari restaurant, and connect from either
-          the 0th or 2nd floor.  Good luck!
+          This wing is almost impossible to find. Good luck!
         lore: >-
           Perhaps "K" stands for "Kirjaamo", or the Aalto Registry.
       - id: M
