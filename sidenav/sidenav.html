@@ -31,7 +31,7 @@
             
             <div ng-show="routeIdx && routeIdx==$routeIndex" id=route_{{object.id}}_{{$routeIndex}}>
               <div ng-repeat="s in r.stages track by $index">
-                - {{s.instruction}}
+                - <span ng-mouseover="$parent.selectedStage=$index;highlightStage($index)" ng-click="$parent.selectedStage=$index;highlightStage($index)" ng-style="{'font-weight': $parent.selectedStage==$index ? 'bold' : 'normal','color':$parent.selectedStage==$index ? 'black' : '#515A5A'}">{{s.instruction}}</span>
               </div>
             </div>
         </div>

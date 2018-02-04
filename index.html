@@ -145,20 +145,28 @@
         }
       }
 
-      mapS.zoomOnRoute = function(object,routeIdx){
+      mapS.zoomOnRoute = function(object, routeIdx){
         mapS.zoomOnObject(object);
+        mapS.drawRoute(object,routeIdx);
+      }
+      
+      mapS.drawRoute = function(object, routeIdx, activeStage=0){
         var rid=object.id+"_"+routeIdx;
-        var outline=mapS.routes[rid].outline;
+        var stage_outlines=mapS.routes[rid].outline;
         //ui-leaflet does not support - and numbers in id
         rid=rid.replace("-","_");
-        //TODO:use separate multipolyline for each stage instead, or concatenate in compile.py
-        outline.forEach(function(line,i){
-          mapS.map.paths[rid+"_"+i]={id:rid+"_"+i,data:object.routes[routeIdx],type:"polyline",color:"red",weight:3,latlngs:line.map(function(coords) {
-            return {
-              lat: coords[0],
-              lng: coords[1]
-              }})
-              };
+        stage_outlines.forEach(function(outline,i){
+            var linecol = i==activeStage ? "black" : "#515A5A";
+            var lwd = i==activeStage ? 8 : 5;
+            outline.forEach(function(line,j){
+              mapS.map.paths[rid+"_"+i+"_"+j]={id:rid+"_"+i+"_"+j,type:"polyline",color:linecol,weight:lwd,opacity:0.4,
+              latlngs:line.map(function(coords) {
+                return {
+                  lat: coords[0],
+                  lng: coords[1]
+                  }})
+                };
+            });
         });
       }
 

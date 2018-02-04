@@ -72,5 +72,10 @@ angular.module('usefulAaltoMap')
     return $scope.get_lang(object, 'url');
   }
 
+  $scope.highlightStage = function(activeStage){
+    mapService.drawRoute($scope.object,$scope.routeIdx,activeStage);
+  }
+
+  $scope.selectedStage=0;
 
 })

@@ -355,32 +355,33 @@ class Route():
     @property
     def osm_data_location(self):
         """OSM elements that have the location data (path or latlon)"""
-        #TODO: split by stage
         osm_elements = [ ]
         for S in self.data["stages"]:
             if 'osm' in S:
                 if isinstance(S['osm'], str) and ',' in S['osm']:
                   parts=S["osm"].split(",")
                   parts=list(map(lambda part: osm_data[int(part.split('=')[1])],parts))
-                  osm_elements.extend(parts)
+                  osm_elements.append(parts)
                 elif isinstance(S['osm'], str) and '=' in S['osm']:
-                    osm_elements.append(int(S['osm'].split('=')[1]))
+                    osm_elements.append([osm_data[int(S['osm'].split('=')[1])]])
                 else:
-                    osm_elements.append(osm_data[self.data['osm']])
+                    osm_elements.append([osm_data[self.data['osm']]])
         if osm_elements:
             return osm_elements
         return None
     @property
     def outline(self):
-        locdat_all = self.osm_data_location
         path=[]
-        for locdat in locdat_all:
-            if locdat['type'] != 'way':
-                continue
-            if 'nodes' in locdat:
-                nodes = [ (round(osm_data[n]['lat'], 6), round(osm_data[n]['lon'], 6))
-                         for n in locdat['nodes'] ]
-                path.append(nodes)
+        for stage in self.osm_data_location:
+            stage_path=[]
+            for locdat in stage:
+                if locdat['type'] != 'way':
+                    continue
+                if 'nodes' in locdat:
+                    nodes = [ (round(osm_data[n]['lat'], 6), round(osm_data[n]['lon'], 6))
+                             for n in locdat['nodes'] ]
+                    stage_path.append(nodes)
+            path.append(stage_path)
         return path
 
 
