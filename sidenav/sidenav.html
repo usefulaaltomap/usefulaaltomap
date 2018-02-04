@@ -25,7 +25,7 @@
       <div style="font-size: 75%" ng-show="object.routes && object.routes.length">
         <b>Getting here:</b>
         <div ng-repeat="r in object.routes track by $index" ng-init="$routeIndex = $index">
-          * <a ng-click="routeIdx && routeIdx==$routeIndex  ? goToState('app.selectedObject',{objectId:object.id,routeIdx: ''}) : goToState('app.selectedObject',{objectId:object.id,routeIdx: $routeIndex})" href="">
+          * <a ng-click="routeIdx && routeIdx==$routeIndex  ? goToState('app.selectedObject',{objectId:object.id,routeIdx: null}) : goToState('app.selectedObject',{objectId:object.id,routeIdx: $routeIndex})" href="">
             {{r.label}}
             </a>
             

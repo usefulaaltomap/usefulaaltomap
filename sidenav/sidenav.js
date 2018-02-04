@@ -5,7 +5,7 @@ angular.module('usefulAaltoMap')
   $scope.objects = mapService.data;
 
   $scope.object = object;
-  $scope.routeIdx = routeIdx;
+  $scope.routeIdx = routeIdx.value === null ? false : routeIdx.value;
 
   $scope.get_lang = utils.get_lang;
 
@@ -29,7 +29,7 @@ angular.module('usefulAaltoMap')
 
   $timeout(function() {
     //TODO: avoid animated menu when changing route
-  	routeIdx ? mapService.zoomOnRoute(object,routeIdx) : mapService.zoomOnObject(object);
+  	routeIdx.value === null ? mapService.zoomOnObject(object) : mapService.zoomOnRoute(object,routeIdx.value);
   	
   	$mdSidenav('left').open();
 

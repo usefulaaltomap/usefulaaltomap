@@ -100,11 +100,14 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
     controller: 'sidenavController',
     url: '/select/:objectId/:routeIdx?',
     params:{
-      routeIdx:""
+      routeIdx:{
+        value:null,
+        squash:true
+      }
     },
     resolve: {
       routeIdx: function($stateParams) {
-        return($stateParams.routeIdx);
+        return({value:$stateParams.routeIdx});
       },
       object: function($stateParams, mapService, $q, $state, $timeout) {
 
