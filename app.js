@@ -62,6 +62,8 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
               })
               // Redirections
               mapService.redirects = res.data.redirects;
+              // Routes
+              mapService.routes = res.data.routes;
               // Add objects to map
               angular.forEach(mapService.data, function(d) {
                 switch (d.type) {

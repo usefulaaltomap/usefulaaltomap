@@ -145,6 +145,23 @@
         }
       }
 
+      mapS.zoomOnRoute = function(object,routeIdx){
+        mapS.zoomOnObject(object);
+        var rid=object.id+"_"+routeIdx;
+        var outline=mapS.routes[rid].outline;
+        //ui-leaflet does not support - and numbers in id
+        rid=rid.replace("-","_");
+        //TODO:use separate multipolyline for each stage instead, or concatenate in compile.py
+        outline.forEach(function(line,i){
+          mapS.map.paths[rid+"_"+i]={id:rid+"_"+i,data:object.routes[routeIdx],type:"polyline",color:"red",weight:3,latlngs:line.map(function(coords) {
+            return {
+              lat: coords[0],
+              lng: coords[1]
+              }})
+              };
+        });
+      }
+
       mapS.clearHighlights = function() {
         // Remove any current paths which are not in the "default
         // objects" set.
