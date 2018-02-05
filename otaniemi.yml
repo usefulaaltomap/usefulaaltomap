@@ -145,8 +145,8 @@ buildings:
       - name: Kvarkki
         osm: node=577022359
         type: restaurant
-  # ELEC building
-  - id: r004
+  # A grid / ELEC building
+  - id: agrid
     osm: 24342454
     aliases: [R004, A-grid, Vanha Sähkötekniikka, Old Electrical Engineering]
     label: A Grid
@@ -156,6 +156,10 @@ buildings:
       new start-up hub, "A Grid", and the old Electrical Engineering
       departments mostly moved to other places.
     children:
+      #- name: # opening August 2018
+      #  type: restaurant
+      #  id:
+      #  osm: node=5012868028
       - name: Elepaja
         id: elepaja
         room: I131
@@ -166,6 +170,99 @@ buildings:
         type: unit
         latlon: [60.1887, 24.8313]
         url: http://acousticslab.aalto.fi/en/
+      - name: Tapaus
+        id: agrid-tapaus
+        type: unit
+        parents: [agrid-CN]
+        level: 1
+        url: https://www.tapaus.fi/
+      - name: A Grid Impact
+        id: agrid-agridimpact
+        type: unit
+        parents: [agrid-CN]
+        level: 2
+      - name: United Nations Technology Innovanion Labs
+        id: agrid-until
+        aliases: [UNTIL, ]
+        type: unit
+        parents: [agrid-CN]
+        level: 0
+      - name: Aalto Start-up center
+        id: agrid-startupcenter
+        type: unit
+        parents: [agrid-CS]
+        url: https://startupcenter.aalto.fi/
+      - name: European Space Agency
+        id: agrid-esa
+        aliases: [ESA, ]
+        type: unit
+        parents: [agrid-CS]
+        level: 2
+      # A grid wings
+      - id: agrid-A
+        name_en: A wing (A Grid)
+        osm: 97545820
+        type: wing
+      - id: agrid-B
+        name_en: B wing (A Grid)
+        osm: 558799732
+        type: wing
+      - id: agrid-CN
+        name_en: CN wing (A Grid)
+        osm: 558799726
+        type: wing
+      - id: agrid-CS
+        name_en: CS wing (A Grid)
+        osm: 558799727
+        type: wing
+      - id: agrid-D
+        name_en: D wing (A Grid)
+        osm: 558799725
+        type: wing
+      - id: agrid-EN
+        name_en: EN wing (A Grid)
+        osm: 558799722
+        type: wing
+      - id: agrid-ES
+        name_en: ES wing (A Grid)
+        osm: 558799724
+        type: wing
+      - id: agrid-K
+        name_en: K wing (A Grid)
+        osm: 558799723
+        type: wing
+      - id: agrid-F
+        name_en: F wing (A Grid)
+        osm: 24342449
+        type: wing
+      - id: agrid-GN
+        name_en: GN wing (A Grid)
+        osm: 558799720
+        type: wing
+      - id: agrid-GS
+        name_en: GS wing (A Grid)
+        osm: 558799719
+        type: wing
+      - id: agrid-H
+        name_en: H wing (A Grid)
+        osm: 558799718
+        type: wing
+      - id: agrid-IS
+        name_en: IS wing (A Grid)
+        osm: 558799717
+        type: wing
+      - id: agrid-I
+        name_en: I wing (A Grid)
+        osm: 558799716
+        type: wing
+      #- id: agrid-J              # This is a corridor - add later maybe?
+      #  name_en: J wing A Grid
+      #  osm:
+      #  type: wing
+      - id: agrid-L
+        name_en: L wing (A Grid)
+        osm: 24342453
+        type: wing
   # K4, Sähkömiehentie 4
   - id: K4
     osm: 7584026
@@ -416,7 +513,10 @@ buildings:
       - name: Studio Kipsari
         type: restaurant
         id: studiokipsari
-        # osm: node=...
+        osm: node=5389688262
+      - name: ELO Film School Helsinki
+        type: unit
+        id: elofilmschoolhelsinki
   # CS
   - id: T
     label: "CS / T"
@@ -765,7 +865,7 @@ other:
     name_sv: Högskolan för elektroteknik
     aliases: [ELEC]
     type: school
-    parents: [r004, oih, tuas, r036, ]
+    parents: [agrid-K, oih, tuas, r036, ]
     url_en: http://elec.aalto.fi/en/
     url_fi: http://elec.aalto.fi/fi/
     url_sv: http://elec.aalto.fi/sv/
@@ -995,7 +1095,7 @@ other:
     name_fi: Signaalinkäsittelyn ja akustiikan laitos
     name_sv: Institutionen för signalbehandling och akustik
     type: department
-    parents: [T, r004, tuas, F, ELEC]
+    parents: [T, agrid, tuas, F, ELEC]
     url_en: http://spa.aalto.fi/en/
     url_fi: http://spa.aalto.fi/fi/
   - id: dept:comnet
