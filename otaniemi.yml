@@ -1285,6 +1285,8 @@ studentvillage:
   - id: JMT1       # JMT 1
     osm: 24334123
     # TODO: Teekkarien autokerho TAK
+  - id: OK18       # OK 18 / Ossin Linna
+    osm: 4259264
   - id: OK20       # OK 20
     osm: 24334160
   - id: OR8A       # OR 8A
