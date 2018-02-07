@@ -229,7 +229,12 @@ class Location():
         if self.data['type'] != 'building': return
         entrances = [ ]
         entrances_objects = [ ]
-        for n in way['nodes']:
+        path = matplotlib.path.Path(self.outline)
+        enclosed_entrances = filter(lambda obj:'tags' in obj and obj['type'] == 'node' and 'entrance' in obj['tags'] and path.contains_point((obj['lat'], obj['lon'])),r['elements'])
+        enclosed_entrances = map(lambda obj: obj['id'], enclosed_entrances)
+        nodes = list(way['nodes'])
+        nodes.extend(enclosed_entrances)
+        for n in nodes :
             if 'tags' not in osm_data[n]:
                 continue
             tags = osm_data[n]['tags']
@@ -358,6 +363,7 @@ else:
     rquery = [ '%s(%s)%s'%(t,osmid, ';>' if t=='way' else '') for t, osmid in osm_ways ]
     rquery.append('node(60.1823,24.81394,60.1906,24.8338)[amenity=printer]')
     rquery.append('node(60.1823,24.81394,60.1906,24.8338)[room]')
+    rquery.append('node(60.1823,24.81394,60.1906,24.8338)[entrance]')
 
     rcommand = "[out:json];(%s);out;"%(";".join(rquery))
     r = requests.get('http://overpass-api.de/api/interpreter',
