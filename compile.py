@@ -361,8 +361,8 @@ for L in locations:
     if osm_data is not None:
         osm_ways.extend(osm_data)
 # Download and cache it
-if use_cache and os.path.exists('osm_raw_data.json'):
-    r = json.loads(open('osm_raw_data.json').read())
+if use_cache and os.path.exists('raw/osm_raw_data.json'):
+    r = json.loads(open('raw/osm_raw_data.json').read())
 else:
     rquery = [ '%s(%s)%s'%(t,osmid, ';>' if t=='way' else '') for t, osmid in osm_ways ]
     rquery.append('node(60.1823,24.81394,60.1906,24.8338)[amenity=printer]')
@@ -375,7 +375,7 @@ else:
     if r.status_code != 200:
         print(rcommand)
         raise RuntimeError("HTTP failure: %s %s"%(r.status_code, r.reason))
-    open('osm_raw_data.json', 'w').write(r.text)
+    open('raw/osm_raw_data.json', 'w').write(r.text)
     try:
         r = r.json()
     except:
