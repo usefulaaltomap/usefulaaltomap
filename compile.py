@@ -6,6 +6,7 @@ import os
 import re
 import sys
 
+import matplotlib.path
 import requests
 import yaml
 
@@ -234,7 +235,7 @@ class Location():
         enclosed_entrances = map(lambda obj: obj['id'], enclosed_entrances)
         nodes = list(way['nodes'])
         nodes.extend(enclosed_entrances)
-        for n in nodes :
+        for n in nodes:
             if 'tags' not in osm_data[n]:
                 continue
             tags = osm_data[n]['tags']
@@ -387,7 +388,6 @@ for elem in r['elements']:
 # rooms
 def find_containing_building(latlon):
     """Find the building that contains item"""
-    import matplotlib.path
     for building in locations:
         if building.data['type'] != 'building': continue
         path = matplotlib.path.Path(building.outline)
