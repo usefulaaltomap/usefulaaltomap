@@ -235,7 +235,9 @@ class Location():
         enclosed_entrances = map(lambda obj: obj['id'], enclosed_entrances)
         nodes = list(way['nodes'])
         nodes.extend(enclosed_entrances)
+        seen_entrances = set()
         for n in nodes:
+            if n in seen_entrances: continue
             if 'tags' not in osm_data[n]:
                 continue
             tags = osm_data[n]['tags']
@@ -282,6 +284,7 @@ class Location():
                             )
             if is_private: yamldata['access'] = 'private'
             ent = Location(yamldata, type='entrance', parent=self.id)
+            seen_entrances.add(n)
             entrances_objects.append(ent)
         return entrances, entrances_objects
     @property
