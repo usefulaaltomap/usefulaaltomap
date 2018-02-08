@@ -145,6 +145,31 @@
         }
       }
 
+      mapS.zoomOnRoute = function(object, routeIdx){
+        mapS.zoomOnObject(object);
+        mapS.drawRoute(object,routeIdx);
+      }
+      
+      mapS.drawRoute = function(object, routeIdx, activeStage=0){
+        var rid=object.id+"_"+routeIdx;
+        var stage_outlines=mapS.routes[rid].outline;
+        //ui-leaflet does not support - and numbers in id
+        rid=rid.replace("-","_");
+        stage_outlines.forEach(function(outline,i){
+            var linecol = i==activeStage ? "black" : "#515A5A";
+            var lwd = i==activeStage ? 8 : 5;
+            outline.forEach(function(line,j){
+              mapS.map.paths[rid+"_"+i+"_"+j]={id:rid+"_"+i+"_"+j,type:"polyline",color:linecol,weight:lwd,opacity:0.4,
+              latlngs:line.map(function(coords) {
+                return {
+                  lat: coords[0],
+                  lng: coords[1]
+                  }})
+                };
+            });
+        });
+      }
+
       mapS.clearHighlights = function() {
         // Remove any current paths which are not in the "default
         // objects" set.

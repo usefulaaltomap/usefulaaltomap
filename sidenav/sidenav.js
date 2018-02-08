@@ -1,11 +1,11 @@
 angular.module('usefulAaltoMap')
-.controller('sidenavController', function($scope, mapService, $state, $mdSidenav, $timeout, utils, object) {
+.controller('sidenavController', function($scope, mapService, $state, $mdSidenav, $timeout, utils, object, routeIdx) {
 
 
   $scope.objects = mapService.data;
 
   $scope.object = object;
-  
+  $scope.routeIdx = routeIdx.value === null ? false : routeIdx.value;
 
   $scope.get_lang = utils.get_lang;
 
@@ -19,13 +19,17 @@ angular.module('usefulAaltoMap')
   if (name != name_sv && name_sv != name_fi && name_sv != name_en)
     $scope.name_sv = utils.get_lang(object, 'name', 'sv');
 
+  $scope.goToState = function(stateName, params) {
+    $state.go(stateName, params);
+  }
 
   $scope.selectChild = function(id) {
 
   }
 
   $timeout(function() {
-  	mapService.zoomOnObject(object)
+    //TODO: avoid animated menu when changing route
+  	routeIdx.value === null ? mapService.zoomOnObject(object) : mapService.zoomOnRoute(object,routeIdx.value);
   	
   	$mdSidenav('left').open();
 
@@ -68,5 +72,10 @@ angular.module('usefulAaltoMap')
     return $scope.get_lang(object, 'url');
   }
 
+  $scope.highlightStage = function(activeStage){
+    mapService.drawRoute($scope.object,$scope.routeIdx,activeStage);
+  }
+
+  $scope.selectedStage=0;
 
 })

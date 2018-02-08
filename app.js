@@ -62,6 +62,8 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
               })
               // Redirections
               mapService.redirects = res.data.redirects;
+              // Routes
+              mapService.routes = res.data.routes;
               // Add objects to map
               angular.forEach(mapService.data, function(d) {
                 switch (d.type) {
@@ -96,8 +98,17 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
   .state('app.selectedObject', {
     templateUrl: '/sidenav/sidenav.html',
     controller: 'sidenavController',
-    url: '/select/:objectId',
+    url: '/select/:objectId/:routeIdx?',
+    params:{
+      routeIdx:{
+        value:null,
+        squash:true
+      }
+    },
     resolve: {
+      routeIdx: function($stateParams) {
+        return({value:$stateParams.routeIdx});
+      },
       object: function($stateParams, mapService, $q, $state, $timeout) {
 
         var objId = $stateParams.objectId;

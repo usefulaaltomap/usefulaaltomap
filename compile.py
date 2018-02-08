@@ -79,6 +79,7 @@ class Location():
         update_maybe(self.data, 'children', data)
         update_maybe(self.data, 'lore', data)
         update_maybe(self.data, 'note', data)
+        update_maybe(self.data, 'routes', data)
         update_maybe(self.data, 'opening_hours', data)
         update_maybe(self.data, 'ref', data)
         update_maybe(self.data, 'nosearch', data)
@@ -320,6 +321,79 @@ class Location():
         return (0, self.data.get('name', ''))
 
 
+# Class for routes to Locations
+class Route():
+    """Holds routes composed of OSM ways and nodes"""
+    def __init__(self, loc, routeIdx,type=None, parent=None):
+        self.targetLocation = loc
+        self.routeIdx=routeIdx
+        self.data=self.targetLocation.data['routes'][self.routeIdx]
+    def __repr__(self):
+        return '%s(objectid=%s,routeIdx=%d)'%(self.__class__.__name__, self.id,self.routeIdx)
+    @property
+    def id(self):
+        return str(self.targetLocation.id)+"_"+str(self.routeIdx)
+    def json(self):
+        data= dict(
+            objectId=self.targetLocation.id,
+            routeIdx=self.routeIdx
+            )
+        if self.outline: data['outline'] = self.outline
+        if self.osm_elements():
+            data['osm_elements'] = [(t.replace('rel', 'relation'), v)
+                                    for t,v in self.osm_elements()]
+        return data
+
+    # Getter methods
+    def osm_elements(self):
+        """Used when downloading OSM data"""
+        osm_elements = [ ]
+        for S in self.data["stages"]:
+            if 'osm' in S:
+                if isinstance(S['osm'], str) and ',' in S['osm']:
+                  parts=S["osm"].split(",")
+                  parts=list(map(lambda part: part.split('='),parts))
+                  osm_elements.extend(parts)
+                elif isinstance(S['osm'], str) and '=' in S['osm']:
+                    osm_elements.append(S['osm'].split('='))
+                else:
+                    osm_elements.append(('way', S['osm']))
+        if osm_elements:
+            return osm_elements
+        return None
+    @property
+    def osm_data_location(self):
+        """OSM elements that have the location data (path or latlon)"""
+        osm_elements = [ ]
+        for S in self.data["stages"]:
+            if 'osm' in S:
+                if isinstance(S['osm'], str) and ',' in S['osm']:
+                  parts=S["osm"].split(",")
+                  parts=list(map(lambda part: osm_data[int(part.split('=')[1])],parts))
+                  osm_elements.append(parts)
+                elif isinstance(S['osm'], str) and '=' in S['osm']:
+                    osm_elements.append([osm_data[int(S['osm'].split('=')[1])]])
+                else:
+                    osm_elements.append([osm_data[self.data['osm']]])
+        if osm_elements:
+            return osm_elements
+        return None
+    @property
+    def outline(self):
+        path=[]
+        for stage in self.osm_data_location:
+            stage_path=[]
+            for locdat in stage:
+                if locdat['type'] != 'way':
+                    continue
+                if 'nodes' in locdat:
+                    nodes = [ (round(osm_data[n]['lat'], 6), round(osm_data[n]['lon'], 6))
+                             for n in locdat['nodes'] ]
+                    stage_path.append(nodes)
+            path.append(stage_path)
+        return path
+
+
 # assemble locations
 locations = [ ]
 for building in data.get('buildings', []):
@@ -352,6 +426,11 @@ for L in locations:
     for L_parent_id in L.data.get('parents', []):
         locations_lookup[L_parent_id].data['children'].append(L.id)
 
+# assemble routes
+routes = [ ]
+for L in locations:
+  for idx,R in enumerate(L.data.get('routes',[])):
+    routes.append(Route(L,idx))
 
 
 # Find the OSM data that needs downloading
@@ -360,10 +439,16 @@ for L in locations:
     osm_data = L.osm_elements()
     if osm_data is not None:
         osm_ways.extend(osm_data)
+for R in routes:
+    osm_data = R.osm_elements()
+    if osm_data is not None:
+        osm_ways.extend(osm_data)
+
 # Download and cache it
 if use_cache and os.path.exists('osm_raw_data.json'):
     r = json.loads(open('osm_raw_data.json').read())
 else:
+    assert all(map(lambda x: len(x)==2,osm_ways)), "some osm_ways not of form ['type','id']: %s" % str(list(filter(lambda x:len(x)!=2,osm_ways)))
     rquery = [ '%s(%s)%s'%(t,osmid, ';>' if t=='way' else '') for t, osmid in osm_ways ]
     rquery.append('node(60.1823,24.81394,60.1906,24.8338)[amenity=printer]')
     rquery.append('node(60.1823,24.81394,60.1906,24.8338)[room]')
@@ -375,7 +460,7 @@ else:
     if r.status_code != 200:
         print(rcommand)
         raise RuntimeError("HTTP failure: %s %s"%(r.status_code, r.reason))
-    open('osm_raw_data.json', 'w').write(r.text)
+    open('osm_raw_data.json', 'w',encoding='utf-8').write(r.text)
     try:
         r = r.json()
     except:
@@ -490,9 +575,14 @@ for L in locations:
     print(L.id)
     newdata.append(L.json())
 
+newroutedata = {}
+for R in routes:
+    print(R)
+    newroutedata[R.id]=R.json()
 
 newdata = dict(
     locations=newdata,
+    routes=newroutedata,
     redirects=data['redirects'],
     search=[],
     )
