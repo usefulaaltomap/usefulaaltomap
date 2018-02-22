@@ -54,7 +54,7 @@
       </div>
       <div ng-show="object.latlon" style="font-size: 75%"><b>Directions</b>:
 	<a href="https://www.openstreetmap.org/directions?engine=graphhopper_foot&route=%3B{{ object.latlon[0] }}%2C{{ object.latlon[1] }}">OpenStreetMap (Foot/bike/car)</a>,
-	<a href="https://www.reittiopas.fi/reitti/%20/{{ get_lang(object, 'name') }}%3A%3A{{ object.latlon[0] }}%2C{{ object.latlon[1] }}">Public Transit (HSL)</a>,
+	<a href="https://www.reittiopas.fi/reitti/Aalto-yliopiston%20metroasema%2C%20Espoo%3A%3A60.1846%2C24.82554/{{ get_lang(object, 'name') }}%3A%3A{{ object.latlon[0] }}%2C{{ object.latlon[1] }}">Public Transit (HSL)</a>,
 	<!-- <a href="https://www.reittiopas.fi/reitti/%20/{{ Math.floor(object.latlon[0]*100000) }}%2C{{ Math.floor(object.latlon[1]*100000) }}">Bike (HSL)</a>, -->
 	<a href="https://www.google.fi/maps/dir//{{ object.latlon[0] }},{{ object.latlon[1] }}/">Google</a>
       </div>
