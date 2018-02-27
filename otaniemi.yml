@@ -1227,6 +1227,8 @@ studentvillage:
     osm: 24342605
   - id: SK3A       # SK 3A
     osm: 4259186
+  - id: SK5A       # SK 5A
+    osm: 4266888
   - id: SK5B       # SK 5B
     osm: 11074082
   - id: SMT6       # SMT 6
@@ -1245,11 +1247,11 @@ studentvillage:
     osm: 4259187
   - id: SMT1       # SMT 1
     osm: 4259263
-  - id: JMT10      # JMT 10 (north)
+  - id: JMT10n     # JMT 10 (north)
     osm: 24334281
   - id: JMT11n     # JMT 11 (north)
     osm: 26139101
-  - id: JMT10      # JMT 10 (south)
+  - id: JMT10s     # JMT 10 (south)
     osm: 24334282
   - id: JVM11sw    # JMT 11 (south-west)
     osm: 24334286
