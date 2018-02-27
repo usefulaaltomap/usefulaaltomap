@@ -26,7 +26,7 @@ angular.module('usefulAaltoMap')
 
   $timeout(function() {
   	mapService.zoomOnObject(object)
-  	
+
   	$mdSidenav('left').open();
 
 	$mdSidenav('left').onClose(function () {
@@ -36,31 +36,42 @@ angular.module('usefulAaltoMap')
 	});
   })
 
+    // This function tests for building or building-like objects.
+    function isBuilding(obj) {
+	//return $scope.objects[obj].type == 'building' || $scope.objects[obj].type == 'wing';
+	//return ['building', 'wing', 'studenthousing'].index($scope.objects[obj].type);
+	return $scope.objects[obj].type in {'building':1, 'wing':1, 'studenthousing':1};
+    }
+    // Remove all non-buildings from a list.
+    function filterNonBuildings(lst) {
+	return lst.filter(function(x) { return !isBuilding(x) })
+    }
+
   $scope.selectContains = function(object) {
       if (object.children == null) return [];
       return object.children.filter( function (c) {
-	  return c in $scope.objects && ($scope.objects[c].parents == null || $scope.objects[c].parents.length <= 1)
+	  return c in $scope.objects && ($scope.objects[c].parents == null || filterNonBuildings($scope.objects[c].parents).length <= 1)
       } )
   }
 
   $scope.selectContainsPartOf = function(object) {
       if (object.children == null) return [];
       return object.children.filter( function (c) {
-	  return c in $scope.objects && ($scope.objects[c].parents != null && $scope.objects[c].parents.length > 1)
+	  return c in $scope.objects && ($scope.objects[c].parents != null && filterNonBuildings($scope.objects[c].parents).length > 1)
       } )
   }
 
   $scope.selectContainedIn = function(object) {
       if (object.parents == null) return [];
       return object.parents.filter( function (p) {
-	  return p in $scope.objects && $scope.objects[p].type == 'building'
+	  return p in $scope.objects && isBuilding(p)
       } )
   }
 
   $scope.selectPartOf = function(object) {
       if (object.parents == null) return [];
       return object.parents.filter( function (p) {
-	  return p in $scope.objects && $scope.objects[p].type != 'building'
+	  return p in $scope.objects && ! isBuilding(p)
       } )
   }
 
