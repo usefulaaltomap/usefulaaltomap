@@ -26,6 +26,15 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
           initApp: function($http, mapService, utils) {
 
             function addBuilding(d) {
+              fillColor = 'red';
+              switch (d.type) {
+                case 'studenthousing':
+                  fillColor = 'purple';
+		break;
+                case 'otherbuilding':
+                  fillColor = 'grey';
+		break;
+              }
               if (d.outline) {
                 message = utils.get_lang(d, "name")
                 if (d.aliases && d.aliases.length > 0)
@@ -37,7 +46,7 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
                   clickable: true,
                   weight: BUILDING_DEFAULT_OUTLINE_WEIGHT,
                   fill: true,
-                  fillColor: 'red',
+                  fillColor: fillColor,
                   fillOpacity: BUILDING_DEFAULT_FILL_OPACITY,
                   latlngs: d.outline.map(function(coords) {
                     return {
@@ -66,6 +75,14 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
               angular.forEach(mapService.data, function(d) {
                 switch (d.type) {
                   case 'building':
+                    addBuilding(d);
+		    mapService.defaultObjects[d.id] = true;
+                    break;
+                  case 'studenthousing':
+                    addBuilding(d);
+		    mapService.defaultObjects[d.id] = true;
+                    break;
+                  case 'otherbuilding':
                     addBuilding(d);
 		    mapService.defaultObjects[d.id] = true;
                     break;

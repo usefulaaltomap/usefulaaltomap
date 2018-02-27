@@ -202,6 +202,9 @@ class Location():
             if 'name:sv' in osm['tags']:  names['name_sv'] = osm['tags']['name:sv'].replace('Aalto ', '')
             if 'addr:street' in osm['tags']:
                 names['address'] = " ".join((osm['tags']['addr:street'], osm['tags']['addr:housenumber']))
+                if 'addr:unit' in osm['tags']: names['address'] += ' '+osm['tags']['addr:unit']
+            if len({'name', 'name_en', 'name_sv', 'name_fi'} & names.keys()) == 0 and 'address' in names:
+                names['name'] = names['address']
         update_matching(self.data, 'name*', names)
         update_matching(self.data, 'address*', names)
         return names
