@@ -38,7 +38,7 @@ class Location():
     """This class will handle most logic of locations"""
     def __init__(self, yamldata, type=None, parent=None):
         self.data = yamldata.copy()
-        if type: self.data['type'] = type
+        if type and 'type' not in self.data: self.data['type'] = type
         self.data.setdefault('parents', [])
         if isinstance(parent, (list,tuple)):
             self.data['parents'].extend(parent)
@@ -399,6 +399,15 @@ def find_containing_building(latlon):
         path = matplotlib.path.Path(building.outline)
         if path.contains_point(latlon):
             return building
+def find_containing_objects(latlon):
+    """Find the building that contains item"""
+    contained_in = [ ]
+    for building in locations:
+        if building.data['type'] not in {'building', 'studenthousing', 'wing'}: continue
+        path = matplotlib.path.Path(building.outline)
+        if path.contains_point(latlon):
+            contained_in.append(building)
+    return contained_in
 # Rooms
 for obj in r['elements']:
     if 'tags' in obj and obj['type'] == 'node' and obj['tags'].get('room') == 'class':
@@ -430,7 +439,7 @@ for obj in r['elements']:
         update_maybe(tags, 'description', yamldata, 'note')
         if 'ref' in tags:
             yamldata['aliases'] = [tags['ref']]
-        room = Location(yamldata, type='room', parent=building.id)
+        room = Location(yamldata, type='room', parent=[x.id for x in find_containing_objects((obj['lat'], obj['lon'])) ])
         building.data['children'].append(room.id)
         locations.append(room)
         locations_lookup[yamldata['id']] = room

@@ -355,6 +355,7 @@ buildings:
   - id: r014
     osm: 7588741
     aliases: [R014]
+    type: otherbuilding
   - id: kirjasto
     osm: 4252948
     aliases: [R015, Aalto-yliopiston kirjasto, Main Library, Learning Center,
@@ -431,6 +432,7 @@ buildings:
     name_en: Otaniemi shopping center
     label: Shops
     label_fi: Kaupat
+    type: auxbuilding
     children:
       # Alepa
       - id: alepa
@@ -465,6 +467,7 @@ buildings:
   - id: r022
     osm: 26608151
     aliases: [R022]
+    type: otherbuilding
     #label: Admin
     #children:   # closed 2017 when admin moved to dipoli
     #  - name: Calori
@@ -499,6 +502,7 @@ buildings:
     osm: 4259272
     aliases: [R028]
     label: Otahalli
+    type: auxbuilding
     children:
       - name: Unisport
         type: service
@@ -697,6 +701,7 @@ buildings:
     osm: 181643549
     label: Aalto Inn
     aliases: [R041]
+    type: auxbuilding
     lore: >-
       This is basically a long-term residence for Aalto-affiliated
       visitors.  Booking through your departments.
@@ -707,29 +712,40 @@ buildings:
     name: Ylioppilaiden terveydenhoitosäätiö
     name_sv: Studenternas hälsovårdsstiftelse
     name_en: Finnish Student Health Service
+    type: auxbuilding
   # Chappel
   - id: chappel
     osm: 4266572
     aliases: [R043]
+    type: auxbuilding
   # Servin Mökki
   - id: servinmokki
     osm: 4259265
     aliases: [R044]
     Label: Smökki
+    type: auxbuilding
   # Rantasauna
   - id: rantasauna
     osm: 26139146
     aliases: [R045]
+    type: auxbuilding
   # Radisson blu
   - id: radisonblu
     name: Radisson Blu
     label: Radisson Blu
     osm: 4259289
     aliases: [R056]
+    type: auxbuilding
     children:
       - id: ravintolaranta
         osm: node=2071892285
         type: restaurant
+  # Valimo
+  - id: r059
+    name: Valimo
+    label: Valimo
+    osm: 7588897
+    type: auxbuilding
   # Väre
   - id: r067
     osm: 402618642
@@ -802,6 +818,7 @@ other:
     name: Valimo
     osm: node=4840360721
     type: restaurant
+    parents: [r059]
   - id: itservicedesks
     name: IT Service Desks
     name_fi: IT Käyttäjäpalvelut
@@ -812,10 +829,12 @@ other:
     osm: node=5012868031
     type: service
     note: Aalto-provided health services for staff are in the other Terveystalo location.
+    parents: [maari]
   - id: terveystalo2
     name: Terveystalo Metallimiehenkuja
     osm: node=5020264817
     type: service
+    parents: [r059]
   - id: convroom
     osm: 515942280
     type: service
