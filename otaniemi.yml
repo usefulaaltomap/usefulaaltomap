@@ -1242,13 +1242,13 @@ studentvillage:
     osm: 4266886
   - id: SMT12s     # SMT 12 (south)
     osm: 4266887
-  - id: SK3B       # SK 3B
+  - id: SK3b       # SK 3B
     osm: 24342605
-  - id: SK3A       # SK 3A
+  - id: SK3a       # SK 3A
     osm: 4259186
-  - id: SK5A       # SK 5A
+  - id: SK5a       # SK 5A
     osm: 4266888
-  - id: SK5B       # SK 5B
+  - id: SK5b       # SK 5B
     osm: 11074082
   - id: SMT6       # SMT 6
     osm: 4259184
@@ -1279,29 +1279,29 @@ studentvillage:
     osm: 24332800
   - id: JMT9       # JMT 9
     osm: 24332799
-  - id: JVM7A      # JMT 7A
+  - id: JVM7a      # JMT 7A
     osm: 24333771
-  - id: JMT7C      # JMT 7C
+  - id: JMT7c      # JMT 7C
     osm: 24333796
-  - id: JMT7B      # JMT 7B
+  - id: JMT7b      # JMT 7B
     osm: 24333770
   - id: JVM6       # JMT 6
     osm: 24334231
     # TODO: yogurt place?
-  - id: JMT5A      # JMT 5A
+  - id: JMT5a      # JMT 5A
     osm: 24333899
     # TODO: tatamisali, Dernecon, Gorsu
-  - id: JMT5B      # JMT 5B
+  - id: JMT5b      # JMT 5B
     osm: 24333934
-  - id: JMT5C      # JMT 5C
+  - id: JMT5c      # JMT 5C
     osm: 24333883
-  - id: JMT3A      # JMT 3A
+  - id: JMT3a      # JMT 3A
     osm: 24333970
     # TODO: polytekkarimuseo
     # TODO: hackerspace
-  - id: JMT3B      # JMT 3B
+  - id: JMT3b      # JMT 3B
     osm: 24334035
-  - id: JMT3C      # JMT 3C
+  - id: JMT3c      # JMT 3C
     osm: 24333952
   - id: JMT1       # JMT 1
     osm: 24334123
@@ -1310,15 +1310,15 @@ studentvillage:
     osm: 4259264
   - id: OK20       # OK 20
     osm: 24334160
-  - id: OR8A       # OR 8A
+  - id: OR8a       # OR 8A
     osm: 24342700
-  - id: OR8B       # OR 8B
+  - id: OR8b       # OR 8B
     osm: 24342691
-  - id: OR8C       # OR 8C
+  - id: OR8c       # OR 8C
     osm: 24342761
-  - id: OR8D       # OR 8D
+  - id: OR8d       # OR 8D
     osm: 24342769
-  - id: OR8E       # OR 8E
+  - id: OR8e       # OR 8E
     osm: 24342775
 
 
