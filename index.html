@@ -145,6 +145,29 @@
         }
       }
 
+      mapS.resetColors = function(p) {
+        fillColor = 'red';
+        weight = BUILDING_DEFAULT_OUTLINE_WEIGHT;
+        //console.log("XXXXXX" + p.toString());
+        switch (mapS.data[p.id.replace(/-/g,'_h_').replace(/\./g,'_p_')].type) {
+          case 'studenthousing':
+            fillColor = 'purple';
+            weight = BUILDING_DEFAULT_OUTLINE_WEIGHT/3;
+            break;
+          case 'auxbuilding':
+            fillColor = 'blue';
+            weight = BUILDING_DEFAULT_OUTLINE_WEIGHT/2;
+            break;
+          case 'otherbuilding':
+            fillColor = 'grey';
+            weight = BUILDING_DEFAULT_OUTLINE_WEIGHT/3;
+            break;
+        }
+        p.fillColor = fillColor;
+        p.fillOpacity = BUILDING_DEFAULT_FILL_OPACITY;
+        p.weight = weight;
+      }
+
       mapS.clearHighlights = function() {
         // Remove any current paths which are not in the "default
         // objects" set.
@@ -156,8 +179,7 @@
         })
         // Set all the default building outlines back to default.
         _.forEach(mapS.map.paths, function(p) {
-          p.fillOpacity = BUILDING_DEFAULT_FILL_OPACITY;
-          p.weight = BUILDING_DEFAULT_OUTLINE_WEIGHT;
+          mapS.resetColors(p)
         })
         mapS.map.markers = {};
       }
@@ -181,8 +203,9 @@
         if (obj.type == 'building') {
           console.log('highlighting building=' + obj.id)
           var path = mapS.map.paths[obj.id];
-          path.fillOpacity = fillOpacity;
+          path.fillOpacity = fillOpacity+.20;
           path.weight = weight;
+          path.fillColor = 'red';
         } else if (obj.outline) {
           console.log('highlighting outline=' + obj.id)
           mapS.map.paths[obj.id.replace(/-/g,'_h_').replace(/\./g,'_p_')] = {

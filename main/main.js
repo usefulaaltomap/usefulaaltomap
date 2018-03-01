@@ -107,9 +107,7 @@ $scope.set_lang = set_lang;
 
   $scope.$on('leafletDirectivePath.mouseout', function(event, args) {
     var path = $scope.map.paths[args.modelName];
-
-    path.weight = BUILDING_DEFAULT_OUTLINE_WEIGHT;
-    path.fillOpacity = BUILDING_DEFAULT_FILL_OPACITY;
+    mapService.resetColors(path)
   })
 
   $scope.$on('leafletDirectiveMarker.mouseover', function(event, args) {
