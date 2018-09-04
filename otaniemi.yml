@@ -748,17 +748,90 @@ buildings:
     type: auxbuilding
   # Väre
   - id: r067
-    osm: 402618642
+    osm: 522627431
     aliases: [R067, School of Arts, Design and Architecture, School of Business]
     label: Väre
+    name: Väre
+    children:
+      - id: aaltoshop
+        osm: node=5871819464
+        type: shopping
+        name: Aalto shop
+      - id: brooklyn
+        osm: node=5871819459
+        type: cafe
+      - id: Kipsari
+        osm: node=5880866308
+        type: restaurant
   - id: metroA
     osm: 402618641
-    aliases: [R069, Metro Centre, Metro entrance A]
+    aliases: [Metro Centre, Metro entrance A]
     children:
       - id: metroA-rkioski
         osm: node=5317875517
         type: service
         name: R-Kioski Metro A
+    parents: [abloc]
+  - id: abloc
+    osm: 522627432
+    alises: [R069, Metrokeskus, Metro center]
+    children:
+      - id: espressohouse
+        osm: node=5870791847
+        type: cafe
+      - id: abloc-rkioski
+        osm: node=5870791841
+        type: service
+      - id: fafas
+        osm: node=5871819461
+        type: restaurant
+      - id: clasohlson
+        osm: node=5870791845
+        type: shopping
+      - id: junglejuice
+        osm: node=5870791846
+        type: cafe
+      - id: whothexxxisalice
+        osm: node=5871819455
+        type: restaurant
+      - id: kmarket
+        osm: node=5870791843
+        type: shopping
+      - id: abloc-atm-otto
+        osm: node=5871819587
+        type: service
+        name: ATM
+        aliases: [Otto-automaatti, Pankkiautomaatti, Automated teller machine]
+      - id: alko
+        osm: node=5870791844
+        type: service
+      - id: abloc-apteekki
+        osm: node=5870791853
+        aliases: [Pharmacy]
+        type: service
+      - id: konnichiwa
+        osm: node=5870791848
+        type: restaurant
+      - id: booky
+        osm: node=5871819460
+        type: shopping
+      - id: abloc-alepa
+        osm: node=5870791842
+        type: shopping
+      - id: abloc-atm-nosto
+        osm: node=5871819468
+        type: service
+        name: ATM
+        aliases: [Nosto-automaatti, Pankkiautomaatti, Automated teller machine]
+      - id: abloc-havajava
+        osm: node=5880866319
+        type: cafe
+      - id: abloc-amica
+        osm: node=5880866320
+        type: restaurant
+  - id: R068
+    osm: 522627430
+    aliases: [R068]
   - id: metroB
     osm: 408595707
     name: Metro entrance B
@@ -813,7 +886,7 @@ other:
   - id: xburger
     name: X-burger
     type: restaurant
-    osm: node=82638832
+    osm: 322041317
   - id: valimo
     name: Valimo
     osm: node=4840360721
