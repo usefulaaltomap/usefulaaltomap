@@ -372,7 +372,8 @@ else:
     rquery.append('node(60.1823,24.81394,60.1906,24.8338)[room]')
     rquery.append('node(60.1823,24.81394,60.1906,24.8338)[entrance]')
 
-    rcommand = "[out:json];(%s);out;"%(";".join(rquery))
+    rcommand = "[out:json];(%s;);out;"%(";\n".join(rquery))
+    open('raw/last-query', 'w').write(rcommand)
     r = requests.get('http://overpass-api.de/api/interpreter',
                 params=dict(data=rcommand))
     if r.status_code != 200:
