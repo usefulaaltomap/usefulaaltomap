@@ -198,6 +198,24 @@ buildings:
         type: unit
         parents: [agrid-CS]
         level: 2
+      - name: AMI-Centre
+        id: ami-center
+        parents: [agrid-I]
+        type: unit
+        url: http://ani.aalto.fi/en/ami_centre/
+        level: 1
+      - name: Aalto TMS
+        id: ami-center
+        parents: [agrid-I]
+        type: unit
+        url: http://ani.aalto.fi/en/ami_centre/
+        level: 3
+      - name: Aalto Behavorial Laboratory
+        id: ami-center
+        parents: [agrid-I]
+        type: unit
+        url: http://ani.aalto.fi/en/ami_centre/
+        level: 3
       # A grid wings
       - id: agrid-A
         name_en: A wing (A Grid)
@@ -255,6 +273,7 @@ buildings:
         name_en: I wing (A Grid)
         osm: 558799716
         type: wing
+        aliases: [Magneettitalo, Magnet House]
       #- id: agrid-J              # This is a corridor - add later maybe?
       #  name_en: J wing A Grid
       #  osm:
