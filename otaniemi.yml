@@ -387,8 +387,12 @@ buildings:
       building is the "Otaniemi Library" and the learning center is
       inside of it so that everyone can be happy.
     children:
-      - name: "Robert's Coffee"
+      - id: robertscoffee
+        osm: node=5012868053
         type: cafe
+      - id: aaltopahvi
+        osm: 6115098577
+        type: shopping
   # Marine technology, Ice Tank
   - id: r016
     osm: 4259025
