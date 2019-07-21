@@ -1,7 +1,7 @@
 PYTHON='python3'
 RAW=raw/osm_raw_data.json
 WEBFILES=index.html data.json data.json-readable otaniemi.yml main sidenav *.js
-
+SITE_DIR=www/
 
 
 default: data.json
@@ -20,6 +20,17 @@ refresh:
 	rm $(RAW) || true
 	$(PYTHON) compile.py data.json
 
-deploy: data.json
+deploy-prepare:
+	mkdir -p $(SITE_DIR)/
+	rsync -a $(WEBFILES) $(SITE_DIR)/
+	touch $(SITE_DIR)/.nojekyll
+deploy: deploy-prepare data.json
 	@test ! -z "$(HOST)" || ( echo "ERROR: specify host:   make ... HOST=hostname" ; false )
-	rsync -aivP $(WEBFILES) $(HOST):/srv/usefulaaltomap/www/
+	rsync -aivP $(SITE_DIR) $(HOST):/srv/usefulaaltomap/www/ --exclude=.git
+
+deploy-github:
+	cd $(SITE_DIR) && git add .
+	cd $(SITE_DIR) && git commit -a -m "deployment"
+	cd $(SITE_DIR) && git push origin master
+
+github: deploy-prepare deploy-github
