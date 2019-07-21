@@ -574,7 +574,7 @@ buildings:
   # Open Innovation House
   - id: oih
     osm: 148683540
-    aliases: [R032, OIH, ]
+    aliases: [R032, OIH]
     label: OIH
     lore: >-
       In 2017, ACRE rented two floors of this building to a school
@@ -590,6 +590,12 @@ buildings:
       - id: eit_rawmaterials
         type: unit
         name: EIT RawMaterials
+      - id: eit_clc
+        type: unit
+        name: EIT Co-Location Centre
+        aliases: [CLC]
+        url_en: https://masterschool.eitdigital.eu/about-us/co-location-centres/
+        note: Accessible when hosted by an EIT member
   # Water laboratory
   - id: r034
     osm: 4259026
