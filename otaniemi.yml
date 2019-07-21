@@ -453,33 +453,12 @@ buildings:
     label_fi: Kaupat
     type: auxbuilding
     children:
-      # Alepa
-      - id: alepa
-        name: Alepa Otaniemi
-        aliases: [Ruokakauppa, Grocery store]
-        type: shopping
-        osm: node=301625473
-      # R-Kioski
-      - id: rkioski
-        type: shopping
-        aliases: [Kioski, Convenience store]
-        osm: node=301625474
-      - id: kynajapaperi
-        osm: node=4840360722
-        type: cafe
-      - id: otafood
-        osm: node=5004956488
-        type: restaurant
       # ATM
       - id: r020-atm
         name: ATM
         aliases: [Otto-automaatti, Pankkiautomaatti, Automated teller machine]
         type: service
         osm: node=263964909
-      # Pharmacy
-      - id: r020-pharmacy
-        osm: node=263964923
-        type: service
 
   # No building 21
   # LMK2, admin
@@ -766,7 +745,7 @@ buildings:
     osm: 7588897
     type: auxbuilding
   # Väre
-  - id: r067
+  - id: vare
     osm: 522627431
     aliases: [R067, School of Arts, Design and Architecture, School of Business]
     label: Väre
@@ -785,12 +764,22 @@ buildings:
   - id: metroA
     osm: 402618641
     aliases: [Metro Centre, Metro entrance A]
-    children:
-      - id: metroA-rkioski
-        osm: node=5317875517
-        type: service
-        name: R-Kioski Metro A
+    #children:
+    #  - id: metroA-rkioski
+    #    osm: node=5317875517
+    #    type: service
+    #    name: R-Kioski Metro A
     parents: [abloc]
+  - id: R068
+    osm: 522627430
+    aliases: [R068]
+    children:
+      - id: kylteri
+        osm: node=6316319506
+        type: cafe
+      - id: arvo
+        osm: node=6316319505
+        type: restaurant
   - id: abloc
     osm: 522627432
     alises: [R069, Metrokeskus, Metro center]
@@ -831,9 +820,6 @@ buildings:
       - id: konnichiwa
         osm: node=5870791848
         type: restaurant
-      - id: booky
-        osm: node=5871819460
-        type: shopping
       - id: abloc-alepa
         osm: node=5870791842
         type: shopping
@@ -845,57 +831,56 @@ buildings:
       - id: abloc-havajava
         osm: node=5880866319
         type: cafe
-      - id: abloc-amica
-        osm: node=5880866320
+      - id: abloc-foodandco
+        osm: node=5891050368
         type: restaurant
-  - id: R068
-    osm: 522627430
-    aliases: [R068]
   - id: metroB
     osm: 408595707
     name: Metro entrance B
     #aliases: [Metro entrance 2]
 
-# Töölö
-  # Töölö main building
+## Töölö
+#  # Töölö main building
   - id: r101
     aliases: [Töölö Päärakennus, Töölö main building]
     osm: 124297669
     osm_meta: rel=1697955
     address: Runeberginkatu 14-16, Helsinki.
-  # Chydenia, Runeberginkatu 22–24
-  - id: chydenia
-    osm: 23192754
-    osm_meta: node=338322347
-    name: Aalto Chydenia Building
-  # Economicum, Arkadiankatu 7
-  - id: economicum
-    osm: 165194634
-  # Arkadia, Lapuankatu 2
-  - id: arkadia
-    name: Aalto Arkadia
-    osm: 124476546
-    osm_meta: node=298645132
+#  # Chydenia, Runeberginkatu 22–24
+#  - id: chydenia
+#    osm: 23192754
+#    osm_meta: node=338322347
+#    name: Aalto Chydenia Building
+#  # Economicum, Arkadiankatu 7
+#  - id: economicum
+#    osm: 165194634
+#  # Arkadia, Lapuankatu 2
+#  - id: arkadia
+#    name: Aalto Arkadia
+#    osm: 124476546
+#    osm_meta: node=298645132
   # Aalto EE building
   - id: domusgadium
     name: Domus Gaudium
     osm: 96286289
     osm_meta: node=1116096931
-  # Töölö Towers
-  - id: toolotowers
-    name: Töölön Tornit
-    name_en: Töölö Towers
-    address: Pohjoinen Hesperiankatu 23
-    osm: 234804200
+#  # Töölö Towers
+#  - id: toolotowers
+#    name: Töölön Tornit
+#    name_en: Töölö Towers
+#    address: Pohjoinen Hesperiankatu 23
+#    osm: 234804200
 
 
 
-# Arabia
-  - id: arabia
-    name: Aalto Arabia Building
-    name_fi: Aalto Arabiakeskus
-    osm: 86969021
-    address: Hämeentie 135 C
+## Arabia
+#  - id: arabia
+#    name: Aalto Arabia Building
+#    name_fi: Aalto Arabiakeskus
+#    osm: 86969021
+#    address: Hämeentie 135 C
+
+# Metsähovi
   - id: metsahovi
     name: Metsähovi main building
     osm: 223131392
@@ -961,7 +946,7 @@ other:
     name_sv: Högskolan för konst,design och arkitektur
     aliases: [ARTS]
     type: school
-    parents: [arabia] #main, r067
+    parents: [vare] #main, r067
     url_en: http://arts.aalto.fi/en/
     url_fi: http://arts.aalto.fi/fi/
     url_sv: http://arts.aalto.fi/sv/
@@ -971,7 +956,7 @@ other:
     name_sv: Handelshögskolan
     aliases: [BIZ]
     type: school
-    parents: [chydenia, economicum, domusgadium, arkadia] #[main, r067]
+    parents: [R068]
     url_en: http://biz.aalto.fi/en/
     url_fi: http://biz.aalto.fi/fi/
   - id: CHEM
@@ -1035,7 +1020,7 @@ other:
     name_sv: Institutionen för konst
     note: Department located on Arabia campus, Helsinki.
     type: department
-    parents: [arabia, ARTS]
+    parents: [vare, ARTS]
     url_en: http://taide.aalto.fi/en/
     url_fi: http://taide.aalto.fi/fi/
   - id: dept:design
@@ -1044,7 +1029,7 @@ other:
     name_sv: Institutionen för design
     note: Department located on Arabia campus, Helsinki.
     type: department
-    parents: [arabia, ARTS]
+    parents: [vare, ARTS]
     url: http://design.aalto.fi/
     url_en: http://design.aalto.fi/en/
   - id: dept:media
@@ -1053,7 +1038,7 @@ other:
     name_sv: Institutionen för medier
     note: Department located on Arabia campus, Helsinki.
     type: department
-    parents: [arabia, ARTS]
+    parents: [vare, ARTS]
     url: http://media.aalto.fi/
     url_en: http://media.aalto.fi/en/
     children:
@@ -1067,7 +1052,7 @@ other:
     name_sv: Institutionen för filmkonst och scenografi
     note: Department located on Arabia campus, Helsinki.
     type: department
-    parents: [arabia, ARTS]
+    parents: [vare, ARTS]
     url: http://elo.aalto.fi/
     url_en: http://elo.aalto.fi/en/
   - id: dept:lume
@@ -1076,7 +1061,7 @@ other:
     name_sv:
     note: Part of Department of Film, Television and Scenography.  Located on Arabia campus, Helsinki.
     type: unit
-    parents: [arabia, "dept:media"]
+    parents: [vare, "dept:media"]
     url: http://lume.aalto.fi/
     url_en: http://lume.aalto.fi/en/
   - id: dept:pupa
@@ -1091,56 +1076,44 @@ other:
   - id: dept:accounting
     name_en: Department of Accounting
     name_fi: Laskentatoimen laitos
-    note: >
-      Located in Töölö, Helsinki: Chydenia building, 3rd floor Runeberginkatu 22-24
     type: department
-    parents: [chydenia, BIZ]
+    parents: [R068, BIZ]
     url_en: http://accounting.aalto.fi/en/
     url_fi: accounting.aalto.fi/fi/
   - id: dept:economics
     name_en: Department of Economics
     name_fi: Taloustieteen laitos
-    note: >
-      Located in Töölö, Helsinki: Arkadiankatu 7
     note: Department located on Arabia campus, Helsinki.
     type: department
-    parents: [economicum, BIZ]
+    parents: [R068, BIZ]
     url_en: http://economics.aalto.fi/en/
     url_fi: http://economics.aalto.fi/fi/
   - id: dept:finance
     name_en: Department of Finance
     name_fi: Rahoituksen laitos
-    note: >
-      Located in Töölö, Helsinki: Chydenia building, 2rd floor Runeberginkatu 22-24
     type: department
-    parents: [chydenia, BIZ]
+    parents: [R068, BIZ]
     url_en: http://finance.aalto.fi/en/
     url_fi: http://finance.aalto.fi/fi/
   - id: dept:infosrv
     name_en: Department of Information and Service Economy
     name_fi: Tieto- ja palvelutalouden laitos
-    note: >
-      Located in Töölö, Helsinki: Chydenia building, 4th-5th floors Runeberginkatu 22-24
     type: department
-    parents: [chydenia, BIZ]
+    parents: [R068, BIZ]
     url_en: http://information.aalto.fi/en/
     url_fi: http://information.aalto.fi/fi/
   - id: dept:management
     name_en: Department of Management
     name_fi: Johtamisen laitos
     type: department
-    note: >
-      Located in Töölö, Helsinki.
-    parents: [BIZ]
+    parents: [R068]
     url_en: http://management.aalto.fi/en/
     url_fi: http://management.aalto.fi/fi
   - id: dept:marketing
     name_en: Department of Marketing
     name_fi: Markkinoinnin laitos
     type: department
-    note: >
-      Located in Töölö, Helsinki.
-    parents: [BIZ]
+    parents: [R068, BIZ]
     url_en:
     url_fi:
   - id: unit:aaltoee
@@ -1156,14 +1129,13 @@ other:
     address: "Lapuankatu 2, Helsinki"
     note: "Located in Töölö, Helsinki."
     type: unit
-    parents: [arkadia]
+    parents: [R068]
     url_en: http://cemat.aalto.fi/en/
     url_fi: http://cemat.aalto.fi/fi/
   - id: unit:cikr
     name_en: Center for Knowledge and Innovation Research
     name_fi: Tiedon ja innovaatioiden tutkimuskeskus
     aliases: [CKIR, BIZ]
-    address: "Runeberginkatu 22-24, Helsinki"
     type: unit
     parents: [BIZ]
     url_en: http://ckir.aalto.fi/en/
