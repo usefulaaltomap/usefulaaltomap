@@ -99,7 +99,7 @@ angular.module('usefulAaltoMap', ['ui-leaflet', 'ui.router', 'ngMaterial'])
     }
   })
   .state('app.selectedObject', {
-    templateUrl: '/sidenav/sidenav.html',
+    templateUrl: 'sidenav/sidenav.html',
     controller: 'sidenavController',
     url: '/select/:objectId',
     resolve: {
