@@ -163,7 +163,7 @@ buildings:
         osm: node=5012868028
         type: restaurant
       - id: agrid-havajava
-        osm: 5389688275
+        osm: node=5389688275
         type: cafe
       - name: Elepaja
         id: elepaja
@@ -394,7 +394,7 @@ buildings:
         osm: node=5012868053
         type: cafe
       - id: aaltopahvi
-        osm: 6115098577
+        osm: node=6115098577
         type: shopping
   # Marine technology, Ice Tank
   - id: r016
