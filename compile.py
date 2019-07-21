@@ -130,12 +130,19 @@ class Location():
         """OSM element that has the location data (path or latlon)"""
         if 'osm' not in self.data or not self.data['osm']: return None
         if isinstance(self.data['osm'], str) and '=' in self.data['osm']:
-            return osm_data[int(self.data['osm'].split('=')[1])]
+            osmtype = self.data['osm'].split('=')[0]
+            oid = int(self.data['osm'].split('=')[1])
+        else:
+            osmtype = 'way'
+            oid = self.data['osm']
         #if isinstance(self.data['osm'], dict):
         #    if isinstance(self.data['osm']['outline'], str):
         #        return osm_data[int(self.data['osm']['outline'].split('=')[1])]
         #    return osm_data[self.data['osm']['outline']]
-        return osm_data[self.data['osm']]
+        if oid not in osm_data:
+            raise ValueError("OSM {} {} not found for {!r}".format(
+                osmtype, oid, self))
+        return osm_data[oid]
     @property
     def osm_metadata(self):
         """OSM element that has the metadata (names, address, etc)"""
