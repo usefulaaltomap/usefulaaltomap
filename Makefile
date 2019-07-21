@@ -24,13 +24,13 @@ deploy-prepare:
 	mkdir -p $(SITE_DIR)/
 	rsync -a $(WEBFILES) $(SITE_DIR)/
 	touch $(SITE_DIR)/.nojekyll
-deploy: deploy-prepare data.json
+deploy-rsync: deploy-prepare data.json
 	@test ! -z "$(HOST)" || ( echo "ERROR: specify host:   make ... HOST=hostname" ; false )
 	rsync -aivP $(SITE_DIR) $(HOST):/srv/usefulaaltomap/www/ --exclude=.git
-
-deploy-github:
+deploy-github: deploy-prepare data.json
+	cd $(SITE_DIR) && test -x .git && git clone git@github.com/usefulaaltomap/usefulaaltomap.fi tmp-git && mv tmp-git/.git . && rm -r tmp-git
 	cd $(SITE_DIR) && git add .
 	cd $(SITE_DIR) && git commit -a -m "deployment"
 	cd $(SITE_DIR) && git push origin master
 
-github: deploy-prepare deploy-github
+deploy: deploy-github
