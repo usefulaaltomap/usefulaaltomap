@@ -43,6 +43,9 @@ buildings:
       - name: Student services
         id: studentservices
         type: service
+      - name: IT Services
+        type: unit
+        parents: [U]
       - name: IT Service Desk Kandi
         id: servicedesk_kandi
         latlon: [60.18692, 24.82891]
@@ -156,10 +159,12 @@ buildings:
       new start-up hub, "A Grid", and the old Electrical Engineering
       departments mostly moved to other places.
     children:
-      #- name: # opening August 2018
-      #  type: restaurant
-      #  id:
-      #  osm: node=5012868028
+      - id: factory
+        osm: node=5012868028
+        type: restaurant
+      - id: agrid-havajava
+        osm: 5389688275
+        type: cafe
       - name: Elepaja
         id: elepaja
         room: I131
@@ -320,9 +325,6 @@ buildings:
     aliases: [R011, Ke, CHEM]
     label: Kemma
     children:
-      - id: maukas
-        osm: node=2381695985
-        type: restaurant
       - id: r011-ywing
         name: A siipi Kemma
         name_en: A wing Kemma
@@ -478,14 +480,14 @@ buildings:
   - id: r023
     osm: 26608177
     aliases: [R023]
-  # MT3
-  - id: r024
-    osm: 27468640
-    aliases: [R024, MT3]
-    children:
-      - name: IT Service Desk MT3
-        id: servicedesk_mt3
-        type: service
+  ## MT3
+  #- id: r024
+  #  osm: 27468640
+  #  aliases: [R024, MT3]
+  #  children:
+  #    - name: IT Service Desk MT3
+  #      id: servicedesk_mt3
+  #      type: service
   # Design factory, Betonimiehenkuja 5
   - id: r025
     osm: 26608273
@@ -597,12 +599,12 @@ buildings:
         osm: node=5323641949
         type: restaurant
   # Vaisalantie 8
-  - id: r035
-    osm: 51725020
-    aliases: [R035]
-    children:
-      - name: IT Services
-        type: unit
+  #- id: r035
+  #  osm: 51725020
+  #  aliases: [R035]
+  #  children:
+  #    - name: IT Services
+  #      type: unit
   # Micronova
   - id: r036
     osm: 7585092
@@ -625,7 +627,7 @@ buildings:
     children:
       - name: Aalto Ventures Program
         type: unit
-      - name: Amica TUAS
+      - id: amicatuas
         type: restaurant
         osm: node=580706218
       - id: library_tuas
@@ -686,6 +688,10 @@ buildings:
   - id: r039
     osm: 27464085
     aliases: [R039]
+    children:
+      - id: panimo
+        osm: node=6583558878
+        type: restaurant
   # TF
   - id: r040
     osm: 4252953
@@ -903,7 +909,7 @@ other:
   - id: itservicedesks
     name: IT Service Desks
     name_fi: IT Käyttäjäpalvelut
-    parents: [servicedesk_kandi, servicedesk_tuas, servicedesk_dipoli, servicedesk_mt3]
+    parents: [servicedesk_kandi, servicedesk_tuas, servicedesk_dipoli]
     type: unit
   - id: terveystalo
     name: Terveystalo Maari
@@ -940,6 +946,9 @@ other:
       There are two taxi stands, by metro entrance A and by Dipoli
       (west side).  Usually you will call for one instead.  Lähitaksi phone=0100 7300
     parents: [taxi-metro, taxi-dipoli]
+  - id: maukas
+    osm: node=2381695985
+    type: restaurant
 
 
 
@@ -1015,7 +1024,7 @@ other:
     name_sv: Institutionen för arkitektur
     note: Department located on Arabia campus, Helsinki.
     type: department
-    parents: [r024, ARTS]
+    parents: [A, ARTS]
     url: http://architecture.aalto.fi/
     url_en: http://architecture.aalto.fi/en/
   - id: dept:art
@@ -1049,7 +1058,7 @@ other:
       - id: medialab
         name: Media Lab Helsinki
         type: unit
-        parents: [r024]
+        parents: [vare]
   - id: dept:film
     name_en: Department of Film, Television and Scenography
     name_fi: Elokuvataiteen ja lavastustaiteen laitos
@@ -1240,7 +1249,7 @@ other:
     name_en: Department of Built Environment
     name_fi: Rakennetun ympäristön laitos
     type: department
-    parents: [K1, r035, ENG]
+    parents: [K1, r016, r034, ENG]
     url_en: http://builtenv.aalto.fi/en/
     url_fi: http://builtenv.aalto.fi/fi/
   # SCI
@@ -1365,8 +1374,11 @@ studentvillage:
     osm: 24333883
   - id: JMT3a      # JMT 3A
     osm: 24333970
-    # TODO: polytekkarimuseo
-    # TODO: hackerspace
+    children:
+      - id: polyteekkarimuseo
+        osm: node=25038585
+        type: museum
+      # TODO: hackerspace
   - id: JMT3b      # JMT 3B
     osm: 24334035
   - id: JMT3c      # JMT 3C
