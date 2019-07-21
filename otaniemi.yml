@@ -379,7 +379,8 @@ buildings:
     type: otherbuilding
   - id: kirjasto
     osm: 4252948
-    aliases: [R015, Aalto-yliopiston kirjasto, Main Library, Learning Center,
+    aliases: [R015, Harald Herlin Learning Centre, Aalto-yliopiston kirjasto,
+              Main Library, Learning Center,
               HH-center, HH-keskus
            ]
     lore: >-
@@ -612,7 +613,7 @@ buildings:
   #    - name: IT Services
   #      type: unit
   # Micronova
-  - id: r036
+  - id: micronova
     osm: 7585092
     aliases: [R036]
     label: Micronova
@@ -777,6 +778,11 @@ buildings:
       - id: Kipsari
         osm: node=5880866308
         type: restaurant
+      - name: IT Service Desk Väre
+        id: servicedesk_vare
+        type: service
+        #latlon: [60. 24.]
+        note: Room R101
   - id: metroA
     osm: 402618641
     aliases: [Metro Centre, Metro entrance A]
@@ -994,7 +1000,7 @@ other:
     name_sv: Högskolan för elektroteknik
     aliases: [ELEC]
     type: school
-    parents: [agrid-K, oih, tuas, r036, ]
+    parents: [agrid-K, oih, tuas, micronova, ]
     url_en: http://elec.aalto.fi/en/
     url_fi: http://elec.aalto.fi/fi/
     url_sv: http://elec.aalto.fi/sv/
@@ -1017,7 +1023,7 @@ other:
     name_sv: Högskolan för teknikvetenskaper
     aliases: [SCI]
     type: school
-    parents: [main, F, K1, r009, T, oih, r036, tuas]
+    parents: [main, F, K1, r009, T, oih, micronova, tuas]
     url_en: http://sci.aalto.fi/en/
     url_fi: http://sci.aalto.fi/fi/
     url_sv: http://sci.aalto.fi/sv/
@@ -1195,7 +1201,7 @@ other:
     name_fi: Sähkötekniikan ja automaation laitos
     name_sv: Instititutionen för elektroteknik och automation
     type: department
-    parents: [T, tuas, r036, ELEC]
+    parents: [T, tuas, micronova, ELEC]
     url_en: http://eea.aalto.fi/en/
     url_fi: http://eea.aalto.fi/fi/
   - id: dept:ele
@@ -1203,7 +1209,7 @@ other:
     name_fi: Elektroniikan ja nanotekniikan laitos
     name_sv: Institutionen för elektronik och nanoteknik
     type: department
-    parents: [r036, tuas, ELEC]
+    parents: [micronova, tuas, ELEC]
     url_en: http://ele.aalto.fi/en/
     url_fi: http://ele.aalto.fi/fi/
   - id: dept:spa
@@ -1226,7 +1232,7 @@ other:
     name: Aalto Nanofab
     type: unit
     aliases: [Micronova]
-    parents: [r036, ELEC]
+    parents: [micronova, ELEC]
     url: http://www.micronova.fi/
   - id: unit:metsahovi
     name_en: Metsähovi Radio Observatory
@@ -1264,7 +1270,7 @@ other:
     name_fi: Teknillisen fysiikan laitos
     name_sv: Institutionen för teknisk fysik
     type: department
-    parents: [main, r036, r009, SCI]
+    parents: [main, micronova, r009, SCI]
     url_en: http://physics.aalto.fi/en/
     url_fi: http://physics.aalto.fi/
   - id: dept:cs
@@ -1316,6 +1322,11 @@ other:
     aliases: [EIT ICT Labs, SCI]
     parents: [oih]
     url: "http://sci.aalto.fi/en/departments/#eit"
+  - id: otanano
+    name: OtaNano
+    url: https://otanano.fi
+    parents: [r009, micronova]
+    type: unit
 
 
 studentvillage:
