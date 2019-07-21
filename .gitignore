@@ -1,3 +1,9 @@
+osm_raw_data*
 data.json
 data.json-readable
 raw/
+www/
+old/
+
+*.pdf
+*.zip
