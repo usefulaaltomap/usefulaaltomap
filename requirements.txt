@@ -1,13 +1,4 @@
-certifi
-chardet
-cycler
-idna
 matplotlib
-numpy
 pyparsing
-python-dateutil
-pytz
 PyYAML
 requests
-six
-urllib3
