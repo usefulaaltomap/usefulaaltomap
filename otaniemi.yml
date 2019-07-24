@@ -781,8 +781,9 @@ buildings:
       - name: IT Service Desk Väre
         id: servicedesk_vare
         type: service
-        #latlon: [60. 24.]
+        latlon: [60.18557, 24.82412]
         note: Room R101
+        level: 0
   - id: metroA
     osm: 402618641
     aliases: [Metro Centre, Metro entrance A]
