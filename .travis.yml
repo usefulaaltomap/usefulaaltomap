@@ -14,3 +14,17 @@ script:
     fi
   # Build the project
   - make data.json
+  - make deploy-prepare
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  local_dir: www/
+  repo: usefulaaltomap/usefulaaltomap.fi
+  on:
+    branch: master
+  verbose: true
+  fqdn: usefulaaltomap.fi
+  target_branch: master

@@ -24,6 +24,7 @@ deploy-prepare:
 	mkdir -p $(SITE_DIR)/
 	rsync -a $(WEBFILES) $(SITE_DIR)/
 	touch $(SITE_DIR)/.nojekyll
+	echo -n usefulaaltomap.fi >> $(SITE_DIR)/CNAME
 deploy-rsync: deploy-prepare data.json
 	@test ! -z "$(HOST)" || ( echo "ERROR: specify host:   make ... HOST=hostname" ; false )
 	rsync -aivP $(SITE_DIR) $(HOST):/srv/usefulaaltomap/www/ --exclude=.git
