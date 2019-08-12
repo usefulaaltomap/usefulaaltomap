@@ -857,6 +857,9 @@ buildings:
       - id: abloc-foodandco
         osm: node=5891050368
         type: restaurant
+      - id: abloc-eatpoke
+        osm: node=6704203384
+        type: restaurant
   - id: metroB
     osm: 408595707
     name: Metro entrance B
