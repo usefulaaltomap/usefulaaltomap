@@ -860,6 +860,11 @@ buildings:
       - id: abloc-foodandco
         osm: node=5891050368
         type: restaurant
+      - id: abloc-wickedrabbit
+        name: Wicked Rabbit
+        address: Otaniementie 12
+        latlon: [60.18515, 24.82498]
+        type: restaurant
       - id: abloc-eatpoke
         osm: node=6704203384
         type: restaurant
