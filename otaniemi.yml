@@ -685,7 +685,7 @@ buildings:
   # Student union
   - id: r038
     osm: 7589907
-    aliases: [R038]
+    aliases: [R038, AYY]
     label: AYY
     name: Aalto-yliopiston ylioppilaskunta
     name_en: Aalto University Student Union
