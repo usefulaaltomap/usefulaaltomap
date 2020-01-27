@@ -863,7 +863,9 @@ buildings:
       - id: abloc-wickedrabbit
         name: Wicked Rabbit
         address: Otaniementie 12
-        latlon: [60.18515, 24.82498]
+        latlon: [60.18506, 24.82518]
+        level: 1
+        note: within the Fazer restaurant in A bloc.
         type: restaurant
       - id: abloc-eatpoke
         osm: node=6704203384
