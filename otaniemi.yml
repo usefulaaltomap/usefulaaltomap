@@ -153,6 +153,7 @@ buildings:
     osm: 24342454
     aliases: [R004, A-grid, Vanha Sähkötekniikka, Old Electrical Engineering]
     label: A Grid
+    name: A Grid
     note: >-
       2016 and earlier, this used to be the School of Electrical
       Engineering main building.  During 2017, it was renovated as a
@@ -315,6 +316,7 @@ buildings:
   - id: r009
     osm: 27930945
     aliases: [R009]
+    name: Nanotalo
     label: Nanotalo
   - id: r010
     osm: 4424188
@@ -383,6 +385,7 @@ buildings:
               Main Library, Learning Center,
               HH-center, HH-keskus
            ]
+    name: Library
     lore: >-
       This used to be the main library.  In 2016, it was renovated and turned
       into a modern library: the "Learning Centre".  Most people call it the
@@ -405,6 +408,7 @@ buildings:
     osm: 7584131
     aliases: [R017]
     label: Maari
+    name: Maarintalo
   - id: r018
     osm: 7244238
     aliases: [R018]
@@ -630,6 +634,7 @@ buildings:
   - id: tuas
     osm: 29012757
     aliases: [R037, TU, AS]
+    name: TUAS
     label: TUAS
     children:
       - name: Aalto Ventures Program
