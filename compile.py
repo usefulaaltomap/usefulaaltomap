@@ -19,6 +19,8 @@ re_nametoid = re.compile('[^a-zA-Z0-9_]+')
 
 # utility
 def update_maybe(dct, key, new_dct, new_key=None):
+    """Move dict[key] to new_dct[new_key], if it isn't an empty list.
+    """
     if new_key is None: new_key = key
     if key in dct:
         if isinstance(dct[key], list) and len(dct[key]) == 0: return
@@ -31,6 +33,10 @@ def floor_number(level):
     level = int(level)
     if level >= 0:  return level+1   #  0 ->  1,  1 ->  2, etc
     if level <  0:  return level     # -1 -> -1, -2 -> -2, etc
+def normalize_namse(s):
+    return s.replace('Aalto University ', '').replace('Aalto ', '')
+
+
 
 # Main class
 
