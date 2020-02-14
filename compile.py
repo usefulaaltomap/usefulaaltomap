@@ -33,7 +33,7 @@ def floor_number(level):
     level = int(level)
     if level >= 0:  return level+1   #  0 ->  1,  1 ->  2, etc
     if level <  0:  return level     # -1 -> -1, -2 -> -2, etc
-def normalize_namse(s):
+def normalize_osm_name(s):
     return s.replace('Aalto University ', '').replace('Aalto ', '')
 
 
@@ -209,10 +209,10 @@ class Location():
         osm = self.osm_metadata
         names = { }
         if osm and 'tags' in osm:
-            if 'name' in osm['tags']:     names['name']    = osm['tags']['name'].replace('Aalto ', '')
-            if 'int_name' in osm['tags']: names['name_en'] = osm['tags']['int_name'].replace('Aalto ', '')
-            if 'name:en' in osm['tags']:  names['name_en'] = osm['tags']['name:en'].replace('Aalto ', '')
-            if 'name:sv' in osm['tags']:  names['name_sv'] = osm['tags']['name:sv'].replace('Aalto ', '')
+            if 'name' in osm['tags']:     names['name']    = normalize_osm_name(osm['tags']['name'])
+            if 'int_name' in osm['tags']: names['name_en'] = normalize_osm_name(osm['tags']['int_name'])
+            if 'name:en' in osm['tags']:  names['name_en'] = normalize_osm_name(osm['tags']['name:en'])
+            if 'name:sv' in osm['tags']:  names['name_sv'] = normalize_osm_name(osm['tags']['name:sv'])
             if 'addr:street' in osm['tags'] and 'addr:housenumber' in osm['tags']:
                 names['address'] = " ".join((osm['tags']['addr:street'], osm['tags']['addr:housenumber']))
                 if 'addr:unit' in osm['tags']: names['address'] += ' '+osm['tags']['addr:unit']
