@@ -219,6 +219,11 @@ class Location():
             if len({'name', 'name_en', 'name_sv', 'name_fi'} & names.keys()) == 0 and 'address' in names:
                 names['name'] = names['address']
         update_matching(self.data, 'name*', names)
+        # Allow "name_en: null" to remove the OSM-defined name:en value, so
+        # that the generic or finnish name will be used for other languages, too.
+        if 'name_fi' in names and names['name_fi'] is None: del names['name_fi']
+        if 'name_en' in names and names['name_en'] is None: del names['name_en']
+        if 'name_sv' in names and names['name_sv'] is None: del names['name_sv']
         update_matching(self.data, 'address*', names)
         return names
     def address_aliases(self, data):
