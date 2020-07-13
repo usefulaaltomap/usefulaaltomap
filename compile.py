@@ -69,10 +69,11 @@ class Location():
         if self.outline: data['outline'] = self.outline
         # aliases: loc_name from OSM and then Aalto-specific
         data['aliases'] = [ ]
-        if self.osm_metadata and 'loc_name' in self.osm_metadata['tags']:
-            data['aliases'].append(self.osm_metadata['tags']['loc_name'])
-        if self.osm_metadata and 'opening_hours' in self.osm_metadata['tags']:
-            data['opening_hours'] = self.osm_metadata['tags']['opening_hours']
+        if self.osm_metadata and 'tags' in self.osm_metadata:
+            if 'loc_name' in self.osm_metadata['tags']:
+                data['aliases'].append(self.osm_metadata['tags']['loc_name'])
+            if 'opening_hours' in self.osm_metadata['tags']:
+                data['opening_hours'] = self.osm_metadata['tags']['opening_hours']
         if 'aliases' in self.data:
             aliases = self.data['aliases']
             if not isinstance(aliases, (list, tuple)):
