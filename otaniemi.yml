@@ -777,8 +777,8 @@ buildings:
     type: auxbuilding
   # Väre
   - id: vare
-    osm: 522627431
-    aliases: [R067, School of Arts, Design and Architecture]
+    osm: 941553968
+    aliases: [R067, "School of Arts, Design and Architecture"]
     label: Väre
     name: Väre
     name_en: null
@@ -808,8 +808,9 @@ buildings:
     #    type: service
     #    name: R-Kioski Metro A
     parents: [abloc]
+  # Business school
   - id: R068
-    osm: 522627430
+    osm: 941553966
     aliases: [R068]
     children:
       - id: kylteri
@@ -819,7 +820,7 @@ buildings:
         osm: node=6316319505
         type: restaurant
   - id: abloc
-    osm: 522627432
+    osm: 941553969
     alises: [R069, Metrokeskus, Metro center]
     children:
       - id: espressohouse
