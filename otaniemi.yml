@@ -831,9 +831,9 @@ buildings:
       - id: fafas
         osm: node=5871819461
         type: restaurant
-      - id: clasohlson
-        osm: node=5870791845
-        type: shopping
+      #- id: clasohlson
+      #  osm: node=5870791845
+      #  type: shopping
       - id: junglejuice
         osm: node=5870791846
         type: cafe
