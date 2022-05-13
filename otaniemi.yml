@@ -461,18 +461,33 @@ buildings:
   - id: r020
     osm: 7589963
     aliases: [R020, Ostari]
-    name: Otaniemen ostoskeskus
-    name_en: Otaniemi shopping center
+    name: A Blanc
+    aliases: [Otaniemen ostoskeskus, Otaniemi shopping center]
     label: Shops
     label_fi: Kaupat
     type: auxbuilding
     children:
       # ATM
       - id: r020-atm
-        name: ATM
-        aliases: [Otto-automaatti, Pankkiautomaatti, Automated teller machine]
+        aliases: [ATM]
         type: service
         osm: node=263964909
+      - id: taproomd20
+        osm: node=9738013085
+        type: restaurant
+      - id: shortcut
+        osm: node=8912114264
+        type: service
+      - id: pukupesu
+        osm: node=9044279913
+        type: service
+      - id: tapiolan-juhlapuku
+        osm: node=9044279914
+        type: service
+      - id: tervystalo-ablanc
+        osm: node=9044279912
+        name: Tervystalo A-blanc
+        type: service
 
   # No building 21
   # LMK2, admin
@@ -787,7 +802,7 @@ buildings:
         osm: node=5871819464
         type: shopping
         name: Aalto shop
-      - id: brooklyn
+      - id: cafetoria
         osm: node=5871819459
         type: cafe
       - id: Kipsari
