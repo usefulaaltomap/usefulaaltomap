@@ -598,6 +598,15 @@ buildings:
         note: >-
           The C wing is "just" the atrium and some rooms directly
           connected to it.
+      - name: Computer Science IT
+        id: cs-it
+        aliases: [CS-IT, Aalto Scientific Computing, ASC]
+        type: service
+        latlon: [60.18691, 24.82092]
+        note: >
+          Room A243.  Access is possible from the atrium area,
+          bridges on the second floor.
+        level: 1
   # No R031
   # Open Innovation House
   - id: oih
