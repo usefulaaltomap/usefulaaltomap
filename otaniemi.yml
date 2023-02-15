@@ -50,7 +50,8 @@ buildings:
         id: servicedesk_kandi
         latlon: [60.18692, 24.82891]
         type: service
-        opening_hours: Mo-Th 08:00-15:45; Fr 08:00-13:00, 14:00-15:30 ; 1 Aug-18 Aug Mo-Th 08:30-11:00, 12:00-15:00; 1 Aug-18 Aug Fr 08:30-09:30, 12:00-13:00, 14:00-15:00; PH off
+        opening_hours: Mo-We 09:00-11:00, 12:00-15:00; Th-Fr 09:00-11:00, 12:00-14:00
+        url: https://www.aalto.fi/en/services/it-service-desk-contact-information-and-service-hours
         address: Room U133a
       - id: studenthub
         osm: 514232691
@@ -453,10 +454,10 @@ buildings:
         type: restaurant
         notes: >-
           The "fancy" restaurant in Dipoli.  Prices 20-30€.
-      - name: IT Service Desk Dipoli
-        id: servicedesk_dipoli
-        type: service
-        latlon: [60.18525, 24.83262]
+      #- name: IT Service Desk Dipoli
+      #  id: servicedesk_dipoli
+      #  type: service
+      #  latlon: [60.18525, 24.83262]
   # Old shopping center
   - id: r020
     osm: 7589963
@@ -675,14 +676,14 @@ buildings:
       - id: library_tuas
         type: service
         osm: node=5012868058
-      - name: IT Service Desk Maari
-        id: servicedesk_tuas
-        latlon: [60.18698, 24.81854]
-        type: service
-        address: TUAS 1163
-        note: >-
-          Open at least during the stated times, but people may be available at
-          other times as well.
+      #- name: IT Service Desk Maari
+      #  id: servicedesk_tuas
+      #  latlon: [60.18698, 24.81854]
+      #  type: service
+      #  address: TUAS 1163
+      #  note: >-
+      #    Open at least during the stated times, but people may be available at
+      #    other times as well.
       - id: tuas-x5xxwing
         name: x5xx siipi TUAS
         name_en: x5xx wing TUAS
@@ -819,9 +820,11 @@ buildings:
         type: restaurant
       - name: IT Service Desk Väre
         id: servicedesk_vare
+        opening_hours: Mo-We 09:00-11:00, 12:00-15:00
+        url: https://www.aalto.fi/en/services/it-service-desk-contact-information-and-service-hours
         type: service
         latlon: [60.18557, 24.82412]
-        note: Room R101
+        address: Room R101
         level: 0
   - id: metroA
     osm: 402618641
@@ -972,7 +975,8 @@ other:
   - id: itservicedesks
     name: IT Service Desks
     name_fi: IT Käyttäjäpalvelut
-    parents: [servicedesk_kandi, servicedesk_tuas, servicedesk_dipoli]
+    parents: [servicedesk_kandi, servicedesk_vare]
+    url: https://www.aalto.fi/en/services/it-service-desk-contact-information-and-service-hours
     type: unit
   - id: terveystalo
     name: Terveystalo Maari
