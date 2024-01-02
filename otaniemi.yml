@@ -299,6 +299,16 @@ buildings:
     osm: 156903284
     aliases: [R006]
     label: K3
+    children:
+      - id: designfactory
+        type: unit
+        osm: node=11107521668
+        name: Aalto Design Factory
+        aliases: [ADF]
+        url: https://designfactory.aalto.fi/
+      - name: Startup Sauna
+        type: unit
+        id: startupsauna
   # K2, Puumiehenkuja 3
   - id: K2
     osm: 156903282
@@ -376,10 +386,11 @@ buildings:
   - id: r013
     osm: 7588593
     aliases: [R013]
-  - id: r014
-    osm: 7588741
-    aliases: [R014]
-    type: otherbuilding
+    name: Aalto Bioproducts Center
+  #- id: r014
+  #  osm: 7588741
+  #  aliases: [R014]
+  #  type: otherbuilding
   - id: kirjasto
     osm: 4252948
     aliases: [R015, Harald Herlin Learning Centre, Aalto-yliopiston kirjasto,
@@ -513,19 +524,19 @@ buildings:
   #      id: servicedesk_mt3
   #      type: service
   # Design factory, Betonimiehenkuja 5
-  - id: r025
-    osm: 26608273
-    aliases: [R025]
-    label: Design Factory
+  #- id: r025
+  #  osm: 26608273
+  #  aliases: [R025]
+  #  label: Design Factory
   # Startup Sauna
-  - id: r026
-    osm: 26608317
-    aliases: [R026]
-    label: Startup Sauna
-    children:
-      - name: Startup Sauna
-        type: unit
-        id: startupsauna
+  #- id: r026
+  #  osm: 26608317
+  #  aliases: [R026]
+  #  label: Startup Sauna
+  #  children:
+  #    - name: Startup Sauna
+  #      type: unit
+  #      id: startupsauna
   - id: r027
     osm: 7588940
     aliases: [R027]
@@ -751,7 +762,6 @@ buildings:
           The only restaurant still student-owned.
   # Aalto Inn
   - id: r041
-    name: Aalto Inn   #TODO: update OSM
     osm: 181643549
     label: Aalto Inn
     aliases: [R041]
@@ -785,7 +795,6 @@ buildings:
     type: auxbuilding
   # Radisson blu
   - id: radisonblu
-    name: Radisson Blu
     label: Radisson Blu
     osm: 4259289
     aliases: [R056]
@@ -921,6 +930,7 @@ buildings:
     osm: 1119443892
     aliases: [R045, OK2A]
 
+
 ## Töölö
 #  # Töölö main building
   - id: r101
@@ -1021,7 +1031,9 @@ other:
   - id: maukas
     osm: node=2381695985
     type: restaurant
-
+  - id: otaparkki
+    osm: 1202350275
+    type: auxbuilding
 
 
 # SCHOOLS
@@ -1060,7 +1072,7 @@ other:
     name_sv: Högskolan för elektroteknik
     aliases: [ELEC]
     type: school
-    parents: [agrid-K, oih, tuas, micronova, ]
+    parents: [agrid-K, oih, tuas, micronova, kide]
     url_en: http://elec.aalto.fi/en/
     url_fi: http://elec.aalto.fi/fi/
     url_sv: http://elec.aalto.fi/sv/
@@ -1072,7 +1084,7 @@ other:
     type: school
     parents: [K1, r034,       # Built Env
               r002,             # Civil
-              K1, K3, K2, K4, r016, r025, # Mechanical
+              K1, K3, K2, K4, r016, # Mechanical
               ]
     url_en: http://eng.aalto.fi/en/
     url_fi: http://eng.aalto.fi/fi/
@@ -1083,7 +1095,7 @@ other:
     name_sv: Högskolan för teknikvetenskaper
     aliases: [SCI]
     type: school
-    parents: [main, F, K1, r009, T, oih, micronova, tuas]
+    parents: [main, F, K1, r009, T, micronova]
     url_en: http://sci.aalto.fi/en/
     url_fi: http://sci.aalto.fi/fi/
     url_sv: http://sci.aalto.fi/sv/
@@ -1094,61 +1106,40 @@ other:
     name_en: Department of Architecture
     name_fi: Arkkitehtuurin laitos
     name_sv: Institutionen för arkitektur
-    note: Department located on Arabia campus, Helsinki.
     type: department
-    parents: [A, ARTS]
+    parents: [vare, A, ARTS]
     url: http://architecture.aalto.fi/
     url_en: http://architecture.aalto.fi/en/
-  - id: dept:art
-    name_en: Department of Art
-    name_fi: Taiteen laitos
-    name_sv: Institutionen för konst
-    note: Department located on Arabia campus, Helsinki.
+  - id: dept:artmedia
+    name_en: Department of Art and Media
+    name_fi: Taiteen ja median laitos
+    name_sv: Institutionen för konst och media
     type: department
     parents: [vare, ARTS]
-    url_en: http://taide.aalto.fi/en/
-    url_fi: http://taide.aalto.fi/fi/
+    url_en: https://www.aalto.fi/en/department-of-art-and-media
+    url_fi: https://www.aalto.fi/fi/taiteen-ja-median-laitos
+    children:
+      - id: medialab
+        name: Aalto Media Lab
+        type: unit
+        parents: [vare]
   - id: dept:design
     name_en: Department of Design
     name_fi: Muotoilun laitos
     name_sv: Institutionen för design
-    note: Department located on Arabia campus, Helsinki.
     type: department
     parents: [vare, ARTS]
     url: http://design.aalto.fi/
     url_en: http://design.aalto.fi/en/
-  - id: dept:media
-    name_en: Department of Media
-    name_fi: Median laitos
-    name_sv: Institutionen för medier
-    note: Department located on Arabia campus, Helsinki.
-    type: department
-    parents: [vare, ARTS]
-    url: http://media.aalto.fi/
-    url_en: http://media.aalto.fi/en/
-    children:
-      - id: medialab
-        name: Media Lab Helsinki
-        type: unit
-        parents: [vare]
   - id: dept:film
     name_en: Department of Film, Television and Scenography
     name_fi: Elokuvataiteen ja lavastustaiteen laitos
     name_sv: Institutionen för filmkonst och scenografi
-    note: Department located on Arabia campus, Helsinki.
     type: department
     parents: [vare, ARTS]
+    aliases: [ELO]
     url: http://elo.aalto.fi/
     url_en: http://elo.aalto.fi/en/
-  - id: dept:lume
-    name_en: Media Centre Lume
-    name_fi: Mediakeskus Lume
-    name_sv:
-    note: Part of Department of Film, Television and Scenography.  Located on Arabia campus, Helsinki.
-    type: unit
-    parents: [vare, "dept:media"]
-    url: http://lume.aalto.fi/
-    url_en: http://lume.aalto.fi/en/
   - id: dept:pupa
     name_en: Pori Urban Platform (PUPA)
     name_fi: Porin yliopistokeskus (PUPA)
@@ -1207,22 +1198,12 @@ other:
     aliases: [Aalto EE]
     parents: [domusgadium, BIZ]
     url: http://www.aaltoee.com/
-  - id: unit:cemat
-    name_en: Center for Markets in Transition (CEMAT)
-    name_fi: Kansainvälisten markkinoiden tutkimuskeskus
-    aliases: [CEMAT, BIZ]
-    address: "Lapuankatu 2, Helsinki"
-    note: "Located in Töölö, Helsinki."
-    type: unit
-    parents: [R068]
-    url_en: http://cemat.aalto.fi/en/
-    url_fi: http://cemat.aalto.fi/fi/
   - id: unit:cikr
     name_en: Center for Knowledge and Innovation Research
     name_fi: Tiedon ja innovaatioiden tutkimuskeskus
-    aliases: [CKIR, BIZ]
+    aliases: [CKIR]
     type: unit
-    parents: [BIZ]
+    parents: [R068, BIZ]
     url_en: http://ckir.aalto.fi/en/
     url_fi: http://ckir.aalto.fi/fi/
   - id: unit:mikkeli
@@ -1246,7 +1227,8 @@ other:
     name_fi: Kemian ja materiaalitieteen laitos
     name_sv: Institutionen för materialteknik
     type: department
-    parents: [r011, CHEM]
+    parents: [r011, micronova, CHEM]
+    aliases: [CMAT]
     url_en: http://cmat.aalto.fi/en/
     url_fi: http://cmat.aalto.fi/fi/
   - id: dept:bio
@@ -1254,14 +1236,15 @@ other:
     name_fi: Biotuotteiden ja biotekniikan laitos
     name_sv: Institutionen för bio- och kemiteknik
     type: department
-    parents: [CHEM]   # TODO
+    aliases: [Bio2]
+    parents: [r011, CHEM]   # TODO
   # ELEC
   - id: dept:eea
     name_en: Department of Electrical Engineering and Automation
     name_fi: Sähkötekniikan ja automaation laitos
     name_sv: Instititutionen för elektroteknik och automation
     type: department
-    parents: [T, tuas, micronova, ELEC]
+    parents: [tuas, F, agrid, micronova, ELEC]
     url_en: http://eea.aalto.fi/en/
     url_fi: http://eea.aalto.fi/fi/
   - id: dept:ele
@@ -1272,22 +1255,14 @@ other:
     parents: [micronova, tuas, ELEC]
     url_en: http://ele.aalto.fi/en/
     url_fi: http://ele.aalto.fi/fi/
-  - id: dept:spa
-    name_en: Department of Signal Processing and Acoustics
-    name_fi: Signaalinkäsittelyn ja akustiikan laitos
-    name_sv: Institutionen för signalbehandling och akustik
+  - id: dept:dice
+    name_en: Information and Communications Engineering
+    name_fi: Informaatio- ja tietoliikennetekniikan laitos
+    #name_sv:
     type: department
-    parents: [T, agrid, tuas, F, ELEC]
-    url_en: http://spa.aalto.fi/en/
-    url_fi: http://spa.aalto.fi/fi/
-  - id: dept:comnet
-    name_en: Department of Communications and Networking
-    name_fi: Tietoliikenne- ja tietoverkkotekniikan laitos
-    name_sv: Institutionen för kommunikations- och nätverkteknik
-    type: department
-    parents: [T, tuas, ELEC]
-    url_en: http://comnet.aalto.fi/en/
-    url_fi: http://comnet.aalto.fi/fi/
+    parents: [agrid, kide, ELEC]
+    url_en: https://dice.aalto.fi/en/
+    url_fi: https://dice.aalto.fi/fi/
   - id: unit:nanofab
     name: Aalto Nanofab
     type: unit
@@ -1307,7 +1282,7 @@ other:
     name_en: Department of Mechanical Engineering
     name_fi: Konetekniikan laitos
     type: department
-    parents: [K1, K2, K3, K4, r025, r016, ENG]
+    parents: [K1, K2, K3, K4, r016, ENG]
     url_en: http://mecheng.aalto.fi/en/
     url_fi: http://mecheng.aalto.fi/fi/
   - id: dept:civileng
@@ -1321,7 +1296,7 @@ other:
     name_en: Department of Built Environment
     name_fi: Rakennetun ympäristön laitos
     type: department
-    parents: [K1, r016, r034, ENG]
+    parents: [K1, r016, ENG]
     url_en: http://builtenv.aalto.fi/en/
     url_fi: http://builtenv.aalto.fi/fi/
   # SCI
@@ -1330,7 +1305,7 @@ other:
     name_fi: Teknillisen fysiikan laitos
     name_sv: Institutionen för teknisk fysik
     type: department
-    parents: [main, micronova, r009, SCI]
+    parents: [main, micronova, r009, kide, SCI]
     url_en: http://physics.aalto.fi/en/
     url_fi: http://physics.aalto.fi/
   - id: dept:cs
@@ -1339,7 +1314,7 @@ other:
     name_sv: Institutionen för datateknik
     type: department
     aliases: [CS]
-    parents: [T, tuas, SCI]
+    parents: [T, SCI]
     url_en: http://cs.aalto.fi/en/
     url_fi: http://cs.aalto.fi/fi/
   - id: dept:tuta
@@ -1379,7 +1354,7 @@ other:
   - id: unit:eit
     name: EIT Digital
     type: unit
-    aliases: [EIT ICT Labs, SCI]
+    aliases: [EIT Digial]
     parents: [oih]
     url: "http://sci.aalto.fi/en/departments/#eit"
   - id: otanano
