@@ -1095,7 +1095,7 @@ other:
     name_sv: Högskolan för teknikvetenskaper
     aliases: [SCI]
     type: school
-    parents: [main, F, K1, r009, T, micronova]
+    parents: [main, F, K1, r009, T, micronova, kide]
     url_en: http://sci.aalto.fi/en/
     url_fi: http://sci.aalto.fi/fi/
     url_sv: http://sci.aalto.fi/sv/
