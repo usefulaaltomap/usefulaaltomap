@@ -673,9 +673,9 @@ buildings:
       - id: amicatuas
         type: restaurant
         osm: node=580706218
-      - id: library_tuas
-        type: service
-        osm: node=5012868058
+      #- id: library_tuas    does this still exist?
+      #  type: service
+      #  osm: node=5012868058
       #- name: IT Service Desk Maari
       #  id: servicedesk_tuas
       #  latlon: [60.18698, 24.81854]
@@ -856,15 +856,15 @@ buildings:
       - id: abloc-rkioski
         osm: node=5870791841
         type: service
-      - id: fafas
+      - id: kot
         osm: node=5871819461
         type: restaurant
       #- id: clasohlson
       #  osm: node=5870791845
       #  type: shopping
-      - id: junglejuice
-        osm: node=5870791846
-        type: cafe
+      #- id: junglejuice
+      #  osm: node=5870791846
+      #  type: cafe
       - id: whothexxxisalice
         osm: node=5871819455
         type: restaurant
@@ -889,14 +889,14 @@ buildings:
       - id: abloc-alepa
         osm: node=5870791842
         type: shopping
-      - id: abloc-atm-nosto
-        osm: node=5871819468
-        type: service
-        name: ATM
-        aliases: [Nosto-automaatti, Pankkiautomaatti, Automated teller machine]
-      - id: abloc-havajava
-        osm: node=5880866319
-        type: cafe
+      #- id: abloc-atm-nosto
+      #  osm: node=5871819468
+      #  type: service
+      #  name: ATM
+      #  aliases: [Nosto-automaatti, Pankkiautomaatti, Automated teller machine]
+      #- id: abloc-havajava
+      #  osm: node=5880866319
+      #  type: cafe
       - id: abloc-foodandco
         osm: node=5891050368
         type: restaurant
@@ -908,12 +908,18 @@ buildings:
         note: within the Fazer restaurant in A bloc.
         type: restaurant
       - id: abloc-eatpoke
-        osm: node=6704203384
+        osm: node=10850660019
         type: restaurant
   - id: metroB
     osm: 408595707
     name: Metro entrance B
     #aliases: [Metro entrance 2]
+  - id: marsio
+    osm: 1119443893
+    aliases: [R044, OK2A]
+  - id: kide
+    osm: 1119443892
+    aliases: [R045, OK2A]
 
 ## Töölö
 #  # Töölö main building
@@ -979,16 +985,15 @@ other:
     url: https://www.aalto.fi/en/services/it-service-desk-contact-information-and-service-hours
     type: unit
   - id: terveystalo
-    name: Terveystalo Maari
-    osm: node=5012868031
+    name: Terveystalo Otaniemi
+    osm: node=9044279912
     type: service
-    note: Aalto-provided health services for staff are in the other Terveystalo location.
-    parents: [maari]
-  - id: terveystalo2
-    name: Terveystalo Metallimiehenkuja
-    osm: node=5020264817
-    type: service
-    parents: [r059]
+    parents: [abloc]
+  #- id: terveystalo2
+  #  name: Terveystalo Metallimiehenkuja
+  #  osm: node=5020264817
+  #  type: service
+  #  parents: [r059]
   - id: convroom
     osm: 515942280
     type: service
