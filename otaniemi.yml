@@ -835,6 +835,18 @@ buildings:
         latlon: [60.18557, 24.82412]
         address: Room R101
         level: 0
+      - {id: abloc-E, type: wing, name: E wing Väre, osm: 815467140}
+      - {id: abloc-F, type: wing, name: F wing Väre, osm: 815467141}
+      - {id: abloc-G, type: wing, name: G wing Väre, osm: 815467148}
+      - {id: abloc-J, type: wing, name: J wing Väre, osm: 815467143}
+      - {id: abloc-K, type: wing, name: K wing Väre, osm: 815467142}
+      - {id: abloc-L, type: wing, name: L wing Väre, osm: 815467139}
+      - {id: abloc-M, type: wing, name: M wing Väre, osm: 815467149}
+      - {id: abloc-O, type: wing, name: O wing Väre, osm: 815467144}
+      - {id: abloc-P, type: wing, name: P wing Väre, osm: 815467145}
+      - {id: abloc-Q, type: wing, name: Q wing Väre, osm: 815467151}
+      - {id: abloc-R, type: wing, name: R wing Väre, osm: 815467150}
+      - {id: abloc-S, type: wing, name: S wing Väre, osm: 815467155}
   - id: metroA
     osm: 402618641
     aliases: [Metro Centre, Metro entrance A]
@@ -855,6 +867,12 @@ buildings:
       - id: arvo
         osm: node=6316319505
         type: restaurant
+      - {id: abloc-T, type: wing, name: T wing BIZ, osm: 815467156}
+      - {id: abloc-U, type: wing, name: U wing BIZ, osm: 815467152}
+      - {id: abloc-V, type: wing, name: V wing BIZ, osm: 815467158}
+      #- {id: abloc-W, type: wing, name: W wing BIZ, osm: } # doesn't exist
+      - {id: abloc-X, type: wing, name: X wing BIZ, osm: 815467157}
+      - {id: abloc-Y, type: wing, name: Y wing BIZ, osm: 815467159}
   - id: abloc
     osm: 941553969
     alises: [R069, Metrokeskus, Metro center]
@@ -919,6 +937,13 @@ buildings:
       - id: abloc-eatpoke
         osm: node=10850660019
         type: restaurant
+      - {id: abloc-A, type: wing, name: A wing Abloc, osm: 815467163}
+      #- {id: abloc-B, type: wing, name: B wing Abloc, osm: } # needs definition
+      #- {id: abloc-C, type: wing, name: C wing Abloc, osm: } # needs definition
+      - {id: abloc-D, type: wing, name: D wing Abloc, osm: 815467164}
+      #- {id: abloc-H, type: wing, name: H wing Abloc, osm: } # needs definition
+      - {id: abloc-I, type: wing, name: I wing Abloc, osm: 815467161}
+      - {id: abloc-N, type: wing, name: N wing Abloc, osm: 815467160}
   - id: metroB
     osm: 408595707
     name: Metro entrance B
