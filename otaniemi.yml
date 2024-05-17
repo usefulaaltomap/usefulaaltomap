@@ -1032,27 +1032,27 @@ other:
   - id: convroom
     osm: 515942280
     type: service
-  - id: r020-postbox
-    name: Postilaatikko
-    name_en: Post box
-    aliases: [Mail box]
-    osm: node=2379476285
-    note: Collection times Mo-Fr 16:00
-    type: service
+  #- id: r020-postbox  # OSM node is now missing
+  #  name: Postilaatikko
+  #  name_en: Post box
+  #  aliases: [Mail box]
+  #  osm: node=2379476285
+  #  note: Collection times Mo-Fr 16:00
+  #  type: service
   - id: taxi-metro
     nosearch: True
     osm: node=5020264820
     type: service
-  - id: taxi-dipoli
-    nosearch: True
-    osm: node=283326614
-    type: service
+  #- id: taxi-dipoli    # seems missing now
+  #  nosearch: True
+  #  osm: node=283326614
+  #  type: service
   - id: taxi
     type: service
     note: >-
       There are two taxi stands, by metro entrance A and by Dipoli
       (west side).  Usually you will call for one instead.  Lähitaksi phone=0100 7300
-    parents: [taxi-metro, taxi-dipoli]
+    parents: [taxi-metro]
   - id: maukas
     osm: node=2381695985
     type: restaurant
