@@ -407,7 +407,7 @@ buildings:
       building is the "Otaniemi Library" and the learning center is
       inside of it so that everyone can be happy.
     children:
-      - id: robertscoffee
+      - id: bakedbyeli
         osm: node=5012868053
         type: cafe
       - id: aaltopahvi
@@ -936,6 +936,9 @@ buildings:
         type: restaurant
       - id: abloc-eatpoke
         osm: node=10850660019
+        type: restaurant
+      - id: mezame
+        osm: node=11883413019
         type: restaurant
       - {id: abloc-A, type: wing, name: A wing Abloc, osm: 815467163}
       #- {id: abloc-B, type: wing, name: B wing Abloc, osm: } # needs definition
