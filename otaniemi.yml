@@ -558,10 +558,10 @@ buildings:
     name_en: null
     address: Otakaari 7
     children:
-      - name: Studio Kipsari
-        type: restaurant
-        id: studiokipsari
-        osm: node=5389688262
+      #- name: Studio Kipsari
+      #  type: restaurant
+      #  id: studiokipsari
+      #  osm: node=5389688262
       - name: ELO Film School Helsinki
         type: unit
         id: elofilmschoolhelsinki
