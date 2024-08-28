@@ -817,10 +817,6 @@ buildings:
     name: Väre
     name_en: null
     children:
-      - id: aaltoshop
-        osm: node=5871819464
-        type: shopping
-        name: Aalto shop
       - id: cafetoria
         osm: node=5871819459
         type: cafe
@@ -954,6 +950,14 @@ buildings:
   - id: marsio
     osm: 1119443893
     aliases: [R044, OK2A]
+    children:
+      - id: moo
+        type: restaurant
+        osm: node=12141712493
+      - id: aaltoshop
+        osm: node=12141712494
+        type: shopping
+        name: Aalto shop
   - id: kide
     osm: 1119443892
     aliases: [R045, KM1]
@@ -1071,7 +1075,7 @@ other:
     name_sv: Högskolan för konst,design och arkitektur
     aliases: [ARTS]
     type: school
-    parents: [vare] #main, r067
+    parents: [vare, marsio] #main, r067
     url_en: http://arts.aalto.fi/en/
     url_fi: http://arts.aalto.fi/fi/
     url_sv: http://arts.aalto.fi/sv/
