@@ -430,7 +430,7 @@ def find_containing_objects(latlon):
     return contained_in
 # Rooms
 for obj in r['elements']:
-    if 'tags' in obj and obj['type'] == 'node' and obj['tags'].get('room') in {'class', 'auditorium'}:
+    if 'tags' in obj and obj['type'] == 'node' and obj['tags'].get('room') in {'class', 'classroom', 'lecture', 'lecture_hall', 'auditorium'}:
         tags = obj['tags']
         print(tags)
         if tags.get('access') not in {'yes', 'university', 'permissive'}: continue
