@@ -380,9 +380,12 @@ buildings:
     aliases: [R012, V]
     label: Vuori
     children:
-      - id: sodexovuori
+      - id: tasteat
         osm: node=2381696675
         type: restaurant
+      - id: space21
+        osm: node=9569447991
+        type: service
   - id: r013
     osm: 7588593
     aliases: [R013]
@@ -1039,13 +1042,13 @@ other:
   - id: convroom
     osm: 515942280
     type: service
-  #- id: r020-postbox  # OSM node is now missing
-  #  name: Postilaatikko
-  #  name_en: Post box
-  #  aliases: [Mail box]
-  #  osm: node=2379476285
-  #  note: Collection times Mo-Fr 16:00
-  #  type: service
+  - id: vare-postbox  # OSM node is now missing
+    name: Postilaatikko
+    name_en: Post box
+    aliases: [Mail box]
+    osm: node=11430420741
+    note: Collection times Mo-Fr 16:00
+    type: service
   - id: taxi-metro
     nosearch: True
     osm: node=5020264820
