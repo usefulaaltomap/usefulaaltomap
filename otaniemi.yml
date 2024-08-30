@@ -324,7 +324,7 @@ buildings:
         osm: node=589913032
         type: restaurant
   # Nanotalo
-  - id: r009
+  - id: nanotalo
     osm: 27930945
     aliases: [R009]
     name: Nanotalo
@@ -1126,7 +1126,7 @@ other:
     name_sv: Högskolan för teknikvetenskaper
     aliases: [SCI]
     type: school
-    parents: [main, F, K1, r009, T, micronova, kide]
+    parents: [main, F, K1, nanotalo, T, micronova, kide]
     url_en: http://sci.aalto.fi/en/
     url_fi: http://sci.aalto.fi/fi/
     url_sv: http://sci.aalto.fi/sv/
@@ -1336,7 +1336,7 @@ other:
     name_fi: Teknillisen fysiikan laitos
     name_sv: Institutionen för teknisk fysik
     type: department
-    parents: [main, micronova, r009, kide, SCI]
+    parents: [main, micronova, nanotalo, kide, SCI]
     url_en: http://physics.aalto.fi/en/
     url_fi: http://physics.aalto.fi/
   - id: dept:cs
@@ -1391,7 +1391,7 @@ other:
   - id: otanano
     name: OtaNano
     url: https://otanano.fi
-    parents: [r009, micronova]
+    parents: [nanotalo, micronova]
     type: unit
 
 
