@@ -280,7 +280,7 @@ class Location():
             is_wheelchair = tags.get('wheelchair') in ('yes', 'designated')
             no_wheelchair = tags.get('wheelchair') in ('no', 'limited')
 
-            name = tags.get('name', tags.get('ref'))
+            name = tags.get('name') or tags.get('ref') or tags.get('addr:unit')
             if name and len(name) > 3: name = None
             lat, lon = round(osm_data[n]['lat'], 6), round(osm_data[n]['lon'], 6)
             # Create data
