@@ -549,22 +549,21 @@ buildings:
     children:
       - name: Unisport
         type: service
-  # Aalto Studios
+  # Old Aalto Studios
   - id: r029
     osm: 24342456
-    aliases: [R029, Aalto Studios]
-    label: Studios
-    name: Aalto Studios
+    aliases: [R029]
+    name: R029
     name_en: null
     address: Otakaari 7
-    children:
+    #children:
       #- name: Studio Kipsari
       #  type: restaurant
       #  id: studiokipsari
       #  osm: node=5389688262
-      - name: ELO Film School Helsinki
-        type: unit
-        id: elofilmschoolhelsinki
+      #- name: ELO Film School Helsinki
+      #  type: unit
+      #  id: elofilmschoolhelsinki
   # CS
   - id: T
     label: "CS / T"
@@ -949,7 +948,7 @@ buildings:
     #aliases: [Metro entrance 2]
   - id: marsio
     osm: 1119443893
-    aliases: [R044, OK2A]
+    aliases: [R044, Aalto Studios, OK2]
     children:
       - id: moo
         type: restaurant
