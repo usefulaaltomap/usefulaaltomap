@@ -1050,25 +1050,24 @@ other:
     note: Collection times Mo-Fr 16:00
     type: service
   - id: taxi-metro
-    nosearch: True
+    name: Taxi
+    aliases: [Taksi]
     osm: node=5020264820
     type: service
-  #- id: taxi-dipoli    # seems missing now
-  #  nosearch: True
-  #  osm: node=283326614
-  #  type: service
-  - id: taxi
-    type: service
-    note: >-
-      There are two taxi stands, by metro entrance A and by Dipoli
-      (west side).  Usually you will call for one instead.  Lähitaksi phone=0100 7300
-    parents: [taxi-metro]
+      Usually you will call for one instead.  Lähitaksi phone=0100 7300
   - id: maukas
     osm: node=2381695985
     type: restaurant
   - id: otaparkki
     osm: 1202350275
     type: auxbuilding
+  - id: lightrail
+    osm: node=9574731673
+    name: Light Rail
+    name_fi: Pikaraitio
+    name_sv: Snabbspårvägs
+    aliases: [Tram, Tram 13, Line 13]
+    type: service
 
 
 # SCHOOLS
