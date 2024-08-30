@@ -739,6 +739,7 @@ buildings:
       - id: AYY-servicepoint
         name: AYY Jäsenpalvelupisteet
         name_en: AYY service point
+        aliases: [AYY keskustoimisto, Keto]
         osm: node=263978267
         type: service
   - id: r039
