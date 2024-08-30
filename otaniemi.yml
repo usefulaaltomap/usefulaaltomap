@@ -1295,7 +1295,7 @@ other:
     name_fi: Informaatio- ja tietoliikennetekniikan laitos
     #name_sv:
     type: department
-    parents: [agrid, kide, ELEC]
+    parents: [kide, tuas, agrid, ELEC]
     url_en: https://dice.aalto.fi/en/
     url_fi: https://dice.aalto.fi/fi/
   - id: unit:nanofab
