@@ -1104,7 +1104,7 @@ other:
     name_sv: Högskolan för elektroteknik
     aliases: [ELEC]
     type: school
-    parents: [agrid-K, oih, tuas, micronova, kide]
+    parents: [agrid-K, tuas, micronova, kide]
     url_en: http://elec.aalto.fi/en/
     url_fi: http://elec.aalto.fi/fi/
     url_sv: http://elec.aalto.fi/sv/
