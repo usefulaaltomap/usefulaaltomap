@@ -635,15 +635,15 @@ buildings:
       - id: oih_cafe
         osm: node=5012868059
         type: cafe
-      - id: eit_rawmaterials
-        type: unit
-        name: EIT RawMaterials
-      - id: eit_clc
-        type: unit
-        name: EIT Co-Location Centre
-        aliases: [CLC]
-        url_en: https://masterschool.eitdigital.eu/about-us/co-location-centres/
-        note: Accessible when hosted by an EIT member
+      #- id: eit_rawmaterials
+      #  type: unit
+      #  name: EIT RawMaterials
+      #- id: eit_clc
+      #  type: unit
+      #  name: EIT Co-Location Centre
+      #  aliases: [CLC]
+      #  url_en: https://masterschool.eitdigital.eu/about-us/co-location-centres/
+      #  note: Accessible when hosted by an EIT member
   # Water laboratory
   - id: r034
     osm: 4259026
@@ -1382,12 +1382,12 @@ other:
     type: unit
     parents: [T, "dept:cs"]
     url_en: http://www.hiit.fi/
-  - id: unit:eit
-    name: EIT Digital
-    type: unit
-    aliases: [EIT Digial]
-    parents: [oih]
-    url: "http://sci.aalto.fi/en/departments/#eit"
+  #- id: unit:eit
+  #  name: EIT Digital
+  #  type: unit
+  #  aliases: [EIT Digial]
+  #  parents: [oih]
+  #  url: "http://sci.aalto.fi/en/departments/#eit"
   - id: otanano
     name: OtaNano
     url: https://otanano.fi
