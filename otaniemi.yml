@@ -1078,7 +1078,7 @@ other:
     name_sv: Högskolan för konst,design och arkitektur
     aliases: [ARTS]
     type: school
-    parents: [vare, marsio] #main, r067
+    parents: [vare, marsio, A] #main, r067
     url_en: http://arts.aalto.fi/en/
     url_fi: http://arts.aalto.fi/fi/
     url_sv: http://arts.aalto.fi/sv/
@@ -1097,7 +1097,7 @@ other:
     name_sv: Högskolan för kemiteknik
     aliases: [CHEM]
     type: school
-    parents: [r011, r012, r013]
+    parents: [r011, r013, micronova]
     url_en: http://chem.aalto.fi/en/
     url_fi: http://chem.aalto.fi/fi/
     url_sv: http://chem.aalto.fi/sv/
@@ -1217,7 +1217,7 @@ other:
     name_en: Department of Management
     name_fi: Johtamisen laitos
     type: department
-    parents: [R068]
+    parents: [R068, BIZ]
     url_en: http://management.aalto.fi/en/
     url_fi: http://management.aalto.fi/fi
   - id: dept:marketing
@@ -1272,7 +1272,7 @@ other:
     name_sv: Institutionen för bio- och kemiteknik
     type: department
     aliases: [Bio2]
-    parents: [r011, CHEM]   # TODO
+    parents: [r013, CHEM]   # TODO
   # ELEC
   - id: dept:eea
     name_en: Department of Electrical Engineering and Automation
