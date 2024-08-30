@@ -1054,6 +1054,7 @@ other:
     aliases: [Taksi]
     osm: node=5020264820
     type: service
+    note: >-
       Usually you will call for one instead.  Lähitaksi phone=0100 7300
   - id: maukas
     osm: node=2381695985
