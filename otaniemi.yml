@@ -1067,6 +1067,7 @@ other:
   - id: otaparkki
     osm: 1202350275
     type: auxbuilding
+    url: https://www.aalto.fi/locations/otaparkki
   - id: lightrail
     osm: node=9574731673
     name: Light Rail
