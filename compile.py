@@ -1,5 +1,19 @@
 #!/usr/bin/env python3
 
+"""Generate data.json from raw OSM data.
+
+This file does several things:
+
+- Download OSM data, cache it to the raw/ directory.  If the raw data is
+  already there, don't download it again. (`make refresh` will force an
+  update).
+
+- Process the raw data to create data.json (combining it with all the info from
+  otaniemi.yml)
+
+"""
+
+
 import fnmatch
 import json
 import os
