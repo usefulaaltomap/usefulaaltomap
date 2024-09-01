@@ -1370,7 +1370,7 @@ other:
     name_fi: Matematiikan ja systeemianalyysin laitos
     name_sv: Institutionen för matematik och systemanlys
     type: department
-    parents: [main, SCI]
+    parents: [M, Y, SCI]
     note: M wing (Y entrance closest), 2nd-3rd floors
     url_en: http://math.aalto.fi/en/
     url_fi: http://math.aalto.fi/fi/
