@@ -74,7 +74,7 @@ buildings:
         name_fi: Kielikeskus
         name_sv: Språkcentret
         type: service
-        latlon: [60.18699, 24.82858]
+        latlon: [60.18698, 24.82870]
         ref: U219
         level: 1
       - id: studenthub
