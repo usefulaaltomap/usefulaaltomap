@@ -40,9 +40,6 @@ buildings:
       - name: Elissa cafe
         type: cafe
         osm: node=5004956487
-      - name: Student services
-        id: studentservices
-        type: service
       - name: IT Services
         type: unit
         parents: [U]
@@ -52,16 +49,37 @@ buildings:
         type: service
         opening_hours: Mo-We 09:00-11:00, 12:00-15:00; Th-Fr 09:00-11:00, 12:00-14:00
         url: https://www.aalto.fi/en/services/it-service-desk-contact-information-and-service-hours
-        address: Room U133a
+        ref: U133a
+        level: 0
+      - id: hr-servicepoint
+        name: HR service point
+        name_fi: HR-palvelupiste
+        type: service
+        latlon: [60.186368, 24.828576]
+        url: https://www.aalto.fi/en/services/human-resource-hr-services-contact-details
+        ref: Y195
+        level: 0
+        opening_hours: Tu-Th 12:00-15:00; PH off
+      - id: startingpoint
+        name: Starting Point, Student services
+        name_fi: Starting Point, Opiskelijapalvelut
+        name_sv: Starting Point, Studerandeservice
+        type: service
+        latlon: [60.18655, 24.82870]
+        ref: Y199a
+        level: 0
+        opening_hours: Mo-Th 12:00-15:00; PH off
+      - id: languagecenter
+        name: Language center
+        name_fi: Kielikeskus
+        name_sv: Språkcentret
+        type: service
+        latlon: [60.18699, 24.82858]
+        ref: U219
+        level: 1
       - id: studenthub
         osm: 514232691
         type: location
-      - id: startingpoint
-        latlon: [60.18655, 24.82870]
-        name: Starting Point
-        ref: Y199a
-        opening_hours: Mo-Fr 11:00-13:00; PH off
-        type: service
       - id: A
         name: A siipi Main
         name_en: A wing Main
@@ -167,11 +185,13 @@ buildings:
       - id: agrid-havajava
         osm: node=5389688275
         type: cafe
-      - name: Elepaja
-        id: elepaja
-        room: I131
-        type: service
-        url: https://elepaja.aalto.fi
+      # Website non-functional, moved?  Needs verification
+      # https://elepaja.fi/yhteystiedot
+      #- name: Elepaja
+      #  id: elepaja
+      #  room: I131
+      #  type: service
+      #  url: https://elepaja.aalto.fi
       - name: Acoustics Laboratory
         id: acousticslab
         type: unit
@@ -468,10 +488,6 @@ buildings:
         type: restaurant
         notes: >-
           The "fancy" restaurant in Dipoli.  Prices 20-30€.
-      #- name: IT Service Desk Dipoli
-      #  id: servicedesk_dipoli
-      #  type: service
-      #  latlon: [60.18525, 24.83262]
   # Old shopping center
   - id: r020
     osm: 7589963
@@ -523,9 +539,6 @@ buildings:
   #  osm: 27468640
   #  aliases: [R024, MT3]
   #  children:
-  #    - name: IT Service Desk MT3
-  #      id: servicedesk_mt3
-  #      type: service
   # Design factory, Betonimiehenkuja 5
   #- id: r025
   #  osm: 26608273
@@ -689,14 +702,6 @@ buildings:
       #- id: library_tuas    does this still exist?
       #  type: service
       #  osm: node=5012868058
-      #- name: IT Service Desk Maari
-      #  id: servicedesk_tuas
-      #  latlon: [60.18698, 24.81854]
-      #  type: service
-      #  address: TUAS 1163
-      #  note: >-
-      #    Open at least during the stated times, but people may be available at
-      #    other times as well.
       - id: tuas-x5xxwing
         name: x5xx siipi TUAS
         name_en: x5xx wing TUAS
