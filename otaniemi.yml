@@ -446,9 +446,13 @@ buildings:
   - id: maari
     osm: 7584131
     aliases: [R017]
+    type: auxbuilding
     label: Maari
     name: Maarintalo
     name_en: null
+    note: >-
+      This used to have various computer labs and was some sort of a
+      student hub.  As of 2024 it's empty awaiting its next use.
   - id: r018
     osm: 7244238
     aliases: [R018]
