@@ -531,18 +531,18 @@ buildings:
 
   # No building 21
   # LMK2, admin
-  - id: r022
-    osm: 26608151
-    aliases: [R022]
-    type: otherbuilding
-    #label: Admin
-    #children:   # closed 2017 when admin moved to dipoli
-    #  - name: Calori
-    #    type: restaurant
-    #    osm: node=2071854934
-  - id: r023
-    osm: 26608177
-    aliases: [R023]
+  #- id: r022
+  #  osm: 26608151
+  #  aliases: [R022]
+  #  type: otherbuilding
+  #  #label: Admin
+  #  #children:   # closed 2017 when admin moved to dipoli
+  #  #  - name: Calori
+  #  #    type: restaurant
+  #  #    osm: node=2071854934
+  #- id: r023
+  #  osm: 26608177
+  #  aliases: [R023]
   ## MT3
   #- id: r024
   #  osm: 27468640
@@ -749,6 +749,7 @@ buildings:
   - id: r038
     osm: 7589907
     aliases: [R038, AYY]
+    type: auxbuilding
     label: AYY
     name: Aalto-yliopiston ylioppilaskunta
     name_en: Aalto University Student Union
@@ -863,6 +864,7 @@ buildings:
   - id: metroA
     osm: 402618641
     aliases: [Metro Centre, Metro entrance A]
+    type: auxbuilding
     #children:
     #  - id: metroA-rkioski
     #    osm: node=5317875517
@@ -889,6 +891,7 @@ buildings:
   - id: abloc
     osm: 941553969
     alises: [R069, Metrokeskus, Metro center]
+    type: auxbuilding
     children:
       - id: espressohouse
         osm: node=5870791847
@@ -963,6 +966,7 @@ buildings:
   - id: metroB
     osm: 408595707
     name: Metro entrance B
+    type: auxbuilding
     #aliases: [Metro entrance 2]
   - id: marsio
     osm: 1119443893
