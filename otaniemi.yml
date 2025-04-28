@@ -39,9 +39,9 @@ buildings:
       - name: Aino cafe
         type: cafe
         osm: node=5004956486
-      - name: Elissa cafe
-        type: cafe
-        osm: node=5004956487
+      #- name: Elissa cafe
+      #  type: cafe
+      #  osm: node=5004956487
       - name: IT Services
         type: unit
         parents: [U]
@@ -341,10 +341,10 @@ buildings:
     osm: 156903276
     aliases: [R008]
     label: K1
-    children:
-      - id: sodexokone
-        osm: node=589913032
-        type: restaurant
+    #children:
+    #  - id: sodexokone
+    #    osm: node=589913032
+    #    type: restaurant
   # Nanotalo
   - id: nanotalo
     osm: 27930945
@@ -728,9 +728,9 @@ buildings:
         note: >-
           Not a real wing, but the 159x conference rooms are isolated
           and hard to find if you don't know it.  First floor only.
-      - id: tuas-sähköpaja
-        osm: node=6817211766
-        type: service
+      #- id: tuas-sähköpaja
+      #  osm: node=6817211766
+      #  type: service
     note: >-
       Some wings are marked here, but numbering is not entirely
       consistent.  To get to 4th floor, you have to take the elevator
