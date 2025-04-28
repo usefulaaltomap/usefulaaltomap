@@ -826,7 +826,6 @@ buildings:
     name: Valimo
     label: Valimo
     osm: 7588897
-    type: auxbuilding
   # Väre
   - id: vare
     osm: 941553968
