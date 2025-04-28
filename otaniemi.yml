@@ -771,6 +771,7 @@ buildings:
   - id: r040
     osm: 4252953
     aliases: [R040, Urdsgjallar]
+    type: auxbuilding
     label: TF
     children:
       - name: Täffä
