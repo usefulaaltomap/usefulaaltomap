@@ -22,7 +22,9 @@ buildings:
       made the name "main building" completly useless: if you ever say
       this, people will first think of this building, and maybe Dipoli
       second.  We all just agree that this will always be the main
-      building, and Dipoli is always called Dipoli.
+      building, and Dipoli is always called Dipoli.  As of 2025, we
+      are probably correct again: the administration has moved back
+      here.
     children:
       - id: alvari
         osm: node=301814516
@@ -470,7 +472,10 @@ buildings:
       Actually, they tried to call Lämpömiehenkuja 2 the "main
       building", which absolutely no one not in the administration
       paid attention to.  Apparently the administration confuses
-      "Administration" with "Main".
+      "Administration" with "Main".  But... as of 2025 the
+      administration is moving back to the "main building", so I guess
+      everything goes full circle and everyone will start calling OK1
+      the "main building" again?
     children:
       - id: carre
         osm: node=5022009311
