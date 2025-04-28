@@ -1023,11 +1023,11 @@ other:
     name: X-burger
     type: restaurant
     osm: 322041317
-  - id: valimo
-    name: Valimo
-    osm: node=4840360721
-    type: restaurant
-    parents: [r059]
+  #- id: valimo
+  #  name: Valimo
+  #  osm: node=4840360721
+  #  type: restaurant
+  #  parents: [r059]
   - id: itservicedesks
     name: IT Service Desks
     name_fi: IT Käyttäjäpalvelut
