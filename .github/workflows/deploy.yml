@@ -1,11 +1,12 @@
-name: Test and deploy
+name: Build and deploy
 
 on:
   push:
     branches:
       - master
-  #schedule:
-  #  - cron: '39 12 * * SUN'
+  workflow_dispatch:
+  schedule:
+    - cron: "39 3 * * MON"
 
 jobs:
   build:
@@ -40,7 +41,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     needs: build
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
     permissions:
       contents: write
 
