@@ -737,8 +737,9 @@ buildings:
       #  type: service
       - id: ai-factory-hub
         name: LUMI AI Factory Hub
-        latlon: [60.1871, 24.8174]
+        latlon: [60.18715, 24.81756]
         type: room
+        url: https://lumi-ai-factory.eu/hubs/
     note: >-
       Some wings are marked here, but numbering is not entirely
       consistent.  To get to 4th floor, you have to take the elevator
