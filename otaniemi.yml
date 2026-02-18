@@ -735,6 +735,10 @@ buildings:
       #- id: tuas-sähköpaja
       #  osm: node=6817211766
       #  type: service
+      - id: ai-factory-hub
+        name: LUMI AI Factory Hub
+        latlon: [60.1871, 24.8174]
+        type: room
     note: >-
       Some wings are marked here, but numbering is not entirely
       consistent.  To get to 4th floor, you have to take the elevator
@@ -1415,6 +1419,11 @@ other:
     name: OtaNano
     url: https://otanano.fi
     parents: [nanotalo, micronova]
+    type: unit
+  - id: ellis
+    name: ELLIS institute
+    url: https://www.ellisinstitute.fi/
+    parents: [T, tuas]
     type: unit
 
 
