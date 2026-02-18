@@ -5,8 +5,9 @@ on:
     branches:
       - master
   workflow_dispatch:
-  schedule:
-    - cron: "39 3 * * MON"
+  # The repository doesn't maintain enough activity to run on the schedule...
+  #schedule:
+  #  - cron: "39 3 * * MON"
 
 jobs:
   build:
