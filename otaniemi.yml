@@ -1422,7 +1422,7 @@ other:
     parents: [nanotalo, micronova]
     type: unit
   - id: ellis
-    name: ELLIS institute
+    name: ELLIS Institute Finland
     url: https://www.ellisinstitute.fi/
     parents: [T, tuas]
     type: unit
