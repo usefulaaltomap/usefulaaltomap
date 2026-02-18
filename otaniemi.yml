@@ -1097,7 +1097,7 @@ other:
     name_sv: Högskolan för konst,design och arkitektur
     aliases: [ARTS]
     type: school
-    parents: [vare, marsio, A] #main, r067
+    parents: [vare, marsio, A]
     url_en: http://arts.aalto.fi/en/
     url_fi: http://arts.aalto.fi/fi/
     url_sv: http://arts.aalto.fi/sv/
